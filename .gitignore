@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Playwright run artifacts
+tests/playwright-report/
+tests/test-results/
+tests/qa-attachments/
+tests/qa-results.json
+tests/qa-summary.json
+tests/suite-table.json
+
+# Throwaway search / video-verification scratch data (scripts stay)
+tools/candidates*.json
+tools/candidates-ids.txt
+tools/candidate-player-results.json
+tools/queries*.txt
+tools/ids-all.txt
+
+# Editor / OS noise
+.DS_Store
+Thumbs.db
+*.log

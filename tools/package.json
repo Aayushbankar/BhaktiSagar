@@ -1,0 +1,13 @@
+{
+  "name": "bhakti-sagar-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dev tools for Bhakti Sagar – generates the permanent panchang dataset in data/panchang.json",
+  "type": "commonjs",
+  "scripts": {
+    "panchang": "node generate-panchang.mjs"
+  },
+  "dependencies": {
+    "@ishubhamx/panchangam-js": "^3.0.0"
+  }
+}
