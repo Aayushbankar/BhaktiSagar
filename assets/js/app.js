@@ -91,6 +91,8 @@
     dayMatches: [],
     specialTracks: [],
     specialSet: {},
+    jyotirlingas: [],
+    jyoLive: [],
     currentSlot: null,
     slotFilter: 'auto',
     typeFilter: 'all',
@@ -176,6 +178,7 @@
   }
 
   function typeLabel(type) {
+    if (type === 'live') { return str('type.live'); }
     var known = (type === 'shloka' || type === 'bhajan' || type === 'aarti') ? type : 'bhajan';
     return str('type.' + known);
   }
@@ -348,19 +351,20 @@
     el.pcSet.textContent = p.sunset || '–';
 
     var fests = p.festivals || [];
-    if (!fests.length) {
+    if (fests.length) {
+      el.festRow.hidden = false;
+      var html = '<span class="fest-label">' + esc(str('panchang.festLabel')) + '</span>';
+      fests.forEach(function (f) {
+        var name = festName(f);
+        html += '<span class="fest-chip cat-' + esc(f.cat || 'major') + '">' + esc(name) + '</span>';
+      });
+      el.festRow.innerHTML = html;
+    } else {
       el.festRow.hidden = true;
       el.festRow.innerHTML = '';
-      return;
     }
-    el.festRow.hidden = false;
-    var html = '<span class="fest-label">' + esc(str('panchang.festLabel')) + '</span>';
-    fests.forEach(function (f) {
-      var name = festName(f);
-      html += '<span class="fest-chip cat-' + esc(f.cat || 'major') + '">' + esc(name) + '</span>';
-    });
-    el.festRow.innerHTML = html;
 
+    // the location note must survive a festival-free day
     renderPanchangNote();
   }
 
@@ -443,6 +447,70 @@
       '</article>';
     });
     el.specialGrid.innerHTML = html;
+  }
+
+  /* ---------------- ज्योतिर्लिंग लाइव दर्शन ---------------- */
+
+  function jyoName(j) {
+    if (lang === 'en' && j.name_en) { return j.name_en; }
+    return j.name_hi || j.name_en || '';
+  }
+
+  function jyoPlace(j) {
+    if (lang === 'en' && j.place_en) { return j.place_en; }
+    return j.place_hi || j.place_en || '';
+  }
+
+  /** The player only ever knows catalogue slugs, so a darshan gets its own. */
+  function jyoTrack(j) {
+    var name = jyoName(j);
+    return {
+      slug: 'live-' + j.slug,
+      title_hi: (j.name_hi || name) + ' · ' + str('type.live'),
+      title_en: (j.name_en || name) + ' · ' + str('type.live'),
+      type: 'live',
+      deity: jyoPlace(j),
+      singer: j.channel || '',
+      youtube_id: j.youtube_id,
+      slots: [],
+      tags: '',
+      blurb: '',
+      lyrics: 0
+    };
+  }
+
+  function renderJyo() {
+    if (!el.jyoSection || !el.jyoGrid) { return; }
+    var items = (state.jyotirlingas || []).filter(function (j) { return !!j.youtube_id; });
+    state.jyoLive = items;
+    if (!items.length) { el.jyoSection.hidden = true; return; }
+    el.jyoSection.hidden = false;
+
+    var html = '';
+    items.forEach(function (j, i) {
+      var track = jyoTrack(j);
+      var playing = state.playing && state.queueIndex >= 0 && state.queue[state.queueIndex] &&
+        state.queue[state.queueIndex].slug === track.slug;
+      var name = jyoName(j);
+      var place = jyoPlace(j);
+      html += '<article class="track-card is-jyo' + (playing ? ' is-playing' : '') + '" data-jindex="' + i + '">' +
+        '<div class="thumb">' +
+          '<span class="badge badge-live">' + esc(str('jyo.live')) + '</span>' +
+          '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async">' +
+          '<button type="button" class="play-fab" data-jplay="' + i + '" aria-label="' +
+            esc(playing ? str('card.pause') + name : str('jyo.play', { name: name })) + '">' +
+            playGlyph(playing) +
+          '</button>' +
+        '</div>' +
+        '<div class="track-body">' +
+          '<h3 class="track-title">' + esc(name) + '</h3>' +
+          '<div class="track-meta">' +
+            '<span class="deity">' + esc(place) + (j.channel ? ' · ' + esc(j.channel) : '') + '</span>' +
+          '</div>' +
+        '</div>' +
+      '</article>';
+    });
+    el.jyoGrid.innerHTML = html;
   }
 
   /* ---------------- chips ---------------- */
@@ -693,6 +761,7 @@
     setHidden(el.miniIconPause, !flag);
     renderGrid();
     renderSpecial();
+    renderJyo();
     renderTrackDetail();
   }
 
@@ -718,6 +787,7 @@
     renderQueue();
     renderGrid();
     renderSpecial();
+    renderJyo();
   }
 
   function togglePlay() {
@@ -881,6 +951,20 @@
       }
     });
 
+    el.jyoGrid.addEventListener('click', function (e) {
+      var btn = e.target.closest('[data-jplay]');
+      if (!btn) { return; }
+      var index = parseInt(btn.getAttribute('data-jplay'), 10);
+      state.errorStreak = 0;
+      state.queue = state.jyoLive.map(jyoTrack);
+      state.queueIndex = index;
+      renderQueue();
+      playAt(index, true);
+      if (window.innerWidth < 1024) {
+        el.playerCol.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+
     el.queueList.addEventListener('click', function (e) {
       var item = e.target.closest('[data-q]');
       if (!item) { return; }
@@ -945,6 +1029,8 @@
     el.specialSection = $('specialSection');
     el.ruleList = $('ruleList');
     el.specialGrid = $('specialGrid');
+    el.jyoSection = $('jyoSection');
+    el.jyoGrid = $('jyoGrid');
     el.slotChips = $('slotChips');
     el.typeChips = $('typeChips');
     el.searchInput = $('searchInput');
@@ -1051,6 +1137,7 @@
     state.locations = data.locations || [];
     state.location = data.location || null;
     state.dayMatches = data.day_matches || [];
+    state.jyotirlingas = data.jyotirlingas || [];
 
     if (ensureCity(data)) {
       loadSuggest();
@@ -1062,6 +1149,7 @@
     renderShloka();
     renderPanchang();
     renderSpecial();
+    renderJyo();
     updateCurrentSlot();
     applyFilters();
     applyRoute();

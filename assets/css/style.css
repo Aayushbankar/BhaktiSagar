@@ -785,14 +785,16 @@ a { color: var(--maroon); }
   margin: 0 0 12px;
 }
 
-.special-title {
+.special-title,
+.jyo-title {
   font-family: var(--font-hi);
   font-size: 1.08rem;
   color: var(--maroon);
   margin: 0 0 10px;
   line-height: 1.35;
 }
-.special-title small {
+.special-title small,
+.jyo-title small {
   display: block;
   font-family: var(--font-ui);
   font-size: .72rem;
@@ -842,6 +844,25 @@ a { color: var(--maroon); }
   padding: 2px 8px;
   white-space: nowrap;
 }
+
+/* ---------------- ज्योतिर्लिंग लाइव दर्शन ---------------- */
+
+.jyo {
+  background: linear-gradient(180deg, #fff7f5 0%, #fff0ec 100%);
+  border: 1px solid #f3d6cb;
+  border-radius: var(--radius);
+  padding: 14px;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 18px;
+}
+
+.track-card.is-jyo { border-color: #f0d5cb; background: #fffcfb; }
+
+.badge-live {
+  background: rgba(197, 34, 34, .95);
+  animation: livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse { 50% { box-shadow: 0 0 0 5px rgba(197, 34, 34, .18); } }
 
 /* ---------------- Track detail & lyrics ---------------- */
 

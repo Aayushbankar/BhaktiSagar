@@ -50,6 +50,7 @@ test.describe('i18n', () => {
     await expect(page.locator('#typeChips')).toContainText('श्लोक');
     await expect(page.locator('#panchangTitle')).toHaveText('आज का पंचांग');
     await expect(page.locator('.special-title')).toContainText('आज विशेष');
+    await expect(page.locator('#jyoSection .jyo-title')).toContainText('ज्योतिर्लिंग लाइव दर्शन');
     await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'hi');
   });
 
@@ -65,6 +66,7 @@ test.describe('i18n', () => {
     await expect(page.locator('#panchangTitle')).toHaveText("Today's panchang");
     await expect(page.locator('#panchangStrip')).toContainText('Sunrise');
     await expect(page.locator('.site-footer')).toContainText('No login, no fees.');
+    await expect(page.locator('#jyoSection .jyo-title')).toContainText('Jyotirlinga Live Darshan');
     await expect(page.locator('#resultCount')).toContainText('results');
     // the language switcher itself stays bilingual
     await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'en');
@@ -79,6 +81,7 @@ test.describe('i18n', () => {
     await expect(page.locator('#slotChips')).toContainText('सर्वदिनम्');
     await expect(page.locator('#panchangTitle')).toHaveText('अद्य पञ्चाङ्गम्');
     await expect(page.locator('#panchangStrip')).toContainText('सूर्योदयः');
+    await expect(page.locator('#jyoSection .jyo-title')).toContainText('ज्योतिर्लिंग लाइव दर्शनम्');
   });
 
   test('/en uses the English song titles and English empty states', async ({ page, request }) => {

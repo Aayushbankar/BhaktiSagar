@@ -269,6 +269,13 @@ $assetVer = static function (string $path): string {
       <div class="grid grid-special" id="specialGrid"></div>
     </section>
 
+    <section class="jyo" id="jyoSection" aria-label="<?= e($t('jyo.aria')) ?>" hidden>
+      <div class="special-head">
+        <h2 class="jyo-title"><?= e($t('jyo.title')) ?> <small><?= e($t('jyo.sub')) ?></small></h2>
+      </div>
+      <div class="grid grid-special" id="jyoGrid"></div>
+    </section>
+
     <section class="toolbar" aria-label="<?= e($t('toolbar.aria')) ?>">
       <div class="chip-row" id="slotChips" role="group" aria-label="<?= e($t('chips.slotAria')) ?>"></div>
       <div class="chip-row chip-row-secondary" id="typeChips" role="group" aria-label="<?= e($t('chips.typeAria')) ?>"></div>

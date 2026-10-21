@@ -15,6 +15,7 @@ tools/candidates-ids.txt
 tools/candidate-player-results.json
 tools/queries*.txt
 tools/ids-all.txt
+tools/jyot-candidates.txt
 
 # Editor / OS noise
 .DS_Store

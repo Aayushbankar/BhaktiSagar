@@ -28,6 +28,13 @@
   "special.sub": "पंचांग (वार · तिथि · त्योहार) के अनुसार",
   "special.nowTag": "पंचांग सुझाव",
 
+  "jyo.aria": "ज्योतिर्लिंग लाइव दर्शन",
+  "jyo.title": "ज्योतिर्लिंग लाइव दर्शन",
+  "jyo.sub": "मंदिरों का यूट्यूब पर सीधा प्रसारण",
+  "jyo.live": "लाइव",
+  "jyo.play": "{name} का लाइव दर्शन देखें",
+
+
   "toolbar.aria": "फ़िल्टर",
   "chips.slotAria": "समय के अनुसार",
   "chips.typeAria": "प्रकार",
@@ -48,6 +55,7 @@
   "type.shloka": "श्लोक",
   "type.bhajan": "भजन",
   "type.aarti": "आरती",
+  "type.live": "लाइव दर्शन",
 
   "empty.shloka": "श्लोक नहीं मिले",
   "empty.bhajan": "भजन नहीं मिले",

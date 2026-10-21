@@ -28,6 +28,13 @@
   "special.sub": "based on the panchang (week-day · tithi · festival)",
   "special.nowTag": "Panchang suggestion",
 
+  "jyo.aria": "Jyotirlinga live darshan",
+  "jyo.title": "Jyotirlinga Live Darshan",
+  "jyo.sub": "Direct streams from the temples on YouTube",
+  "jyo.live": "LIVE",
+  "jyo.play": "Watch live darshan of {name}",
+
+
   "toolbar.aria": "Filters",
   "chips.slotAria": "By time of day",
   "chips.typeAria": "By type",
@@ -48,6 +55,7 @@
   "type.shloka": "Shloka",
   "type.bhajan": "Bhajan",
   "type.aarti": "Aarti",
+  "type.live": "Live darshan",
 
   "empty.shloka": "No shlokas found",
   "empty.bhajan": "No bhajans found",

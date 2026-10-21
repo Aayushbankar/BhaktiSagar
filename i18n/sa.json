@@ -28,6 +28,13 @@
   "special.sub": "पञ्चाङ्गानुसारं (वारः · तिथिः · पर्व)",
   "special.nowTag": "पञ्चाङ्गसूचना",
 
+  "jyo.aria": "ज्योतिर्लिंग लाइव दर्शन",
+  "jyo.title": "ज्योतिर्लिंग लाइव दर्शनम्",
+  "jyo.sub": "YouTube माध्यमेन मन्दिरानां सजीवप्रसारणम्",
+  "jyo.live": "सजीवम्",
+  "jyo.play": "{name} इत्यस्य लाइवदर्शनं पश्यतु",
+
+
   "toolbar.aria": "छाननी",
   "chips.slotAria": "कालानुसारं",
   "chips.typeAria": "प्रकारतः",
@@ -48,6 +55,7 @@
   "type.shloka": "श्लोकः",
   "type.bhajan": "भजनम्",
   "type.aarti": "आरती",
+  "type.live": "लाइवदर्शनम्",
 
   "empty.shloka": "श्लोकाः न लभ्यन्ते",
   "empty.bhajan": "भजनानि न लभ्यन्ते",

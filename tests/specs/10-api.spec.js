@@ -98,4 +98,36 @@ test.describe('API', () => {
       expect(slots, `${t.slug} is a shloka but carries the aarti slot`).not.toContain('aarti');
     }
   });
+
+  test('jyotirlingas: all twelve in order, live ids well formed', async ({ request }) => {
+    const res = await request.get('api/?action=suggest');
+    expect(res.ok()).toBeTruthy();
+    const j = await res.json();
+    const jyo = j.jyotirlingas || [];
+
+    expect(jyo.length).toBe(12);
+    expect(jyo.map((x) => x.order)).toEqual([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]);
+    expect(new Set(jyo.map((x) => x.slug)).size).toBe(12);
+
+    const live = jyo.filter((x) => x.youtube_id);
+    expect(live.length, 'at least one darshan must be live').toBeGreaterThanOrEqual(1);
+
+    const ids = new Set();
+    for (const x of jyo) {
+      expect(x.name_hi, `${x.slug} name_hi`).toBeTruthy();
+      expect(x.name_en, `${x.slug} name_en`).toBeTruthy();
+      expect(x.place_hi, `${x.slug} place_hi`).toBeTruthy();
+      expect(x.place_en, `${x.slug} place_en`).toBeTruthy();
+      if (!x.youtube_id) {
+        expect(x.youtube_id).toBeNull();
+        continue;
+      }
+      expect(x.youtube_id, `${x.slug} youtube_id`).toMatch(/^[A-Za-z0-9_-]{11}$/);
+      expect(ids.has(x.youtube_id), `duplicate live id ${x.youtube_id}`).toBe(false);
+      ids.add(x.youtube_id);
+      expect(x.verified_on, `${x.slug} has a live id but no verified_on`)
+        .toMatch(/^\d{4}-\d{2}-\d{2}$/);
+      expect(x.channel, `${x.slug} channel`).toBeTruthy();
+    }
+  });
 });

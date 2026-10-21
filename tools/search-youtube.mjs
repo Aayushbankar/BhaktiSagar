@@ -19,8 +19,11 @@ let queries = [];
 let n = 6;
 let jsonOut = null;
 let delay = 6000;
+// optional YouTube search filter param, e.g. "EgJAAQ==" = Live only
+let sp = null;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--n') { n = parseInt(args[++i], 10); }
+  else if (args[i] === '--sp') { sp = args[++i]; }
   else if (args[i] === '--delay') { delay = parseInt(args[++i], 10); }
   else if (args[i] === '--json') { jsonOut = args[++i]; }
   else if (args[i] === '--batch') {
@@ -64,7 +67,7 @@ for (const q of queries) {
   let items = null;
   for (let attempt = 0; attempt < 3 && !items; attempt++) {
     try {
-      const url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q);
+      const url = 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q) + (sp ? '&sp=' + encodeURIComponent(sp) : '');
       const res = await fetch(url, { headers: { 'User-Agent': UA, 'Accept-Language': 'en-US,en;q=0.9' } });
       const html = await res.text();
       const parsed = extract(html);

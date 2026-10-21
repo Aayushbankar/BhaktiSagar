@@ -230,6 +230,39 @@ function panchang_file(string $root, array $loc, array $registry): string
     return $root . '/data/panchang/' . $key . '.json';
 }
 
+/* ---------------- Jyotirlinga live darshan ---------------- */
+
+/**
+ * The twelve Jyotirlingas with their YouTube LIVE darshan ids. Entries whose
+ * youtube_id is null have no live stream yet; the site hides them.
+ */
+function load_jyotirlingas(string $root): array
+{
+    $file = require $root . '/data/jyotirlingas.php';
+    if (!is_array($file)) {
+        return [];
+    }
+    $out = [];
+    foreach ($file as $j) {
+        if (!is_array($j)) {
+            continue;
+        }
+        $id = isset($j['youtube_id']) ? (string) $j['youtube_id'] : '';
+        $out[] = [
+            'order' => (int) ($j['order'] ?? 0),
+            'slug' => (string) ($j['slug'] ?? ''),
+            'name_hi' => (string) ($j['name_hi'] ?? ''),
+            'name_en' => (string) ($j['name_en'] ?? ''),
+            'place_hi' => (string) ($j['place_hi'] ?? ''),
+            'place_en' => (string) ($j['place_en'] ?? ''),
+            'youtube_id' => $id === '' ? null : $id,
+            'channel' => (string) ($j['channel'] ?? ''),
+            'verified_on' => (string) ($j['verified_on'] ?? ''),
+        ];
+    }
+    return $out;
+}
+
 /* ---------------- panchang (वार / तिथि / नक्षत्र / त्योहार) ---------------- */
 
 function load_day_rules(?PDO $pdo, array $dayRules): array
@@ -512,5 +545,6 @@ json_out([
     ],
     'panchang' => $panchang,
     'day_matches' => $matches,
+    'jyotirlingas' => load_jyotirlingas($root),
     'tracks' => $tracks,
 ]);

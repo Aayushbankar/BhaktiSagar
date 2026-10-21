@@ -7,6 +7,10 @@ of the day, with an embedded **YouTube player** and a play queue.
 
 - No login, no signup, no fees — open and play.
 - Works perfectly on mobile and desktop.
+- **Live darshan of the Jyotirlingas**: the home page carries a section with the temples'
+  official **YouTube live streams** (currently 5 of the 12 — Somnath, Mahakaleshwar,
+  Omkareshwar, Baidyanath, Kashi Vishwanath); the other seven appear as soon as a live
+  stream id is added to `data/jyotirlingas.php`.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
   in `data/panchang.json` **and** the MySQL `panchang_days` table.
 - Links are stored in **MySQL**, served by a small **PHP** JSON API.
@@ -47,6 +51,7 @@ bhakti-sagar/
 ├── data/
 │   ├── catalog.php        # single source of truth: 59 tracks, slots, 17 daily shlokas
 │   ├── day_rules.php      # वार / तिथि / त्योहार → track rules (49 rules)
+│   ├── jyotirlingas.php   # the 12 Jyotirlingas + their YouTube LIVE darshan ids
 │   └── panchang.json      # generated permanent dataset: 2026-01-01 → 2028-12-31
 ├── db/
 │   ├── schema.sql         # database + tables (tracks, daily_shlokas, panchang_days, day_rules)
@@ -56,6 +61,7 @@ bhakti-sagar/
 │   ├── search-youtube.mjs     # search YouTube for candidate videos (id/title/channel)
 │   ├── oembed-check.mjs       # verify ids exist + title/channel via oEmbed
 │   ├── verify-player.mjs      # verify videos actually PLAY in an embedded player (headless Edge)
+│   ├── live-check.mjs         # is a stream LIVE / scheduled / not live right now?
 │   ├── player-check.html      # local harness page used by verify-player.mjs
 │   ├── ui-check.mjs           # headless UI assertions (renders/auto-advance checks)
 │   └── package.json           # depends on @ishubhamx/panchangam-js (MIT)
@@ -216,6 +222,23 @@ Open `data/day_rules.php` and append an entry to `$rules`:
 Tithi groups (`ekadashi`, `pradosh`, `purnima`, …) are defined in the same file under
 `tithi_groups`. Re-run `php db/seed.php` to sync the rules into MySQL.
 
+## Adding a Jyotirlinga live darshan
+
+`data/jyotirlingas.php` lists all twelve Jyotirlingas in traditional order. Entries with a
+`youtube_id` render on the home page as a live-darshan card; entries with `youtube_id => null`
+are still returned by the API but stay hidden until a stream is found.
+
+Only **live** streams belong here — recorded darshan videos are not acceptable. Verify before
+storing:
+
+```bash
+node tools/live-check.mjs 9qW0GDdqjTU          # LIVE / SCHEDULED / NOT_LIVE right now
+node tools/verify-player.mjs 9qW0GDdqjTU       # reaches PLAYING from the app origin
+```
+
+Then fill `youtube_id`, `channel` and `verified_on`. The API reads the file directly, so no
+`php db/seed.php` is needed.
+
 ## Testing (Playwright)
 
 ```bash
@@ -224,9 +247,10 @@ npm install
 npx playwright test          # runs the full suite against http://localhost/bhakti-sagar/
 ```
 
-- 78 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
-  weekday → track wiring, shloka/slot invariants), home UI (filters, chip counts for every
-  slot × type, search, empty-state, cache-busting), date deep-links/आज विशेष, the player
+- 82 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
+  weekday → track wiring, shloka/slot invariants, Jyotirlinga live ids), home UI (filters,
+  chip counts for every slot × type, search, empty-state, cache-busting), date
+  deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, /en), the player
   (orange pause state, play→pause→resume icon cycle, queue/next/prev, special cards, mobile
   mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap, i18n
   (hi/en/sa), lyrics/track pages, and a QA audit (console/network errors, link integrity,
