@@ -17,7 +17,7 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     await expect(page.locator('#jyoSection .jyo-title')).toContainText('ज्योतिर्लिंग लाइव दर्शन');
     await expect(page.locator('#jyoGrid .track-card')).toHaveCount(live.length);
     await expect(page.locator('#jyoGrid .badge-live')).toHaveCount(live.length);
-    await expect(page.locator('#jyoGrid [data-jplay]')).toHaveCount(live.length);
+    await expect(page.locator('#jyoGrid [data-jtoggle]')).toHaveCount(live.length);
 
     // the cards follow data/jyotirlingas.php order, so सोमनाथ (order 1) leads
     const titles = await page.locator('#jyoGrid .track-title').allTextContents();
@@ -56,10 +56,11 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     // the mini bar is the mobile player; it stays out of the desktop layout
     await page.setViewportSize({ width: 390, height: 844 });
     await page.goto('./');
-    await expect(page.locator('#jyoGrid [data-jplay]').first()).toBeVisible({ timeout: 30000 });
+    await expect(page.locator('#jyoGrid [data-jtoggle]').first()).toBeVisible({ timeout: 30000 });
     const name = (await page.locator('#jyoGrid .track-title').first().textContent()).trim();
 
-    await page.locator('#jyoGrid [data-jplay]').first().click();
+    // tapping the card body (not its pause button) loads the darshan into the player
+    await page.locator('#jyoGrid .track-card').first().locator('.track-title').click();
 
     await expect(page.locator('#nowTitle')).toContainText(name);
     await expect(page.locator('#nowMeta')).toContainText('लाइव दर्शन');
@@ -80,10 +81,10 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
 
   test('sound button unmutes a live darshan without stopping it', async ({ page }) => {
     await page.goto('./');
-    await expect(page.locator('#jyoGrid [data-jplay]').first()).toBeVisible({ timeout: 30000 });
+    await expect(page.locator('#jyoGrid [data-jtoggle]').first()).toBeVisible({ timeout: 30000 });
     await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '0');
 
-    await page.locator('#jyoGrid [data-jplay]').first().click();
+    await page.locator('#jyoGrid .track-card').first().locator('.track-title').click();
     await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '1');
     await expect(page.locator('#btnSound')).toHaveAttribute('aria-pressed', 'true');
     await expect(page.locator('#btnSound')).toHaveAttribute('aria-label', 'ध्वनि चालू करें');
@@ -96,6 +97,28 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
 
     // the stream keeps playing through the toggle
     await expect(page.locator('#jyoGrid .track-card.is-playing')).toHaveCount(1, { timeout: 60000 });
+  });
+
+  test('card button icon tracks the live preview and toggles play/pause', async ({ page }) => {
+    await page.goto('./');
+    const fab = page.locator('#jyoGrid [data-jtoggle]').first();
+    await expect(fab).toBeVisible({ timeout: 30000 });
+
+    // the preview autoplays muted, so the icon reads as pause with its label
+    await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 30000 });
+    await expect(fab.locator('svg path')).toHaveAttribute('d', /M6 5h4v14H6zM14 5h4v14h-4z/);
+    await expect(fab).toHaveAttribute('aria-label', /^रोकें /);
+
+    // tapping it pauses the preview; the icon flips to play
+    await fab.click();
+    await expect(fab).toHaveAttribute('data-playing', '0', { timeout: 15000 });
+    await expect(fab.locator('svg path')).toHaveAttribute('d', /M8 5v14l11-7z/);
+    await expect(fab).toHaveAttribute('aria-label', /लाइव दर्शन देखें$/);
+
+    // tapping again resumes the preview and the icon returns to pause
+    await fab.click();
+    await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 15000 });
+    await expect(fab.locator('svg path')).toHaveAttribute('d', /M6 5h4v14H6zM14 5h4v14h-4z/);
   });
 
   test('/en shows the English names and the LIVE badge', async ({ page, request }) => {

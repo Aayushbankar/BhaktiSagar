@@ -11,8 +11,10 @@ of the day, with an embedded **YouTube player** and a play queue.
   official **YouTube live streams** (currently 6 of the 12 — Somnath, Mahakaleshwar,
   Omkareshwar, Trimbakeshwar, Baidyanath, Kashi Vishwanath); the other six appear as soon as a live
   stream id is added to `data/jyotirlingas.php`. **Every live card autoplays its own stream,
-  muted, as soon as the page loads** (they pause with the tab); the play button loads the
-  stream into the main player, where one tap on the sound button unmutes it.
+  muted, as soon as the page loads** (they pause with the tab). The card's button icon
+  always mirrors that stream's real state — pause while it plays, play while it's paused —
+  and taps toggle it. Tapping the card itself loads the darshan into the main player,
+  where one tap on the sound button unmutes it.
 - **Quick links**: a sticky pill nav under the header (and the same links in the footer, plus the
   language switcher) jumps to Live darshan, आज विशेष, पंचांग, the song catalogue and the player.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
@@ -251,11 +253,11 @@ npm install
 npx playwright test          # runs the full suite against http://localhost/bhakti-sagar/
 ```
 
-- 84 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
+- 85 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
   weekday → track wiring, shloka/slot invariants, Jyotirlinga live ids), home UI (filters,
   chip counts for every slot × type, search, empty-state, cache-busting, quick links/footer
   links), date deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, muted
-  autoplay + sound toggle, /en), the player
+  autoplay + state-tracking pause/play icons + sound toggle, /en), the player
   (orange pause state, play→pause→resume icon cycle, queue/next/prev, special cards, mobile
   mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap, i18n
   (hi/en/sa), lyrics/track pages, and a QA audit (console/network errors, link integrity,

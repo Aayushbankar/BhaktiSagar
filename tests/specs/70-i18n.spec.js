@@ -119,7 +119,13 @@ test.describe('i18n', () => {
   test('a language change is a plain navigation: no reload loop, no page errors', async ({ page }) => {
     const errors = [];
     page.on('pageerror', (e) => errors.push(String(e)));
-    page.on('console', (m) => { if (m.type() === 'error') { errors.push(m.text()); } });
+    page.on('console', (m) => {
+      // the YouTube player's compute-pressure probe trips a Permissions
+      // Policy warning in every browser — not ours to fix
+      if (m.type() === 'error' && !/compute-pressure|Permissions policy/i.test(m.text())) {
+        errors.push(m.text());
+      }
+    });
 
     await page.goto('track/hanuman-chalisa');
     await expect(page.locator('#trackGrid .track-card').first()).toBeVisible();

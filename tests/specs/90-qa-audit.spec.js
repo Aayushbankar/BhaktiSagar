@@ -44,6 +44,9 @@ test.describe('QA audit', () => {
         // a deliberate 404 route makes the browser echo the document's own
         // status; the response listener below still catches asset 404s
         if (name === 'not-found' && /Failed to load resource/.test(m.text())) return;
+        // the YouTube player's compute-pressure probe trips a Permissions
+        // Policy warning in every browser — not ours to fix
+        if (/compute-pressure|Permissions policy/i.test(m.text())) return;
         consoleErrors.push(m.text());
       });
       page.on('pageerror', (e) => pageErrors.push(String(e)));

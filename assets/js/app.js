@@ -493,9 +493,9 @@
         '<span class="badge badge-live">' + esc(str('jyo.live')) + '</span>' +
         '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async">' +
         '<div class="jyo-preview" data-preview="' + esc(j.youtube_id) + '" data-name="' + esc(name) + '"></div>' +
-        '<button type="button" class="play-fab" data-jplay="' + i + '" aria-label="' +
-          esc(str('jyo.play', { name: name })) + '">' +
-          playGlyph(false) +
+        '<button type="button" class="play-fab" data-jtoggle="' + i + '" data-playing="1" aria-label="' +
+          esc(str('card.pause') + name) + '">' +
+          playGlyph(true) +
         '</button>' +
       '</div>' +
       '<div class="track-body">' +
@@ -520,6 +520,19 @@
       '?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&enablejsapi=1&origin=' +
       encodeURIComponent(window.location.origin);
     box.appendChild(frame);
+    // ask the player to start reporting its state so the card icon can track it
+    frame.addEventListener('load', function () {
+      var listen = function () {
+        try {
+          frame.contentWindow.postMessage(
+            JSON.stringify({ event: 'listening', id: id }), '*');
+        } catch (e) { /* cross-origin frame – ignore */ }
+      };
+      listen();
+      // the player app inside the iframe may not be listening yet at load
+      setTimeout(listen, 1000);
+      setTimeout(listen, 3000);
+    });
   }
 
   function mountJyoPreviews() {
@@ -527,15 +540,72 @@
     el.jyoGrid.querySelectorAll('.jyo-preview').forEach(mountJyoPreview);
   }
 
-  /** Muted previews pause with the tab so background streams don't burn data. */
+  /**
+   * Muted previews pause with the tab so background streams don't burn data.
+   * Commands flip the icon optimistically and arm a pending flag so in-flight
+   * state reports from before the command can't race the next click.
+   */
   function jyoPreviewCommand(func) {
-    var frames = document.querySelectorAll('.jyo-preview iframe');
-    for (var i = 0; i < frames.length; i += 1) {
-      try {
-        frames[i].contentWindow.postMessage(
-          JSON.stringify({ event: 'command', func: func, args: [] }), '*');
-      } catch (e) { /* cross-origin frame – ignore */ }
-    }
+    var resume = func === 'playVideo';
+    document.querySelectorAll('.jyo-preview').forEach(function (box) {
+      box.setAttribute('data-pending', resume ? '1' : '0');
+      setPreviewPlaying(box, resume);
+      jyoPreviewBoxCommand(box, func);
+    });
+  }
+
+  function jyoPreviewBoxCommand(box, func) {
+    var frame = box && box.querySelector('iframe');
+    if (!frame) { return; }
+    var id = box.getAttribute('data-preview') || '';
+    try {
+      frame.contentWindow.postMessage(
+        JSON.stringify({ event: 'command', func: func, args: [], id: id }), '*');
+    } catch (e) { /* cross-origin frame – ignore */ }
+  }
+
+  /** Keeps a card's button icon in sync with its preview's real player state. */
+  function setPreviewPlaying(box, playing) {
+    box.setAttribute('data-playing', playing ? '1' : '0');
+    var card = box.closest('.track-card');
+    var btn = card && card.querySelector('.play-fab');
+    if (!btn) { return; }
+    btn.setAttribute('data-playing', playing ? '1' : '0');
+    var i = parseInt(card.getAttribute('data-jindex'), 10);
+    var name = jyoName(state.jyoLive[i]);
+    btn.innerHTML = playGlyph(playing);
+    btn.setAttribute('aria-label',
+      playing ? str('card.pause') + name : str('jyo.play', { name: name }));
+  }
+
+  function bindJyoPreviewStates() {
+    window.addEventListener('message', function (e) {
+      var d = e.data;
+      if (!d) { return; }
+      var msg = null;
+      if (typeof d === 'string') {
+        if (d.indexOf('infoDelivery') < 0) { return; }
+        try { msg = JSON.parse(d); } catch (err) { return; }
+      } else if (typeof d === 'object' && d.event === 'infoDelivery') {
+        msg = d;
+      }
+      if (!msg || msg.event !== 'infoDelivery' || !msg.info) { return; }
+      var frames = document.querySelectorAll('.jyo-preview iframe');
+      for (var i = 0; i < frames.length; i += 1) {
+        if (frames[i].contentWindow !== e.source) { continue; }
+        var box = frames[i].parentNode;
+        var st = msg.info.playerState;
+        // 1 = playing, 3 = buffering; everything else is a pause icon
+        var playing = st === 1 || st === 3;
+        // a state report captured before our last command may arrive late —
+        // skip reports that contradict a still-pending pause/resume
+        var pending = box.getAttribute('data-pending');
+        if ((pending === '1' && playing) || (pending === '0' && !playing)) { return; }
+        box.removeAttribute('data-pending');
+        setPreviewPlaying(box, playing);
+        return;
+      }
+    });
   }
 
   function updateJyoPlaying() {
@@ -547,12 +617,6 @@
         state.queue[state.queueIndex] &&
         state.queue[state.queueIndex].slug === jyoTrack(t).slug);
       card.classList.toggle('is-playing', playing);
-      var btn = card.querySelector('.play-fab');
-      if (!btn) { return; }
-      var name = jyoName(t);
-      btn.innerHTML = playGlyph(playing);
-      btn.setAttribute('aria-label',
-        playing ? str('card.pause') + name : str('jyo.play', { name: name }));
     });
   }
 
@@ -1066,9 +1130,23 @@
     });
 
     el.jyoGrid.addEventListener('click', function (e) {
-      var btn = e.target.closest('[data-jplay]');
-      if (!btn) { return; }
-      var index = parseInt(btn.getAttribute('data-jplay'), 10);
+      // the card's button pauses/resumes its own muted preview
+      var toggle = e.target.closest('[data-jtoggle]');
+      if (toggle) {
+        var card = toggle.closest('.track-card');
+        var box = card && card.querySelector('.jyo-preview');
+        if (box) {
+          var resume = toggle.getAttribute('data-playing') !== '1';
+          box.setAttribute('data-pending', resume ? '1' : '0');
+          setPreviewPlaying(box, resume);
+          jyoPreviewBoxCommand(box, resume ? 'playVideo' : 'pauseVideo');
+        }
+        return;
+      }
+      // tapping the card body loads the darshan into the main player
+      var cardEl = e.target.closest('.track-card[data-jindex]');
+      if (!cardEl) { return; }
+      var index = parseInt(cardEl.getAttribute('data-jindex'), 10);
       state.errorStreak = 0;
       state.queue = state.jyoLive.map(jyoTrack);
       state.queueIndex = index;
@@ -1333,6 +1411,7 @@
     renderClock();
     renderDates();
     bindEvents();
+    bindJyoPreviewStates();
     initLyrics();
     loadYouTubeApi();
     updateTopbarH();
