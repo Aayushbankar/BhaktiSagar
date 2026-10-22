@@ -9,6 +9,14 @@ require __DIR__ . '/lib/i18n.php';
 
 $requestPath = bs_request_path();
 
+/* Friendly aliases and messy hand-typed URLs 301 to the one canonical page. */
+$canonical = bs_canonical_redirect($requestPath);
+if ($canonical !== null) {
+    $qs = (string) ($_SERVER['QUERY_STRING'] ?? '');
+    header('Location: ' . bs_base_path() . $canonical . ($qs !== '' ? '?' . $qs : ''), true, 301);
+    exit;
+}
+
 /* Static files served by this front controller (never real files on disk). */
 if ($requestPath === '/robots.txt') {
     header('Content-Type: text/plain; charset=utf-8');
@@ -77,7 +85,7 @@ $assetVer = static function (string $path): string {
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%237b1e2b'/%3E%3Ctext x='32' y='44' font-size='34' text-anchor='middle' fill='%23f4a024' font-family='serif'%3E%E0%A5%90%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=<?= e($assetVer('assets/css/style.css')) ?>">
 <script type="application/ld+json"><?= $jsonld ?></script>
 </head>
@@ -101,7 +109,7 @@ $assetVer = static function (string $path): string {
        href="<?= e(bs_href($alt)) ?>"
        lang="<?= e($code) ?>"
        hreflang="<?= e($code) ?>"
-       <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(mb_strtoupper($code)) ?></a>
+       <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(bs_lang_label($code)) ?></a>
     <?php endforeach; ?>
   </nav>
 
@@ -205,7 +213,7 @@ $assetVer = static function (string $path): string {
         $lyricsCount = bs_lyrics_count($route['slug']);
         $hasTranslit = bs_lyrics_has_translit($route['slug']);
         $hasMeaning  = bs_lyrics_has_meaning($route['slug']);
-        $trackTitle  = (string) ($trackDetail[$lang === 'en' ? 'title_en' : 'title_hi'] ?? $trackDetail['title_en']);
+        $trackTitle  = bs_track_title($trackDetail, $lang);
     ?>
     <section class="track-detail" id="trackDetail" data-slug="<?= e($route['slug']) ?>" aria-label="<?= e($t('track.aria')) ?>">
       <p class="track-crumb">
@@ -392,7 +400,7 @@ $assetVer = static function (string $path): string {
        href="<?= e(bs_href($alt)) ?>"
        lang="<?= e($code) ?>"
        hreflang="<?= e($code) ?>"
-       <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(mb_strtoupper($code)) ?></a>
+       <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(bs_lang_label($code)) ?></a>
     <?php endforeach; ?>
   </nav>
 

@@ -161,11 +161,12 @@ test.describe('Lyrics / track pages', () => {
     await expect(page.locator('#trackGrid .track-card.is-playing')).toHaveCount(0);
   });
 
-  test('lyrics render in /en and /sa with the translated reading controls', async ({ request }) => {
+  test('lyrics render in /en, /sa and /gu with the translated reading controls', async ({ request }) => {
     const en = await (await request.get(`en/track/${WITH_LYRICS}`)).text();
     const sa = await (await request.get(`sa/track/${WITH_LYRICS}`)).text();
+    const gu = await (await request.get(`gu/track/${WITH_LYRICS}`)).text();
 
-    for (const [lang, html] of [['en', en], ['sa', sa]]) {
+    for (const [lang, html] of [['en', en], ['sa', sa], ['gu', gu]]) {
       expect(html, lang).toContain('<html lang="' + lang + '">');
       expect(html, lang).toContain('id="lyricsBody"');
       expect(html, lang).toContain('class="lyric-stanza"');
@@ -175,5 +176,6 @@ test.describe('Lyrics / track pages', () => {
 
     expect(en).toContain('>Roman script<');
     expect(sa).toContain('>रोमनलिपिः<');
+    expect(gu).toContain('>રોમન લિપિ<');
   });
 });

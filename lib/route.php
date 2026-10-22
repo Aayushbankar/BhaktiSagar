@@ -17,8 +17,87 @@ declare(strict_types=1);
  * Unknown paths render the shell with a 404 status.
  */
 
-const BS_LANGS = ['hi', 'en', 'sa'];
+const BS_LANGS = ['hi', 'en', 'sa', 'gu'];
 const BS_DEFAULT_LANG = 'hi';
+
+/** Native-script labels for the switcher — full words read better than HI/EN codes. */
+function bs_lang_label(string $code): string
+{
+    static $labels = [
+        'hi' => 'हिन्दी',
+        'en' => 'English',
+        'sa' => 'संस्कृत',
+        'gu' => 'ગુજરાતી',
+    ];
+    return $labels[$code] ?? mb_strtoupper($code);
+}
+
+/**
+ * Canonical-form normalisation. Returns the canonical app-relative path when
+ * the request should 301 elsewhere, or null when it is already canonical.
+ *
+ * Deliberately generous: elderly visitors type URLs by hand, so /EN/Track/X,
+ * /hindi, /gujarati, /date/15-11-2026, /index.php and trailing slashes all
+ * land on the one right page instead of a 404 or a duplicate.
+ */
+function bs_canonical_redirect(string $path): ?string
+{
+    // 1. collapse duplicate slashes
+    $collapsed = preg_replace('#/{2,}#', '/', $path);
+    if ($collapsed !== null && $collapsed !== $path && $collapsed !== '') {
+        return $collapsed;
+    }
+    // 2. /index.php and /index.php/anything → /anything
+    if (strncmp($path, '/index.php', 10) === 0) {
+        $rest = (string) substr($path, 10);
+        return $rest === '' || $rest === '/' ? '/' : $rest;
+    }
+    // 3. trailing slash → none (except the bare home page)
+    if ($path !== '/' && str_ends_with($path, '/')) {
+        return rtrim($path, '/');
+    }
+    // 4. uppercase → lowercase; slugs and language codes are always lowercase
+    $lower = strtolower($path);
+    if ($lower !== $path) {
+        return $lower;
+    }
+    $segs = trim($path, '/') === '' ? [] : explode('/', trim($path, '/'));
+    // 5. full-word language aliases: /hindi /english /sanskrit /gujarati
+    static $langWords = [
+        'hindi' => 'hi',
+        'english' => 'en',
+        'sanskrit' => 'sa',
+        'gujarati' => 'gu',
+    ];
+    if ($segs !== [] && isset($langWords[$segs[0]])) {
+        $code = $langWords[(string) array_shift($segs)];
+        $prefix = $code === BS_DEFAULT_LANG ? '' : '/' . $code;
+        if ($segs === []) {
+            return $prefix === '' ? '/' : $prefix;
+        }
+        return $prefix . '/' . implode('/', $segs);
+    }
+    // 6. Indian-friendly date: /date/15-11-2026 → /date/2026-11-15
+    if (count($segs) === 2 && $segs[0] === 'date'
+        && preg_match('#^(\d{1,2})-(\d{1,2})-(\d{4})$#', $segs[1], $m) === 1
+        && checkdate((int) $m[2], (int) $m[1], (int) $m[3])
+    ) {
+        return sprintf('/date/%04d-%02d-%02d', (int) $m[3], (int) $m[2], (int) $m[1]);
+    }
+    return null;
+}
+
+/** Localised title for a track row; en→title_en, gu→title_gu, else title_hi. */
+function bs_track_title(array $track, string $lang): string
+{
+    if ($lang === 'en') {
+        return (string) ($track['title_en'] ?? $track['title_hi'] ?? '');
+    }
+    if ($lang === 'gu') {
+        return (string) ($track['title_gu'] ?? $track['title_hi'] ?? $track['title_en'] ?? '');
+    }
+    return (string) ($track['title_hi'] ?? $track['title_en'] ?? '');
+}
 
 function bs_config(): array
 {
@@ -56,9 +135,6 @@ function bs_request_path(): string
         $path = (string) substr($path, strlen($base));
     }
     $path = '/' . ltrim($path, '/');
-    if ($path === '/index.php' || $path === '/index.php/') {
-        $path = '/';
-    }
     return $path;
 }
 

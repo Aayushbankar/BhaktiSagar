@@ -13,6 +13,7 @@ CREATE TABLE IF NOT EXISTS `tracks` (
   `slug`          VARCHAR(80)  NOT NULL,
   `title_hi`      VARCHAR(190) NOT NULL,
   `title_en`      VARCHAR(190) NOT NULL,
+  `title_gu`      VARCHAR(190) NOT NULL DEFAULT '',
   `type`          ENUM('shloka','bhajan','aarti') NOT NULL DEFAULT 'bhajan',
   `deity`         VARCHAR(90)  NOT NULL DEFAULT '',
   `singer`        VARCHAR(120) NOT NULL DEFAULT '',

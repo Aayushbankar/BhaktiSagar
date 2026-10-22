@@ -21,8 +21,8 @@
   --radius: 16px;
   --radius-sm: 10px;
   --maxw: 1240px;
-  --font-hi: "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Mukta", serif;
-  --font-ui: "Mukta", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-hi: "Tiro Devanagari Hindi", "Noto Sans Devanagari", "Noto Sans Gujarati", "Mukta", serif;
+  --font-ui: "Mukta", "Noto Sans Gujarati", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -107,12 +107,12 @@ a { color: var(--maroon); }
 }
 .lang-link {
   display: inline-block;
-  padding: 5px 10px;
+  padding: 6px 12px;
   border-radius: 999px;
   color: #ffe9c9;
-  font-size: .74rem;
+  font-size: .86rem;
   font-weight: 700;
-  letter-spacing: .8px;
+  letter-spacing: .2px;
   text-decoration: none;
   transition: background .15s ease;
 }

@@ -16,7 +16,7 @@ test.describe('Routing & SEO', () => {
 
     expect(html).toContain('<html lang="hi">');
     expect(html).toContain('<link rel="canonical" href="http://localhost/bhakti-sagar/">');
-    for (const code of ['hi', 'en', 'sa', 'x-default']) {
+    for (const code of ['hi', 'en', 'sa', 'gu', 'x-default']) {
       expect(html, `hreflang ${code}`).toContain(`hreflang="${code}"`);
     }
     expect(html).toContain('<script type="application/ld+json">');
@@ -53,16 +53,19 @@ test.describe('Routing & SEO', () => {
     expect(errors).toEqual([]);
   });
 
-  test('/en and /sa switch <html lang>, title and hreflang but keep the route kind', async ({ request }) => {
+  test('/en, /sa and /gu switch <html lang>, title and hreflang but keep the route kind', async ({ request }) => {
     const home = {
       en: await (await request.get('en')).text(),
       sa: await (await request.get('sa')).text(),
+      gu: await (await request.get('gu')).text(),
     };
     expect(home.en).toContain('<html lang="en">');
     expect(home.en).toContain('<title>Bhakti Sagar | Hindu Shlokas');
     expect(home.sa).toContain('<html lang="sa">');
+    expect(home.gu).toContain('<html lang="gu">');
+    expect(home.gu).toContain('<title>ભક્તિ સાગર | શ્લોક, ભજન અને આરતી');
 
-    for (const lang of ['en', 'sa']) {
+    for (const lang of ['en', 'sa', 'gu']) {
       const html = await (await request.get(`${lang}/track/hanuman-chalisa`)).text();
       expect(html, `${lang} track`).toContain(`<html lang="${lang}">`);
       const route = JSON.parse(meta(html, /window\.__ROUTE__ = (\{.*?\});/));
@@ -76,10 +79,11 @@ test.describe('Routing & SEO', () => {
     const hrefs = await page.locator('.lang-switch .lang-link').evaluateAll((els) =>
       els.map((a) => ({ lang: a.getAttribute('hreflang'), href: a.getAttribute('href') }))
     );
-    expect(hrefs.map((h) => h.lang).sort()).toEqual(['en', 'hi', 'sa']);
+    expect(hrefs.map((h) => h.lang).sort()).toEqual(['en', 'gu', 'hi', 'sa']);
     expect(hrefs.find((h) => h.lang === 'hi').href, 'hi').toBe('/bhakti-sagar/track/hanuman-chalisa');
     expect(hrefs.find((h) => h.lang === 'en').href, 'en').toBe('/bhakti-sagar/en/track/hanuman-chalisa');
     expect(hrefs.find((h) => h.lang === 'sa').href, 'sa').toBe('/bhakti-sagar/sa/track/hanuman-chalisa');
+    expect(hrefs.find((h) => h.lang === 'gu').href, 'gu').toBe('/bhakti-sagar/gu/track/hanuman-chalisa');
     await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'hi');
 
     // and the link must actually navigate (href has to include the mount point)
@@ -108,6 +112,32 @@ test.describe('Routing & SEO', () => {
     const route = JSON.parse(meta(html, /window\.__ROUTE__ = (\{.*?\});/));
     expect(route).toMatchObject({ kind: 'date', date: '2026-11-15' });
     expect(html).toContain('<link rel="canonical" href="http://localhost/bhakti-sagar/date/2026-11-15">');
+  });
+
+  test('elderly-friendly aliases 301-redirect to the canonical URL', async ({ request }) => {
+    const cases = [
+      ['EN', '/bhakti-sagar/en'],
+      ['en/', '/bhakti-sagar/en'],
+      ['english', '/bhakti-sagar/en'],
+      ['english/track/hanuman-chalisa', '/bhakti-sagar/en/track/hanuman-chalisa'],
+      ['hindi', '/bhakti-sagar/'],
+      ['sanskrit', '/bhakti-sagar/sa'],
+      ['gujarati', '/bhakti-sagar/gu'],
+      ['date/15-11-2026', '/bhakti-sagar/date/2026-11-15'],
+      ['index.php', '/bhakti-sagar/'],
+      ['Track/hanuman-chalisa', '/bhakti-sagar/track/hanuman-chalisa'],
+    ];
+    for (const [from, to] of cases) {
+      const res = await request.get(from, { maxRedirects: 0 });
+      expect(res.status(), `${from} status`).toBe(301);
+      expect(res.headers()['location'], `${from} -> ${to}`).toBe(to);
+    }
+  });
+
+  test('query strings survive the canonical redirect', async ({ request }) => {
+    const res = await request.get('en/?city=ahmedabad', { maxRedirects: 0 });
+    expect(res.status()).toBe(301);
+    expect(res.headers()['location']).toBe('/bhakti-sagar/en?city=ahmedabad');
   });
 
   test('unknown paths return 404 + noindex and render the not-found panel', async ({ request }) => {

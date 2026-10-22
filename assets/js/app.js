@@ -22,7 +22,7 @@
   var routeScrolled = false;
 
   // UI language: the chrome strings are embedded by index.php (lib/i18n.php).
-  var lang = (route.lang === 'en' || route.lang === 'sa') ? route.lang : 'hi';
+  var lang = (route.lang === 'en' || route.lang === 'sa' || route.lang === 'gu') ? route.lang : 'hi';
   var strings = window.__I18N__ || {};
 
   // Note: deliberately not named `t` — every card loop uses `t` for the track.
@@ -37,12 +37,13 @@
     return s;
   }
 
-  /** Catalogue payloads only carry hi/en names; Sanskrit falls back to hi. */
+  /** Catalogue payloads only carry hi/en(/gu titles) names; sa and others fall back to hi. */
   function locLang() { return lang === 'en' ? 'en' : 'hi'; }
 
   function trackTitle(tr) {
     if (!tr) { return ''; }
     if (lang === 'en' && tr.title_en) { return tr.title_en; }
+    if (lang === 'gu' && tr.title_gu) { return tr.title_gu; }
     return tr.title_hi || tr.title_en || '';
   }
 
@@ -1074,7 +1075,9 @@
   }
 
   function trackHref(slug) {
-    return (route.base || '') + '/track/' + slug;
+    // keep the visitor's language — a lyrics badge on /en must not drop to Hindi
+    var prefix = route.lang && route.lang !== 'hi' ? '/' + route.lang : '';
+    return (route.base || '') + prefix + '/track/' + slug;
   }
 
   /* ---------------- events ---------------- */

@@ -15,6 +15,12 @@ of the day, with an embedded **YouTube player** and a play queue.
   always mirrors that stream's real state — pause while it plays, play while it's paused —
   and taps toggle it. Tapping the card itself loads the darshan into the main player,
   where one tap on the sound button unmutes it.
+- **Four languages, elderly-friendly URLs**: the site ships in हिन्दी (default), English, संस्कृत and
+  ગુજરાતી (`/`, `/en`, `/sa`, `/gu`); the switcher shows native names (हिन्दी · English · संस्कृત · ગુજરાતી).
+  Old or misspelled links are **301-redirected to the canonical URL** instead of 404-ing:
+  full-word aliases (`/hindi` `/english` `/sanskrit` `/gujarati`), uppercase segments (`/EN`),
+  trailing slashes (`/en/`), `/index.php`, `DD-MM-YYYY` dates and doubled slashes all land on the
+  right page, with the query string preserved.
 - **Quick links**: a sticky pill nav under the header (and the same links in the footer, plus the
   language switcher) jumps to Live darshan, आज विशेष, पंचांग, the song catalogue and the player.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
@@ -44,7 +50,7 @@ embedding), so they were replaced with playback-verified alternates (`tools/veri
 | Player    | YouTube IFrame Player API |
 | Backend   | PHP 8 (works with PHP 7.4+) |
 | Database  | MySQL / MariaDB (XAMPP ships MariaDB) |
-| Fonts     | Google Fonts (Mukta + Tiro Devanagari Hindi) – optional, site works without them |
+| Fonts     | Google Fonts (Mukta + Tiro Devanagari Hindi + Noto Sans Gujarati) – optional, site works without them |
 
 ## Folder structure
 
@@ -185,6 +191,7 @@ The location used for sunrise/sunset is New Delhi by default — change `LOCATIO
     'slug' => 'unique-slug',
     'title_hi' => 'गीत का नाम',
     'title_en' => 'Track name',
+    'title_gu' => 'ગીતનું નામ',            // Gujarati title (falls back to title_hi if empty)
     'type' => 'bhajan',                 // shloka | bhajan | aarti
     'deity' => 'श्री कृष्ण',
     'singer' => 'गायक का नाम',
@@ -253,15 +260,16 @@ npm install
 npx playwright test          # runs the full suite against http://localhost/bhakti-sagar/
 ```
 
-- 85 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
+- 88 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
   weekday → track wiring, shloka/slot invariants, Jyotirlinga live ids), home UI (filters,
   chip counts for every slot × type, search, empty-state, cache-busting, quick links/footer
   links), date deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, muted
   autoplay + state-tracking pause/play icons + sound toggle, /en), the player
   (orange pause state, play→pause→resume icon cycle, queue/next/prev, special cards, mobile
-  mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap, i18n
-  (hi/en/sa), lyrics/track pages, and a QA audit (console/network errors, link integrity,
-  accessibility, content coverage, performance budget). See `docs/qa-report-2026-10-19.md`.
+  mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap (including the
+  301 alias redirects), i18n (hi/en/sa/gu), lyrics/track pages, and a QA audit
+  (console/network errors, link integrity, accessibility, content coverage, performance budget).
+  See `docs/qa-report-2026-10-19.md`.
 - Report is saved automatically:
   - HTML: `tests/playwright-report/index.html` (open in a browser)
   - JSON: `tests/playwright-report/results.json`

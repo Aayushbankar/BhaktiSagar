@@ -163,8 +163,8 @@ test.describe('Home UI & filters', () => {
     await expect(footer.locator('a[data-nav="jyoSection"]')).toBeVisible();
     await expect(footer.locator('a[href="#trackGrid"]')).toBeVisible();
     await expect(footer.locator('a[href="#playerCol"]')).toBeVisible();
-    await expect(page.locator('.footer-langs a')).toHaveCount(3);
-    await expect(page.locator('.footer-langs a.is-current')).toHaveText('HI');
+    await expect(page.locator('.footer-langs a')).toHaveCount(4);
+    await expect(page.locator('.footer-langs a.is-current')).toHaveText('हिन्दी');
 
     // clicking a pill jumps to that section
     await nav.locator('a[href="#trackGrid"]').click();

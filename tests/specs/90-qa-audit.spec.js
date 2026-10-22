@@ -6,6 +6,7 @@ const ROUTES = [
   ['home', './'],
   ['home-en', 'en'],
   ['home-sa', 'sa'],
+  ['home-gu', 'gu'],
   ['track-with-lyrics', 'track/om-jai-jagdish-hare-lata'],
   ['track-without-lyrics', 'track/hanuman-chalisa'],
   ['festival', 'festival/diwali-lakshmi-puja'],
@@ -109,7 +110,7 @@ test.describe('QA audit', () => {
     const xml = await (await request.get('sitemap.xml')).text();
     const trackUrls = (xml.match(/<loc>([^<]*?\/track\/[^<]*)<\/loc>/g) || [])
       .map((l) => l.replace(/<\/?loc>/g, ''))
-      .filter((u) => !/\/(en|sa)\//.test(u));
+      .filter((u) => !/\/(en|sa|gu)\//.test(u));
     expect(trackUrls.length, 'sitemap must list every track').toBeGreaterThanOrEqual(59);
 
     const broken = [];

@@ -10,16 +10,18 @@ function readTable(lang) {
 }
 
 test.describe('i18n', () => {
-  test('hi, en and sa tables carry exactly the same keys', () => {
+  test('hi, en, sa and gu tables carry exactly the same keys', () => {
     const hi = Object.keys(readTable('hi')).sort();
     const en = Object.keys(readTable('en')).sort();
     const sa = Object.keys(readTable('sa')).sort();
+    const gu = Object.keys(readTable('gu')).sort();
 
     expect(hi.length).toBeGreaterThan(60);
     expect(en).toEqual(hi);
     expect(sa).toEqual(hi);
+    expect(gu).toEqual(hi);
 
-    for (const lang of ['hi', 'en', 'sa']) {
+    for (const lang of ['hi', 'en', 'sa', 'gu']) {
       const table = readTable(lang);
       for (const [key, value] of Object.entries(table)) {
         expect(typeof value, `${lang}.${key}`).toBe('string');
@@ -29,7 +31,7 @@ test.describe('i18n', () => {
   });
 
   test('index.php embeds the table for the requested language', async ({ request }) => {
-    for (const lang of ['hi', 'en', 'sa']) {
+    for (const lang of ['hi', 'en', 'sa', 'gu']) {
       const url = lang === 'hi' ? '' : `${lang}`;
       const html = await (await request.get(url)).text();
       const m = html.match(/window\.__I18N__ = (\{.*?\});/);
@@ -86,6 +88,21 @@ test.describe('i18n', () => {
     await expect(page.locator('#panchangStrip')).toContainText('सूर्योदयः');
     await expect(page.locator('#jyoSection .jyo-title')).toContainText('ज्योतिर्लिंग लाइव दर्शनम्');
     await expect(page.locator('#quickNav a[href="#trackGrid"]')).toHaveText('गीतसङ्ग्रहः');
+  });
+
+  test('/gu renders the whole chrome in Gujarati', async ({ page }) => {
+    await page.goto('gu');
+    await expect(page.locator('html')).toHaveAttribute('lang', 'gu');
+    await expect(page.locator('#nowTitle')).toHaveText('પ્લેયર તૈયાર છે');
+    await expect(page.locator('.queue-head h3')).toHaveText('ચાલુ રહેલ યાદી');
+    await expect(page.locator('#slotChips')).toContainText('બધા સમય');
+    await expect(page.locator('#typeChips')).toContainText('શ્લોક');
+    await expect(page.locator('#panchangTitle')).toHaveText('આજનું પંચાંગ');
+    await expect(page.locator('#jyoSection .jyo-title')).toContainText('જ્યોતિર્લિંગ લાઈવ દર્શન');
+    await expect(page.locator('#quickNav a[href="#trackGrid"]')).toHaveText('ભજન સંગ્રહ');
+    await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'gu');
+    await expect(page.locator('.lang-link.is-current')).toHaveText('ગુજરાતી');
+    await expect(page.locator('.lang-link[hreflang="sa"]')).toBeVisible();
   });
 
   test('/en uses the English song titles and English empty states', async ({ page, request }) => {

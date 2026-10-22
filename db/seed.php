@@ -73,12 +73,19 @@ $pdo = new PDO(
     ]
 );
 
+// upgrade pre-existing installs: Gujarati titles (added 2026-10)
+$hasTitleGu = $pdo->query("SHOW COLUMNS FROM `tracks` LIKE 'title_gu'")->fetch();
+if (!$hasTitleGu) {
+    $pdo->exec("ALTER TABLE `tracks` ADD COLUMN `title_gu` VARCHAR(190) NOT NULL DEFAULT '' AFTER `title_en`");
+    out('tracks.title_gu column added.');
+}
+
 // 2. tracks
 $insertTrack = $pdo->prepare(
-    'INSERT INTO tracks (slug, title_hi, title_en, type, deity, singer, youtube_id, slots, tags, blurb, sort_order)
-     VALUES (:slug, :title_hi, :title_en, :type, :deity, :singer, :youtube_id, :slots, :tags, :blurb, :sort_order)
+    'INSERT INTO tracks (slug, title_hi, title_en, title_gu, type, deity, singer, youtube_id, slots, tags, blurb, sort_order)
+     VALUES (:slug, :title_hi, :title_en, :title_gu, :type, :deity, :singer, :youtube_id, :slots, :tags, :blurb, :sort_order)
      ON DUPLICATE KEY UPDATE
-        title_hi = VALUES(title_hi), title_en = VALUES(title_en), type = VALUES(type),
+        title_hi = VALUES(title_hi), title_en = VALUES(title_en), title_gu = VALUES(title_gu), type = VALUES(type),
         deity = VALUES(deity), singer = VALUES(singer), youtube_id = VALUES(youtube_id),
         slots = VALUES(slots), tags = VALUES(tags), blurb = VALUES(blurb),
         sort_order = VALUES(sort_order), is_active = 1, updated_at = CURRENT_TIMESTAMP'
@@ -90,6 +97,7 @@ foreach ($catalog['tracks'] as $track) {
         ':slug' => $track['slug'],
         ':title_hi' => $track['title_hi'],
         ':title_en' => $track['title_en'],
+        ':title_gu' => $track['title_gu'] ?? '',
         ':type' => $track['type'],
         ':deity' => $track['deity'],
         ':singer' => $track['singer'],

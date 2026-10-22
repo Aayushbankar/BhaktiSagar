@@ -60,6 +60,23 @@ function bs_seo_texts(): array
             'notfound_desc' => 'इदं पृष्ठं न विद्यते । भक्तिसागरे अद्य पञ्चाङ्गं भक्तिसूचनाः च पश्यतु ।',
             'notfound_cta' => 'अद्य पञ्चाङ्गं पश्यतु →',
         ],
+        'gu' => [
+            'site' => 'ભક્તિ સાગર',
+            'home_title' => 'ભક્તિ સાગર | શ્લોક, ભજન અને આરતી – સમય મુજબ સૂચનો',
+            'home_h1' => 'ભક્તિ સાગર · શ્લોક · ભજન · આરતી',
+            'home_desc' => 'પંચાંગ (વાર, તિથિ, નક્ષત્ર અને તહેવાર) મુજબ હિન્દુ શ્લોક, ભજન અને આરતીના સૂચનો – YouTube પ્લેયર સાથે. લોગિન વિના, મોબાઇલ અને ડેસ્કટોપ બંને પર.',
+            'track_title' => '{title} | ભક્તિ સાગર',
+            'track_desc' => '{blurb} શબ્દો, અર્થ, સાંભળવાનો યોગ્ય સમય અને YouTube પ્લેયર સાથે.',
+            'festival_title' => '{name} {year} – તિથિ, પંચાંગ અને ભક્તિ સૂચનો | ભક્તિ સાગર',
+            'festival_h1' => '{name} {year}',
+            'festival_desc' => '{name} {year}ની તિથિ અને પંચાંગ (વાર, તિથિ, નક્ષત્ર) મુજબ શ્લોક, ભજન અને આરતીના સૂચનો.',
+            'date_title' => '{date}નું પંચાંગ – વાર, તિથિ, નક્ષત્ર, તહેવાર | ભક્તિ સાગર',
+            'date_h1' => '{date}નું પંચાંગ',
+            'date_desc' => '{date}નું પંચાંગ અને એ દિવસ માટે શ્લોક, ભજન અને આરતીના સૂચનો.',
+            'notfound_title' => 'પેજ મળ્યું નથી | ભક્તિ સાગર',
+            'notfound_desc' => 'આ પેજ ઉપલબ્ધ નથી. ભક્તિ સાગર પર આજનું પંચાંગ અને ભક્તિ સૂચનો જુઓ.',
+            'notfound_cta' => 'આજનું પંચાંગ અને ભક્તિ સૂચનો જુઓ →',
+        ],
     ];
 }
 
@@ -90,7 +107,7 @@ function bs_jsonld(array $route, array $ctx): array
         $track = $ctx['track'];
         $items[] = [
             '@type' => 'MusicRecording',
-            'name' => $track['title_' . ($route['lang'] === 'en' ? 'en' : 'hi')] ?? $track['title_en'],
+            'name' => bs_track_title($track, $route['lang']),
             'url' => bs_absolute(bs_path_of($route)),
             'description' => bs_t($route['lang'], 'track_desc', [
                 'title' => $track['title_en'] ?? $track['slug'],
@@ -177,7 +194,7 @@ function bs_seo(array $route): array
 
     switch ($kind) {
         case 'track':
-            $title = bs_t($lang, 'track_title', ['title' => $ctx['track']['title_' . ($lang === 'en' ? 'en' : 'hi')] ?? $ctx['track']['title_en']]);
+            $title = bs_t($lang, 'track_title', ['title' => bs_track_title($ctx['track'], $lang)]);
             $description = bs_t($lang, 'track_desc', [
                 'title' => $ctx['track']['title_en'] ?? $route['slug'],
                 'blurb' => $ctx['track']['blurb'] ?? '',
@@ -214,12 +231,15 @@ function bs_seo(array $route): array
         $clone['lang'] = $code;
         $alternates[$code] = bs_absolute(bs_path_of($clone));
     }
-    $alternates['x-default'] = bs_absolute('/');
+    // x-default = the default-language version of THIS page, not always home
+    $defaultRoute = $route;
+    $defaultRoute['lang'] = BS_DEFAULT_LANG;
+    $alternates['x-default'] = bs_absolute(bs_path_of($defaultRoute));
 
     $og = [
         'og:type' => 'website',
         'og:site_name' => bs_t($lang, 'site'),
-        'og:locale' => ['hi' => 'hi_IN', 'en' => 'en_US', 'sa' => 'hi_IN'][$lang] ?? 'hi_IN',
+        'og:locale' => ['hi' => 'hi_IN', 'en' => 'en_US', 'sa' => 'sa_IN', 'gu' => 'gu_IN'][$lang] ?? 'hi_IN',
         'og:title' => $title,
         'og:description' => $description,
         'og:url' => bs_absolute($canonicalPath),
@@ -227,6 +247,7 @@ function bs_seo(array $route): array
             $lang === 'hi' ? '' : 'hi_IN',
             $lang === 'en' ? '' : 'en_US',
             $lang === 'sa' ? '' : 'sa_IN',
+            $lang === 'gu' ? '' : 'gu_IN',
         ])),
         'twitter:card' => 'summary',
         'twitter:title' => $title,

@@ -75,6 +75,7 @@ function normalize_track(array $row): array
         'slug' => $row['slug'] ?? '',
         'title_hi' => $row['title_hi'] ?? '',
         'title_en' => $row['title_en'] ?? '',
+        'title_gu' => $row['title_gu'] ?? '',
         'type' => $row['type'] ?? 'bhajan',
         'deity' => $row['deity'] ?? '',
         'singer' => $row['singer'] ?? '',
@@ -126,7 +127,7 @@ function load_tracks(?PDO $pdo, array $catalog): array
 
     if ($pdo instanceof PDO) {
         try {
-            $rows = $pdo->query('SELECT slug, title_hi, title_en, type, deity, singer, youtube_id, slots, tags, blurb, sort_order
+            $rows = $pdo->query('SELECT slug, title_hi, title_en, title_gu, type, deity, singer, youtube_id, slots, tags, blurb, sort_order
                                  FROM tracks WHERE is_active = 1 ORDER BY sort_order, id')->fetchAll();
             if ($rows) {
                 return $withLyrics(array_map('normalize_track', $rows));

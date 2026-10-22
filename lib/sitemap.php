@@ -75,8 +75,9 @@ function bs_sitemap_xml(): string
             $lines[] = '    <xhtml:link rel="alternate" hreflang="' . e($lang) . '" href="'
                 . e(bs_absolute($path)) . '"/>';
         }
+        // x-default = this group's default-language page, not always home
         $lines[] = '    <xhtml:link rel="alternate" hreflang="x-default" href="'
-            . e(bs_absolute('/')) . '"/>';
+            . e(bs_absolute($group['paths'][BS_DEFAULT_LANG])) . '"/>';
         $lines[] = '  </url>';
     }
     $lines[] = '</urlset>';
