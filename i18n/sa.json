@@ -4,6 +4,15 @@
   "clock.ist": "भारतीयकालः (IST)",
   "clock.local": "स्थानीयकालः",
   "lang.aria": "Language / भाषा",
+
+  "nav.aria": "त्वरितसम्पर्काः",
+  "nav.live": "ज्योतिर्लिंग दर्शनम्",
+  "nav.special": "अद्य विशेषम्",
+  "nav.panchang": "पञ्चाङ्गम्",
+  "nav.catalog": "गीतसङ्ग्रहः",
+  "nav.player": "वादकः",
+  "nav.lang": "भाषां चिनुत",
+
   "dateline.saka": "(शक संवत)",
   "slot.calculating": "कालः निरूप्यते…",
 
@@ -74,6 +83,9 @@
   "player.toggle": "चालय / स्तम्भय",
   "player.next": "अगलगीतम्",
   "player.openYt": "YouTube इत्यत्र उद्घाटयतु",
+  "player.mute": "ध्वनिं निरोधयतु",
+  "player.unmute": "ध्वनिं उद्घाटयतु",
+
   "player.errorSkip": "इदं विडियो न चलतु शक्नोति — अगलं गीतं चालयामः…",
   "player.errorNone": "किमपि विडियो न चलतु शक्नोति — अन्यं गीतं चिनुत वा YouTube इत्यत्र उद्घाटयतु ।",
 
@@ -114,6 +126,8 @@
   "footer.panchang": "पञ्चाङ्गम्",
   "footer.location": "स्थानम्",
   "footer.updated": "अद्यतमम्",
+  "footer.links": "साइटसम्पर्काः",
+
   "api.unavailable": "API अनुपलब्धम् — कृपया XAMPP/MySQL पश्यतु ।",
   "load.error": "आँकडाः लोडं न कर्तुं शक्नोति ({err}) ।",
   "load.retry": "पुनः प्रयत्नं कुरुत"

@@ -104,6 +104,7 @@
     ytPlayer: null,
     pendingVideoId: null,
     playing: false,
+    muted: false,
     errorStreak: 0,
     booted: false
   };
@@ -341,9 +342,11 @@
     var p = state.panchang;
     if (!p) {
       el.panchangStrip.hidden = true;
+      syncNav();
       return;
     }
     el.panchangStrip.hidden = false;
+    syncNav();
     el.pcVar.textContent = p.var_hi || '–';
     el.pcTithi.textContent = ((p.paksha_hi ? p.paksha_hi + ' ' : '') + (p.tithi_hi || '')).trim() || '–';
     el.pcNak.textContent = p.nakshatra_hi || '–';
@@ -405,9 +408,11 @@
     var matches = state.dayMatches || [];
     if (!matches.length || !state.specialTracks.length) {
       el.specialSection.hidden = true;
+      syncNav();
       return;
     }
     el.specialSection.hidden = false;
+    syncNav();
 
     var ruleHtml = '';
     matches.forEach(function (m) {
@@ -483,8 +488,9 @@
     if (!el.jyoSection || !el.jyoGrid) { return; }
     var items = (state.jyotirlingas || []).filter(function (j) { return !!j.youtube_id; });
     state.jyoLive = items;
-    if (!items.length) { el.jyoSection.hidden = true; return; }
+    if (!items.length) { el.jyoSection.hidden = true; syncNav(); return; }
     el.jyoSection.hidden = false;
+    syncNav();
 
     var html = '';
     items.forEach(function (j, i) {
@@ -722,10 +728,15 @@
         modestbranding: 1,
         playsinline: 1,
         autoplay: autoplay ? 1 : 0,
+        mute: state.muted ? 1 : 0,
         origin: window.location.origin
       },
       events: {
-        onReady: function () { setPlaying(true); },
+        onReady: function () {
+          if (state.muted && typeof state.ytPlayer.mute === 'function') { state.ytPlayer.mute(); }
+          applyMuteUI();
+          setPlaying(true);
+        },
         onStateChange: function (event) {
           var YT = window.YT;
           if (!YT) { return; }
@@ -751,6 +762,46 @@
   function setHidden(node, flag) {
     if (!node) { return; }
     if (flag) { node.setAttribute('hidden', ''); } else { node.removeAttribute('hidden'); }
+  }
+
+  function applyMuteUI() {
+    setHidden(el.iconSoundOn, state.muted);
+    setHidden(el.iconSoundOff, !state.muted);
+    setHidden(el.miniIconSoundOn, state.muted);
+    setHidden(el.miniIconSoundOff, !state.muted);
+    var label = str(state.muted ? 'player.unmute' : 'player.mute');
+    [el.btnSound, el.miniSound].forEach(function (btn) {
+      if (!btn) { return; }
+      btn.setAttribute('data-muted', state.muted ? '1' : '0');
+      btn.classList.toggle('is-muted', state.muted);
+      btn.setAttribute('aria-pressed', state.muted ? 'true' : 'false');
+      btn.setAttribute('aria-label', label);
+    });
+  }
+
+  function setMuted(muted) {
+    state.muted = !!muted;
+    if (state.ytPlayer) {
+      if (state.muted && typeof state.ytPlayer.mute === 'function') { state.ytPlayer.mute(); }
+      else if (!state.muted && typeof state.ytPlayer.unMute === 'function') { state.ytPlayer.unMute(); }
+    }
+    applyMuteUI();
+  }
+
+  /** Quick-links/footer anchors only point at sections that are actually shown. */
+  function syncNav() {
+    if (!el.navBits || !el.navBits.length) { return; }
+    el.navBits.forEach(function (link) {
+      var target = document.getElementById(link.getAttribute('data-nav'));
+      if (!target) { return; }
+      if (target.hidden) { link.setAttribute('hidden', ''); } else { link.removeAttribute('hidden'); }
+    });
+  }
+
+  /** The quick-nav sticks right below the top bar, whose height wraps on mobile. */
+  function updateTopbarH() {
+    if (!el.topbar) { return; }
+    document.documentElement.style.setProperty('--topbar-h', el.topbar.offsetHeight + 'px');
   }
 
   function setPlaying(flag) {
@@ -779,6 +830,9 @@
 
     if (track.youtube_id) {
       el.btnOpenYt.href = ytWatchUrl(track.youtube_id);
+      // Live temple streams always come in muted (browser autoplay policy +
+      // no surprise audio); the sound button unmutes them in one tap.
+      if (track.type === 'live') { setMuted(true); }
       playVideoId(track.youtube_id, autoplay !== false);
     } else {
       window.open(ytSearchUrl(track.title_en || track.title_hi), '_blank', 'noopener');
@@ -976,6 +1030,13 @@
     el.btnNext.addEventListener('click', nextTrack);
     el.btnPrev.addEventListener('click', prevTrack);
 
+    function toggleSound(e) {
+      e.preventDefault();
+      setMuted(!state.muted);
+    }
+    if (el.btnSound) { el.btnSound.addEventListener('click', toggleSound); }
+    if (el.miniSound) { el.miniSound.addEventListener('click', toggleSound); }
+
     if (el.citySelect) {
       el.citySelect.addEventListener('change', function () {
         setCity(el.citySelect.value);
@@ -1050,9 +1111,12 @@
     el.btnToggle = $('btnToggle');
     el.btnNext = $('btnNext');
     el.btnPrev = $('btnPrev');
+    el.btnSound = $('btnSound');
     el.btnOpenYt = $('btnOpenYt');
     el.iconPlay = $('iconPlay');
     el.iconPause = $('iconPause');
+    el.iconSoundOn = $('iconSoundOn');
+    el.iconSoundOff = $('iconSoundOff');
     el.playerPlaceholder = $('playerPlaceholder');
     el.ytPlayerHost = $('ytPlayerHost');
     el.playerCol = $('playerCol');
@@ -1062,10 +1126,15 @@
     el.miniToggle = $('miniToggle');
     el.miniNext = $('miniNext');
     el.miniPrev = $('miniPrev');
+    el.miniSound = $('miniSound');
     el.miniOpen = $('miniOpen');
     el.miniIconPlay = $('miniIconPlay');
     el.miniIconPause = $('miniIconPause');
+    el.miniIconSoundOn = $('miniIconSoundOn');
+    el.miniIconSoundOff = $('miniIconSoundOff');
     el.footerMeta = $('footerMeta');
+    el.topbar = document.querySelector('.topbar');
+    el.navBits = document.querySelectorAll('[data-nav]');
   }
 
   function normalizeSlot(slot, index, all) {
@@ -1201,10 +1270,14 @@
     bindEvents();
     initLyrics();
     loadYouTubeApi();
+    updateTopbarH();
+    syncNav();
+    applyMuteUI();
 
     setInterval(renderClock, 1000);
     setInterval(renderDates, 60 * 1000);
     setInterval(updateCurrentSlot, 30 * 1000);
+    window.addEventListener('resize', updateTopbarH);
 
     // a ?city= pin wins, then a stored choice; the list itself only arrives
     // with the payload, so everything is validated in ensureCity()

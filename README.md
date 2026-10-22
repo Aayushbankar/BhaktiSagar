@@ -10,7 +10,10 @@ of the day, with an embedded **YouTube player** and a play queue.
 - **Live darshan of the Jyotirlingas**: the home page carries a section with the temples'
   official **YouTube live streams** (currently 6 of the 12 — Somnath, Mahakaleshwar,
   Omkareshwar, Trimbakeshwar, Baidyanath, Kashi Vishwanath); the other six appear as soon as a live
-  stream id is added to `data/jyotirlingas.php`.
+  stream id is added to `data/jyotirlingas.php`. Live streams **start playing muted** (autoplay-safe,
+  no surprise audio) — one tap on the sound button unmutes them.
+- **Quick links**: a sticky pill nav under the header (and the same links in the footer, plus the
+  language switcher) jumps to Live darshan, आज विशेष, पंचांग, the song catalogue and the player.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
   in `data/panchang.json` **and** the MySQL `panchang_days` table.
 - Links are stored in **MySQL**, served by a small **PHP** JSON API.
@@ -247,10 +250,11 @@ npm install
 npx playwright test          # runs the full suite against http://localhost/bhakti-sagar/
 ```
 
-- 82 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
+- 84 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
   weekday → track wiring, shloka/slot invariants, Jyotirlinga live ids), home UI (filters,
-  chip counts for every slot × type, search, empty-state, cache-busting), date
-  deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, /en), the player
+  chip counts for every slot × type, search, empty-state, cache-busting, quick links/footer
+  links), date deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, muted
+  autoplay + sound toggle, /en), the player
   (orange pause state, play→pause→resume icon cycle, queue/next/prev, special cards, mobile
   mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap, i18n
   (hi/en/sa), lyrics/track pages, and a QA audit (console/network errors, link integrity,

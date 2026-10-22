@@ -167,6 +167,14 @@ $assetVer = static function (string $path): string {
   <p class="panchang-note" id="panchangNote" hidden></p>
 </section>
 
+<nav class="quick-nav" id="quickNav" aria-label="<?= e($t('nav.aria')) ?>">
+  <a class="quick-link" href="#jyoSection" data-nav="jyoSection" hidden><?= e($t('nav.live')) ?></a>
+  <a class="quick-link" href="#specialSection" data-nav="specialSection" hidden><?= e($t('nav.special')) ?></a>
+  <a class="quick-link" href="#panchangStrip" data-nav="panchangStrip" hidden><?= e($t('nav.panchang')) ?></a>
+  <a class="quick-link" href="#trackGrid"><?= e($t('nav.catalog')) ?></a>
+  <a class="quick-link" href="#playerCol"><?= e($t('nav.player')) ?></a>
+</nav>
+
 <main class="layout">
 
   <div class="main-col">
@@ -322,6 +330,10 @@ $assetVer = static function (string $path): string {
         <button type="button" class="ctrl-btn" id="btnNext" aria-label="<?= e($t('player.next')) ?>">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l10-7z"/><rect x="16.8" y="5" width="2.2" height="14" rx="1"/></svg>
         </button>
+        <button type="button" class="ctrl-btn" id="btnSound" data-muted="0" aria-pressed="false" aria-label="<?= e($t('player.mute')) ?>">
+          <svg viewBox="0 0 24 24" aria-hidden="true" id="iconSoundOn"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 12c0-1.6-.9-3-2.3-3.7v7.4c1.4-.7 2.3-2.1 2.3-3.7z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" id="iconSoundOff" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4.5 4.5l15 15"/></svg>
+        </button>
         <a class="yt-link" id="btnOpenYt" href="https://www.youtube.com/" target="_blank" rel="noopener"><?= e($t('player.openYt')) ?></a>
       </div>
 
@@ -348,6 +360,10 @@ $assetVer = static function (string $path): string {
     <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconPlay"><path d="M8 5v14l11-7z"/></svg>
     <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconPause" hidden><rect x="6" y="5" width="4" height="14" rx="1.2"/><rect x="14" y="5" width="4" height="14" rx="1.2"/></svg>
   </button>
+  <button type="button" class="mini-btn" id="miniSound" data-muted="0" aria-pressed="false" aria-label="<?= e($t('player.mute')) ?>">
+    <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconSoundOn"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 12c0-1.6-.9-3-2.3-3.7v7.4c1.4-.7 2.3-2.1 2.3-3.7z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconSoundOff" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4.5 4.5l15 15"/></svg>
+  </button>
   <button type="button" class="mini-btn" id="miniNext" aria-label="<?= e($t('mini.next')) ?>">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l10-7z"/><rect x="16.8" y="5" width="2.2" height="14" rx="1"/></svg>
   </button>
@@ -356,6 +372,30 @@ $assetVer = static function (string $path): string {
 <footer class="site-footer">
   <p><strong>भक्ति सागर</strong> – <?= e($t('footer.about')) ?></p>
   <p><?= e($t('footer.legal')) ?></p>
+
+  <nav class="footer-links" aria-label="<?= e($t('footer.links')) ?>">
+    <span class="footer-links-label"><?= e($t('footer.links')) ?></span>
+    <a href="#jyoSection" data-nav="jyoSection" hidden><?= e($t('nav.live')) ?></a>
+    <a href="#specialSection" data-nav="specialSection" hidden><?= e($t('nav.special')) ?></a>
+    <a href="#panchangStrip" data-nav="panchangStrip" hidden><?= e($t('nav.panchang')) ?></a>
+    <a href="#trackGrid"><?= e($t('nav.catalog')) ?></a>
+    <a href="#playerCol"><?= e($t('nav.player')) ?></a>
+  </nav>
+
+  <nav class="footer-langs" aria-label="<?= e($t('nav.lang')) ?>">
+    <span class="footer-links-label" aria-hidden="true"><?= e($t('nav.lang')) ?></span>
+    <?php foreach (BS_LANGS as $code):
+        $alt = $route;
+        $alt['lang'] = $code;
+        $isCurrent = $code === $lang; ?>
+    <a class="footer-lang<?= $isCurrent ? ' is-current' : '' ?>"
+       href="<?= e(bs_href($alt)) ?>"
+       lang="<?= e($code) ?>"
+       hreflang="<?= e($code) ?>"
+       <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(mb_strtoupper($code)) ?></a>
+    <?php endforeach; ?>
+  </nav>
+
   <p class="footer-meta" id="footerMeta"></p>
 </footer>
 

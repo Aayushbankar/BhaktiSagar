@@ -4,6 +4,15 @@
   "clock.ist": "भारतीय समय (IST)",
   "clock.local": "स्थानीय समय",
   "lang.aria": "Language / भाषा",
+
+  "nav.aria": "त्वरित लिंक",
+  "nav.live": "ज्योतिर्लिंग लाइव",
+  "nav.special": "आज विशेष",
+  "nav.panchang": "पंचांग",
+  "nav.catalog": "भजन संग्रह",
+  "nav.player": "प्लेयर व कतार",
+  "nav.lang": "भाषा चुनें",
+
   "dateline.saka": "(शक संवत)",
   "slot.calculating": "समय निर्धारण हो रहा है…",
 
@@ -74,6 +83,9 @@
   "player.toggle": "चलाएँ / रोकें",
   "player.next": "अगला गीत",
   "player.openYt": "YouTube पर खोलें",
+  "player.mute": "ध्वनि बंद करें",
+  "player.unmute": "ध्वनि चालू करें",
+
   "player.errorSkip": "यह वीडियो नहीं चल सका – अगला गीत चलाते हैं…",
   "player.errorNone": "कोई वीडियो नहीं चल सका – दूसरा गीत चुनें या YouTube पर खोलें।",
 
@@ -114,6 +126,8 @@
   "footer.panchang": "पंचांग",
   "footer.location": "स्थान",
   "footer.updated": "अपडेट",
+  "footer.links": "साइट के लिंक",
+
   "api.unavailable": "API अनुपलब्ध – कृपया XAMPP/MySQL जाँचें।",
   "load.error": "डेटा लोड नहीं हो सका ({err})।",
   "load.retry": "फिर से कोशिश करें"

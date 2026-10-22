@@ -139,4 +139,35 @@ test.describe('Home UI & filters', () => {
     const cssHref = await page.locator('link[rel="stylesheet"][href*="style.css"]').getAttribute('href');
     expect(cssHref, 'style.css must carry ?v= cache-buster').toMatch(/style\.css\?v=\d{10,}/);
   });
+
+  test('quick links and footer links point at real page sections', async ({ page }) => {
+    await page.goto('./');
+    const nav = page.locator('#quickNav');
+    await expect(nav).toBeVisible();
+    await expect(nav).toHaveAttribute('aria-label', 'त्वरित लिंक');
+
+    // every pill must target an element that really exists on the page
+    const hrefs = await nav.locator('a').evaluateAll((els) => els.map((a) => a.getAttribute('href')));
+    expect(hrefs.length).toBeGreaterThanOrEqual(2);
+    for (const href of hrefs) {
+      expect(href).toMatch(/^#\w+$/);
+      await expect(page.locator(href), `anchor target ${href}`).toHaveCount(1);
+    }
+    await expect(nav.locator('a[href="#trackGrid"]')).toBeVisible();
+    await expect(nav.locator('a[href="#playerCol"]')).toBeVisible();
+    await expect(nav.locator('a[data-nav="jyoSection"]')).toBeVisible();
+
+    // footer mirrors the section links and adds the language switcher
+    const footer = page.locator('.footer-links');
+    await expect(footer).toBeVisible();
+    await expect(footer.locator('a[data-nav="jyoSection"]')).toBeVisible();
+    await expect(footer.locator('a[href="#trackGrid"]')).toBeVisible();
+    await expect(footer.locator('a[href="#playerCol"]')).toBeVisible();
+    await expect(page.locator('.footer-langs a')).toHaveCount(3);
+    await expect(page.locator('.footer-langs a.is-current')).toHaveText('HI');
+
+    // clicking a pill jumps to that section
+    await nav.locator('a[href="#trackGrid"]').click();
+    await expect(page).toHaveURL(/#trackGrid$/);
+  });
 });

@@ -24,6 +24,11 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     expect(titles[0]).toContain('सोमनाथ');
     expect(new Set(titles.map((t) => t.trim())).size).toBe(live.length);
 
+    // the section is reachable from the quick links and the footer
+    await expect(page.locator('#quickNav a[data-nav="jyoSection"]')).toBeVisible();
+    await expect(page.locator('#quickNav a[data-nav="jyoSection"]')).toHaveAttribute('href', '#jyoSection');
+    await expect(page.locator('.footer-links a[data-nav="jyoSection"]')).toBeVisible();
+
     for (const img of await page.locator('#jyoGrid .thumb img').all()) {
       expect(await img.getAttribute('src'))
         .toMatch(/^https:\/\/i\.ytimg\.com\/vi\/[A-Za-z0-9_-]{11}\/hqdefault\.jpg$/);
@@ -52,7 +57,33 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     await expect(page.locator('#btnOpenYt')).toHaveAttribute('href', /watch\?v=[A-Za-z0-9_-]{11}/);
     await expect(page.locator('#jyoGrid .track-card.is-playing')).toHaveCount(1, { timeout: 60000 });
 
+    // live darshans always come in muted — no surprise audio, autoplay-safe
+    await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '1');
+    await expect(page.locator('#btnSound')).toHaveClass(/is-muted/);
+    await expect(page.locator('#miniSound')).toHaveAttribute('data-muted', '1');
+    await expect(page.locator('#miniSound')).toHaveClass(/is-muted/);
+
     expect(errors).toEqual([]);
+  });
+
+  test('sound button unmutes a live darshan without stopping it', async ({ page }) => {
+    await page.goto('./');
+    await expect(page.locator('#jyoGrid [data-jplay]').first()).toBeVisible({ timeout: 30000 });
+    await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '0');
+
+    await page.locator('#jyoGrid [data-jplay]').first().click();
+    await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '1');
+    await expect(page.locator('#btnSound')).toHaveAttribute('aria-pressed', 'true');
+    await expect(page.locator('#btnSound')).toHaveAttribute('aria-label', 'ध्वनि चालू करें');
+
+    await page.locator('#btnSound').click();
+    await expect(page.locator('#btnSound')).toHaveAttribute('data-muted', '0');
+    await expect(page.locator('#btnSound')).toHaveAttribute('aria-pressed', 'false');
+    await expect(page.locator('#btnSound')).toHaveAttribute('aria-label', 'ध्वनि बंद करें');
+    await expect(page.locator('#btnSound')).not.toHaveClass(/is-muted/);
+
+    // the stream keeps playing through the toggle
+    await expect(page.locator('#jyoGrid .track-card.is-playing')).toHaveCount(1, { timeout: 60000 });
   });
 
   test('/en shows the English names and the LIVE badge', async ({ page, request }) => {

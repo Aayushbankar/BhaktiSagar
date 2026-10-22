@@ -4,6 +4,15 @@
   "clock.ist": "Indian time (IST)",
   "clock.local": "Local time",
   "lang.aria": "Language / भाषा",
+
+  "nav.aria": "Quick links",
+  "nav.live": "Live darshan",
+  "nav.special": "Today's picks",
+  "nav.panchang": "Panchang",
+  "nav.catalog": "Song catalogue",
+  "nav.player": "Player & queue",
+  "nav.lang": "Choose language",
+
   "dateline.saka": "(Saka era)",
   "slot.calculating": "Working out the right time…",
 
@@ -74,6 +83,9 @@
   "player.toggle": "Play / Pause",
   "player.next": "Next song",
   "player.openYt": "Open on YouTube",
+  "player.mute": "Mute sound",
+  "player.unmute": "Unmute sound",
+
   "player.errorSkip": "This video could not play – moving to the next song…",
   "player.errorNone": "No video could play – pick another song or open it on YouTube.",
 
@@ -114,6 +126,8 @@
   "footer.panchang": "panchang",
   "footer.location": "place",
   "footer.updated": "updated",
+  "footer.links": "Site links",
+
   "api.unavailable": "API unavailable – please check XAMPP/MySQL.",
   "load.error": "The data could not be loaded ({err}).",
   "load.retry": "Try again"
