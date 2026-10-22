@@ -132,9 +132,9 @@ return [
         'name_en'     => 'Trimbakeshwar',
         'place_hi'    => 'नासिक, महाराष्ट्र',
         'place_en'    => 'Nashik, Maharashtra',
-        'youtube_id'  => null,
-        'channel'     => '',
-        'verified_on' => '',
+        'youtube_id'  => 'EMMWSBPvbrE',
+        'channel'     => 'Trimbakeshwar Darshan',
+        'verified_on' => '2026-10-22',
     ],
     [
         'order'       => 12,

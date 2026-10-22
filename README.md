@@ -8,8 +8,8 @@ of the day, with an embedded **YouTube player** and a play queue.
 - No login, no signup, no fees — open and play.
 - Works perfectly on mobile and desktop.
 - **Live darshan of the Jyotirlingas**: the home page carries a section with the temples'
-  official **YouTube live streams** (currently 5 of the 12 — Somnath, Mahakaleshwar,
-  Omkareshwar, Baidyanath, Kashi Vishwanath); the other seven appear as soon as a live
+  official **YouTube live streams** (currently 6 of the 12 — Somnath, Mahakaleshwar,
+  Omkareshwar, Trimbakeshwar, Baidyanath, Kashi Vishwanath); the other six appear as soon as a live
   stream id is added to `data/jyotirlingas.php`.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
   in `data/panchang.json` **and** the MySQL `panchang_days` table.
