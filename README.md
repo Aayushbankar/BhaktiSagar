@@ -232,8 +232,8 @@ Only **live** streams belong here — recorded darshan videos are not acceptable
 storing:
 
 ```bash
-node tools/live-check.mjs 9qW0GDdqjTU          # LIVE / SCHEDULED / NOT_LIVE right now
-node tools/verify-player.mjs 9qW0GDdqjTU       # reaches PLAYING from the app origin
+node tools/live-check.mjs WY5LoCD2vPg          # LIVE / SCHEDULED / NOT_LIVE right now
+node tools/verify-player.mjs WY5LoCD2vPg       # reaches PLAYING from the app origin
 ```
 
 Then fill `youtube_id`, `channel` and `verified_on`. The API reads the file directly, so no

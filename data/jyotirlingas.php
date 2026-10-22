@@ -22,7 +22,7 @@ return [
         'name_en'     => 'Somnath',
         'place_hi'    => 'प्रभास पाटन, गुजरात',
         'place_en'    => 'Prabhas Patan, Gujarat',
-        'youtube_id'  => '9qW0GDdqjTU',
+        'youtube_id'  => 'WY5LoCD2vPg',
         'channel'     => 'Somnath Temple - Official Channel',
         'verified_on' => '2026-10-21',
     ],
