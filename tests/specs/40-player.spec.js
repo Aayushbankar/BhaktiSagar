@@ -120,7 +120,7 @@ test.describe('Player, queue & playback states', () => {
       const norm = (s) => (s || '').replace(/\s+/g, ' ').trim();
       const now = () => norm((document.getElementById('nowTitle') || {}).textContent);
       let i;
-      const frame = document.querySelector('iframe[src*="youtube.com/embed"]');
+      const frame = document.querySelector('#ytPlayerHost iframe[src*="youtube.com/embed"]');
       if (!frame) { return { step: 'no-iframe', ok: false }; }
       const msgs = [];
       window.addEventListener('message', (e) => {

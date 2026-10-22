@@ -17,6 +17,17 @@ function isInternal(url) {
   return url.startsWith(`${BASE}/`) || url.startsWith(`http://localhost/bhakti-sagar/`);
 }
 
+/**
+ * The live-darshan previews stream continuously, so `networkidle` never
+ * settles on this site — wait for the app's own hydration signal instead.
+ */
+async function waitHydrated(page) {
+  await page.waitForFunction(() => {
+    const el = document.getElementById('footerMeta');
+    return !!el && (el.textContent || '').trim().length > 0;
+  }, null, { timeout: 30000 }).catch(() => {});
+}
+
 test.describe('QA audit', () => {
   test('no console errors, page errors or failing first-party requests', async ({ page }) => {
     test.setTimeout(180000);
@@ -48,9 +59,10 @@ test.describe('QA audit', () => {
         }
       });
 
-      await page.goto(path, { waitUntil: 'networkidle', timeout: 60000 }).catch((e) => {
+      await page.goto(path, { waitUntil: 'load', timeout: 60000 }).catch((e) => {
         findings.push({ route: name, kind: 'navigation', detail: String(e) });
       });
+      await waitHydrated(page);
       await page.waitForTimeout(600);
 
       if (consoleErrors.length) findings.push({ route: name, kind: 'console.error', detail: consoleErrors });
@@ -79,7 +91,7 @@ test.describe('QA audit', () => {
       if (looksLikeAsset) assets.push({ url, status: r.status(), type });
     });
 
-    await page.goto('./', { waitUntil: 'networkidle', timeout: 60000 });
+    await page.goto('./', { waitUntil: 'load', timeout: 60000 });
     await page.locator('[data-slot="all"]').click();
     await expect(page.locator('#trackGrid .track-card').first()).toBeVisible({ timeout: 30000 });
     await page.waitForTimeout(500);
@@ -116,7 +128,8 @@ test.describe('QA audit', () => {
     for (const [name, path] of ROUTES) {
       // wait for hydration: the track grid is client-rendered from the API,
       // so auditing at DOMContentLoaded would miss every card image
-      await page.goto(path, { waitUntil: 'networkidle', timeout: 60000 });
+      await page.goto(path, { waitUntil: 'load', timeout: 60000 });
+      await waitHydrated(page);
       await page.waitForTimeout(300);
       const audit = await page.evaluate(() => {
         const ids = [...document.querySelectorAll('[id]')].map((el) => el.id);
@@ -178,7 +191,7 @@ test.describe('QA audit', () => {
   test('heading structure: exactly one <h1> per route', async ({ page }) => {
     const counts = {};
     for (const [name, path] of ROUTES) {
-      await page.goto(path, { waitUntil: 'networkidle', timeout: 60000 });
+      await page.goto(path, { waitUntil: 'load', timeout: 60000 });
       counts[name] = await page.locator('h1').count();
     }
     await testInfo_attach('heading-h1-counts', counts);
@@ -231,7 +244,7 @@ test.describe('QA audit', () => {
   });
 
   test('performance smoke: home page budget', async ({ page }) => {
-    await page.goto('./', { waitUntil: 'networkidle', timeout: 60000 });
+    await page.goto('./', { waitUntil: 'load', timeout: 60000 });
     await page.locator('[data-slot="all"]').click();
     await expect(page.locator('#trackGrid .track-card').first()).toBeVisible({ timeout: 30000 });
 

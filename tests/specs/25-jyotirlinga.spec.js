@@ -34,6 +34,18 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
         .toMatch(/^https:\/\/i\.ytimg\.com\/vi\/[A-Za-z0-9_-]{11}\/hqdefault\.jpg$/);
       expect(await img.getAttribute('alt')).toBeTruthy();
     }
+
+    // every card autoplays its own stream, muted, straight from page load
+    await expect(page.locator('#jyoGrid .jyo-preview iframe'))
+      .toHaveCount(live.length, { timeout: 30000 });
+    for (let i = 0; i < live.length; i += 1) {
+      const frame = page.locator('#jyoGrid .jyo-preview iframe').nth(i);
+      const src = await frame.getAttribute('src');
+      expect(src).toContain(`/embed/${live[i].youtube_id}`);
+      expect(src).toContain('autoplay=1');
+      expect(src).toContain('mute=1');
+      expect(await frame.getAttribute('title')).toBeTruthy();
+    }
   });
 
   test('clicking a darshan loads it into the player queue', async ({ page, request }) => {

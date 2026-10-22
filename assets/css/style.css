@@ -406,6 +406,23 @@ a { color: var(--maroon); }
   background: linear-gradient(180deg, rgba(0,0,0,0) 45%, rgba(0,0,0,.45) 100%);
 }
 
+/* live preview: each darshan card plays its temple stream, muted, from load */
+.jyo-preview {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background: #1c1108;
+}
+.jyo-preview:empty { display: none; }
+.jyo-preview iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 .play-fab {
   position: absolute;
   right: 10px;

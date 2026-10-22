@@ -93,6 +93,7 @@
     specialSet: {},
     jyotirlingas: [],
     jyoLive: [],
+    jyoRenderedKey: '',
     currentSlot: null,
     slotFilter: 'auto',
     typeFilter: 'all',
@@ -484,6 +485,77 @@
     };
   }
 
+  function jyoCardHtml(j, i) {
+    var name = jyoName(j);
+    var place = jyoPlace(j);
+    return '<article class="track-card is-jyo" data-jindex="' + i + '">' +
+      '<div class="thumb">' +
+        '<span class="badge badge-live">' + esc(str('jyo.live')) + '</span>' +
+        '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async">' +
+        '<div class="jyo-preview" data-preview="' + esc(j.youtube_id) + '" data-name="' + esc(name) + '"></div>' +
+        '<button type="button" class="play-fab" data-jplay="' + i + '" aria-label="' +
+          esc(str('jyo.play', { name: name })) + '">' +
+          playGlyph(false) +
+        '</button>' +
+      '</div>' +
+      '<div class="track-body">' +
+        '<h3 class="track-title">' + esc(name) + '</h3>' +
+        '<div class="track-meta">' +
+          '<span class="deity">' + esc(place) + (j.channel ? ' · ' + esc(j.channel) : '') + '</span>' +
+        '</div>' +
+      '</div>' +
+    '</article>';
+  }
+
+  /** Every live card carries its own muted, autoplaying stream from page load. */
+  function mountJyoPreview(box) {
+    if (!box || box.getAttribute('data-mounted') === '1') { return; }
+    var id = box.getAttribute('data-preview') || '';
+    if (!/^[A-Za-z0-9_-]{11}$/.test(id)) { return; }
+    box.setAttribute('data-mounted', '1');
+    var frame = document.createElement('iframe');
+    frame.title = box.getAttribute('data-name') || 'Live darshan';
+    frame.allow = 'autoplay; encrypted-media; picture-in-picture';
+    frame.src = 'https://www.youtube.com/embed/' + id +
+      '?autoplay=1&mute=1&playsinline=1&controls=0&modestbranding=1&rel=0&enablejsapi=1&origin=' +
+      encodeURIComponent(window.location.origin);
+    box.appendChild(frame);
+  }
+
+  function mountJyoPreviews() {
+    if (!el.jyoGrid) { return; }
+    el.jyoGrid.querySelectorAll('.jyo-preview').forEach(mountJyoPreview);
+  }
+
+  /** Muted previews pause with the tab so background streams don't burn data. */
+  function jyoPreviewCommand(func) {
+    var frames = document.querySelectorAll('.jyo-preview iframe');
+    for (var i = 0; i < frames.length; i += 1) {
+      try {
+        frames[i].contentWindow.postMessage(
+          JSON.stringify({ event: 'command', func: func, args: [] }), '*');
+      } catch (e) { /* cross-origin frame – ignore */ }
+    }
+  }
+
+  function updateJyoPlaying() {
+    if (!el.jyoGrid) { return; }
+    el.jyoGrid.querySelectorAll('.track-card').forEach(function (card) {
+      var i = parseInt(card.getAttribute('data-jindex'), 10);
+      var t = state.jyoLive[i];
+      var playing = !!(t && state.playing && state.queueIndex >= 0 &&
+        state.queue[state.queueIndex] &&
+        state.queue[state.queueIndex].slug === jyoTrack(t).slug);
+      card.classList.toggle('is-playing', playing);
+      var btn = card.querySelector('.play-fab');
+      if (!btn) { return; }
+      var name = jyoName(t);
+      btn.innerHTML = playGlyph(playing);
+      btn.setAttribute('aria-label',
+        playing ? str('card.pause') + name : str('jyo.play', { name: name }));
+    });
+  }
+
   function renderJyo() {
     if (!el.jyoSection || !el.jyoGrid) { return; }
     var items = (state.jyotirlingas || []).filter(function (j) { return !!j.youtube_id; });
@@ -492,31 +564,17 @@
     el.jyoSection.hidden = false;
     syncNav();
 
-    var html = '';
-    items.forEach(function (j, i) {
-      var track = jyoTrack(j);
-      var playing = state.playing && state.queueIndex >= 0 && state.queue[state.queueIndex] &&
-        state.queue[state.queueIndex].slug === track.slug;
-      var name = jyoName(j);
-      var place = jyoPlace(j);
-      html += '<article class="track-card is-jyo' + (playing ? ' is-playing' : '') + '" data-jindex="' + i + '">' +
-        '<div class="thumb">' +
-          '<span class="badge badge-live">' + esc(str('jyo.live')) + '</span>' +
-          '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async">' +
-          '<button type="button" class="play-fab" data-jplay="' + i + '" aria-label="' +
-            esc(playing ? str('card.pause') + name : str('jyo.play', { name: name })) + '">' +
-            playGlyph(playing) +
-          '</button>' +
-        '</div>' +
-        '<div class="track-body">' +
-          '<h3 class="track-title">' + esc(name) + '</h3>' +
-          '<div class="track-meta">' +
-            '<span class="deity">' + esc(place) + (j.channel ? ' · ' + esc(j.channel) : '') + '</span>' +
-          '</div>' +
-        '</div>' +
-      '</article>';
-    });
-    el.jyoGrid.innerHTML = html;
+    // the live set rarely changes, but renderJyo also runs on every play-state
+    // flip — rebuilding the grid then would restart all six preview streams
+    var key = items.map(function (j) { return j.youtube_id; }).join(',');
+    if (state.jyoRenderedKey !== key) {
+      state.jyoRenderedKey = key;
+      var html = '';
+      items.forEach(function (j, i) { html += jyoCardHtml(j, i); });
+      el.jyoGrid.innerHTML = html;
+      mountJyoPreviews();
+    }
+    updateJyoPlaying();
   }
 
   /* ---------------- chips ---------------- */
@@ -806,6 +864,8 @@
 
   function setPlaying(flag) {
     state.playing = flag;
+    // muted card previews yield bandwidth to whatever the main player plays
+    jyoPreviewCommand(flag ? 'pauseVideo' : 'playVideo');
     setHidden(el.iconPlay, flag);
     setHidden(el.iconPause, !flag);
     setHidden(el.miniIconPlay, flag);
@@ -1062,6 +1122,11 @@
     document.addEventListener('keydown', function (e) {
       if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) { return; }
       if (e.code === 'Space' && state.queueIndex >= 0) { e.preventDefault(); togglePlay(); }
+    });
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) { jyoPreviewCommand('pauseVideo'); }
+      else if (!state.playing) { jyoPreviewCommand('playVideo'); }
     });
   }
 

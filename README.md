@@ -10,8 +10,9 @@ of the day, with an embedded **YouTube player** and a play queue.
 - **Live darshan of the Jyotirlingas**: the home page carries a section with the temples'
   official **YouTube live streams** (currently 6 of the 12 — Somnath, Mahakaleshwar,
   Omkareshwar, Trimbakeshwar, Baidyanath, Kashi Vishwanath); the other six appear as soon as a live
-  stream id is added to `data/jyotirlingas.php`. Live streams **start playing muted** (autoplay-safe,
-  no surprise audio) — one tap on the sound button unmutes them.
+  stream id is added to `data/jyotirlingas.php`. **Every live card autoplays its own stream,
+  muted, as soon as the page loads** (they pause with the tab); the play button loads the
+  stream into the main player, where one tap on the sound button unmutes it.
 - **Quick links**: a sticky pill nav under the header (and the same links in the footer, plus the
   language switcher) jumps to Live darshan, आज विशेष, पंचांग, the song catalogue and the player.
 - Panchang data (vara/tithi/nakshatra + 200+ festivals) is **generated once and stored permanently**
