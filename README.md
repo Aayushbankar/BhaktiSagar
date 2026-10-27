@@ -8,13 +8,19 @@ of the day, with an embedded **YouTube player** and a play queue.
 - No login, no signup, no fees — open and play.
 - Works perfectly on mobile and desktop.
 - **Live darshan of the Jyotirlingas**: the home page carries a section with the temples'
-  official **YouTube live streams** (currently 6 of the 12 — Somnath, Mahakaleshwar,
-  Omkareshwar, Trimbakeshwar, Baidyanath, Kashi Vishwanath); the other six appear as soon as a live
-  stream id is added to `data/jyotirlingas.php`. **Every live card autoplays its own stream,
-  muted, as soon as the page loads** (they pause with the tab). The card's button icon
-  always mirrors that stream's real state — pause while it plays, play while it's paused —
-  and taps toggle it. Tapping the card itself loads the darshan into the main player,
-  where one tap on the sound button unmutes it.
+  official **YouTube live streams** (currently 11 of the 12 — Somnath, Mallikarjuna,
+  Mahakaleshwar, Omkareshwar, Vaijnath, Bhimashankar, Rameshwaram, Nageshwar,
+  Kashi Vishwanath, Trimbakeshwar, Baidyanath; Grishneshwar appears when an official
+  live channel is found). **Only streams that are LIVE right now are shown** — the server
+  resolves the current live video ID from each temple's official YouTube channel on every
+  request (5-minute cache). Every live card autoplays its own stream, muted, as soon as
+  the page loads (they pause with the tab). The card's button icon always mirrors that
+  stream's real state — pause while it plays, play while it's paused — and taps toggle it.
+  Tapping the card itself loads the darshan into the main player, where one tap on the
+  sound button unmutes it.
+- **Elderly-friendly**: a **text-size control** (button in the top bar, cycles 100% → 112% → 125% root
+  font-size) persists across visits; all interactive targets meet ≥48 px min-height; tiny
+  font sizes raised to a readable floor; contrast improved; global `:focus-visible` ring.
 - **Four languages, elderly-friendly URLs**: the site ships in हिन्दी (default), English, संस्कृत and
   ગુજરાતી (`/`, `/en`, `/sa`, `/gu`); the switcher shows native names (हिन्दी · English · संस्कृત · ગુજરાતી).
   Old or misspelled links are **301-redirected to the canonical URL** instead of 404-ing:
@@ -260,10 +266,11 @@ npm install
 npx playwright test          # runs the full suite against http://localhost/bhakti-sagar/
 ```
 
-- 88 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
+- 89 tests in `tests/specs/`: API (health, date-pinned day rules, catalogue integrity,
   weekday → track wiring, shloka/slot invariants, Jyotirlinga live ids), home UI (filters,
   chip counts for every slot × type, search, empty-state, cache-busting, quick links/footer
-  links), date deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards, queue hand-off, muted
+  links, **text-size control**), date deep-links/आज विशेष, ज्योतिर्लिंग live darshan (cards,
+  **LIVE-only server-side resolution**, queue hand-off, muted
   autoplay + state-tracking pause/play icons + sound toggle, /en), the player
   (orange pause state, play→pause→resume icon cycle, queue/next/prev, special cards, mobile
   mini-bar, auto-advance), location-aware panchang, routing/SEO + robots/sitemap (including the
@@ -296,3 +303,10 @@ with a tick-box per row: daily shlokas, all tracks by type (श्लोक/भ�
 - No user accounts, no tracking, no cookies.
 - Works offline-ish: if the API or MySQL is unreachable, the UI shows a retry button and the
   bundled catalogue keeps the site functional.
+- **Jyotirlinga live resolution** (`lib/live.php`): each temple entry in `data/jyotirlingas.php`
+  now has a `channel_id` (official YouTube channel). The API fetches the `/live` endpoint and
+  follows the 302 redirect to the currently-live video ID. Results are cached for 5 minutes.
+  To re-verify a stream manually: `node tools/live-check.mjs <id>`; to embed-verify:
+  `node tools/verify-player.mjs <id>`.
+- **Elderly-friendly UX**: top-bar text-size button (100% → 112% → 125%), all tap targets ≥48 px,
+  font-size floor ~0.8 rem, improved contrast (`--ink-soft` darkened), global focus ring.

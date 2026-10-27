@@ -73,6 +73,7 @@ test.describe('i18n', () => {
     await expect(page.locator('#quickNav a[href="#trackGrid"]')).toHaveText('Song catalogue');
     await expect(page.locator('.footer-links a[href="#playerCol"]')).toHaveText('Player & queue');
     await expect(page.locator('#btnSound')).toHaveAttribute('aria-label', 'Mute sound');
+    await expect(page.locator('#textSizeBtn')).toHaveAttribute('aria-label', 'Text size / अक्षर का आकार');
     // the language switcher itself stays bilingual
     await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'en');
     await expect(page.locator('.lang-link[hreflang="sa"]')).toBeVisible();
@@ -88,6 +89,7 @@ test.describe('i18n', () => {
     await expect(page.locator('#panchangStrip')).toContainText('सूर्योदयः');
     await expect(page.locator('#jyoSection .jyo-title')).toContainText('ज्योतिर्लिंग लाइव दर्शनम्');
     await expect(page.locator('#quickNav a[href="#trackGrid"]')).toHaveText('गीतसङ्ग्रहः');
+    await expect(page.locator('#textSizeBtn')).toHaveAttribute('aria-label', 'Text size / अक्षरविस्तारः');
   });
 
   test('/gu renders the whole chrome in Gujarati', async ({ page }) => {
@@ -103,6 +105,7 @@ test.describe('i18n', () => {
     await expect(page.locator('.lang-link.is-current')).toHaveAttribute('hreflang', 'gu');
     await expect(page.locator('.lang-link.is-current')).toHaveText('ગુજરાતી');
     await expect(page.locator('.lang-link[hreflang="sa"]')).toBeVisible();
+    await expect(page.locator('#textSizeBtn')).toHaveAttribute('aria-label', 'Text size / અક્ષરનું કદ');
   });
 
   test('/en uses the English song titles and English empty states', async ({ page, request }) => {

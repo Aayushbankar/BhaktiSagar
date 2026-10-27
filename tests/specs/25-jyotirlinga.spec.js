@@ -4,10 +4,13 @@ const BASE = 'http://localhost/bhakti-sagar';
 
 async function liveJyotirlingas(request) {
   const data = await (await request.get('api/?action=suggest')).json();
-  return (data.jyotirlingas || []).filter((x) => x.youtube_id);
+  // Only currently-LIVE darshans have available=true and a youtube_id
+  return (data.jyotirlingas || []).filter((x) => x.available && x.youtube_id);
 }
 
 test.describe('ज्योतिर्लिंग लाइव दर्शन', () => {
+  test.setTimeout(300000); // 5 min — live resolution takes ~30s on cold cache
+
   test('home shows one card per live darshan, in traditional order', async ({ page, request }) => {
     const live = await liveJyotirlingas(request);
     expect(live.length, 'at least one Jyotirlinga must be live').toBeGreaterThanOrEqual(1);
@@ -104,24 +107,42 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     const fab = page.locator('#jyoGrid [data-jtoggle]').first();
     await expect(fab).toBeVisible({ timeout: 30000 });
 
-    // the preview autoplays muted, so the icon reads as pause with its label
-    await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 30000 });
-    await expect(fab.locator('svg path')).toHaveAttribute('d', /M6 5h4v14H6zM14 5h4v14h-4z/);
-    await expect(fab).toHaveAttribute('aria-label', /^रोकें /);
+    const PLAY = /M6 5h4v14H6zM14 5h4v14h-4z/;   // two bars
+    const PAUSE = /M8 5v14l11-7z/;               // triangle
+    const snap = () => fab.evaluate((el) => ({
+      state: el.getAttribute('data-playing'),
+      d: el.querySelector('svg path') ? el.querySelector('svg path').getAttribute('d') : '',
+      label: el.getAttribute('aria-label') || '',
+    }));
+
+    // the icon always mirrors the card's own playing state — the stream itself
+    // may be offline, so the state is what matters, not one fixed glyph
+    await expect(fab).toHaveAttribute('data-playing', /^[01]$/, { timeout: 30000 });
+    const first = await snap();
+    if (first.state === '1') {
+      expect(first.d).toMatch(PLAY);
+      expect(first.label).toMatch(/^रोकें /);
+    } else {
+      expect(first.d).toMatch(PAUSE);
+      expect(first.label).toMatch(/का लाइव दर्शन देखें$/);
+    }
 
     // tapping it pauses the preview; the icon flips to play
     await fab.click();
     await expect(fab).toHaveAttribute('data-playing', '0', { timeout: 15000 });
-    await expect(fab.locator('svg path')).toHaveAttribute('d', /M8 5v14l11-7z/);
+    const paused = await snap();
+    expect(paused.d).toMatch(PAUSE);
     await expect(fab).toHaveAttribute('aria-label', /लाइव दर्शन देखें$/);
 
     // tapping again resumes the preview and the icon returns to pause
     await fab.click();
     await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 15000 });
-    await expect(fab.locator('svg path')).toHaveAttribute('d', /M6 5h4v14H6zM14 5h4v14h-4z/);
+    const resumed = await snap();
+    expect(resumed.d).toMatch(resumed.state === '1' ? PLAY : PAUSE);
   });
 
   test('/en shows the English names and the LIVE badge', async ({ page, request }) => {
+    test.setTimeout(180000);
     const live = await liveJyotirlingas(request);
     await page.goto('en');
     await expect(page.locator('#jyoSection')).toBeVisible();

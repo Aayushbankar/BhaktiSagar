@@ -5,9 +5,10 @@ declare(strict_types=1);
  * The twelve Jyotirlingas and their YouTube LIVE darshan streams.
  *
  * Rules:
- *  - 'youtube_id' must point at a stream that is LIVE on YouTube, never at a
- *    recorded video. Null means "no live stream found yet" — such entries are
- *    returned by the API but hidden by the site until an id is supplied.
+ *  - 'channel_id' is the official YouTube channel ID (UC...) — the site
+ *    resolves the *currently* live video ID from it on every API request.
+ *  - 'youtube_id' is the last-known live video id (cached hint, may be stale).
+ *    Null means "no live stream found yet" — such entries are hidden.
  *  - Re-verify any time with:
  *      node tools/live-check.mjs <id,id,...>        (is it live right now?)
  *      node tools/verify-player.mjs <id,id,...>     (does it embed/play?)
@@ -23,6 +24,7 @@ return [
         'place_hi'    => 'प्रभास पाटन, गुजरात',
         'place_en'    => 'Prabhas Patan, Gujarat',
         'youtube_id'  => 'WY5LoCD2vPg',
+        'channel_id'  => 'UCT1egsvA08YcdMLiEu1DTRg', // Somnath Temple - Official Channel
         'channel'     => 'Somnath Temple - Official Channel',
         'verified_on' => '2026-10-21',
     ],
@@ -34,7 +36,8 @@ return [
         'place_hi'    => 'श्रीशैलम, आंध्र प्रदेश',
         'place_en'    => 'Srisailam, Andhra Pradesh',
         'youtube_id'  => null,
-        'channel'     => '',
+        'channel_id'  => 'UCNIzL2dT2gZxQae2LHXvl0A', // Srisaila Tv (official)
+        'channel'     => 'Srisaila Tv',
         'verified_on' => '',
     ],
     [
@@ -45,6 +48,7 @@ return [
         'place_hi'    => 'उज्जैन, मध्य प्रदेश',
         'place_en'    => 'Ujjain, Madhya Pradesh',
         'youtube_id'  => 'pZik61fEsJc',
+        'channel_id'  => 'UCQE_hlxeDSuw4YpuAkDmrMg', // divyadarshan (main live streamer)
         'channel'     => 'divyadarshan',
         'verified_on' => '2026-10-21',
     ],
@@ -55,9 +59,10 @@ return [
         'name_en'     => 'Omkareshwar',
         'place_hi'    => 'खंडवा, मध्य प्रदेश',
         'place_en'    => 'Khandwa, Madhya Pradesh',
-        'youtube_id'  => 'keJSAIK6QVc',
+        'youtube_id'  => 'RJcQxzKBYQ8',
+        'channel_id'  => 'UCsIZ3yYwCW4316fPX3V-4lg', // Shri Omkareshwar Jyotirlinga Official
         'channel'     => 'Shri Omkareshwar Jyotirlinga Official',
-        'verified_on' => '2026-10-21',
+        'verified_on' => '2026-10-26',
     ],
     [
         'order'       => 5,
@@ -67,7 +72,8 @@ return [
         'place_hi'    => 'परली, महाराष्ट्र',
         'place_en'    => 'Parli, Maharashtra',
         'youtube_id'  => null,
-        'channel'     => '',
+        'channel_id'  => 'UCy0WURYusTNfKG6MNf8sjvw', // Parli Vaijnath Jyotirlinga Dham
+        'channel'     => 'Parli Vaijnath Jyotirlinga Dham',
         'verified_on' => '',
     ],
     [
@@ -78,7 +84,8 @@ return [
         'place_hi'    => 'पुणे, महाराष्ट्र',
         'place_en'    => 'Pune, Maharashtra',
         'youtube_id'  => null,
-        'channel'     => '',
+        'channel_id'  => 'UClJXzDkoCdZJEYcgjr09j2A', // Bhimashankar jyotirlinga official
+        'channel'     => 'Bhimashankar jyotirlinga official',
         'verified_on' => '',
     ],
     [
@@ -89,7 +96,8 @@ return [
         'place_hi'    => 'रामेश्वरम, तमिलनाडु',
         'place_en'    => 'Rameswaram, Tamil Nadu',
         'youtube_id'  => null,
-        'channel'     => '',
+        'channel_id'  => 'UC9CgVhkj8XZ2g__MWbVWr2g', // Ramanathaswamy temple, Rameswaram
+        'channel'     => 'Ramanathaswamy temple, Rameswaram',
         'verified_on' => '',
     ],
     [
@@ -100,6 +108,7 @@ return [
         'place_hi'    => 'एलोरा, महाराष्ट्र',
         'place_en'    => 'Ellora, Maharashtra',
         'youtube_id'  => null,
+        'channel_id'  => '', // no official live channel found
         'channel'     => '',
         'verified_on' => '',
     ],
@@ -111,7 +120,8 @@ return [
         'place_hi'    => 'द्वारका, गुजरात',
         'place_en'    => 'Dwarka, Gujarat',
         'youtube_id'  => null,
-        'channel'     => '',
+        'channel_id'  => 'UCBAvMHZO3BIfMMhOK9LMOYQ', // Shri Dwarkadhish Mandir (official)
+        'channel'     => 'Shri Dwarkadhish Mandir',
         'verified_on' => '',
     ],
     [
@@ -122,7 +132,8 @@ return [
         'place_hi'    => 'वाराणसी, उत्तर प्रदेश',
         'place_en'    => 'Varanasi, Uttar Pradesh',
         'youtube_id'  => 'WPZ0xL0-sKs',
-        'channel'     => 'Live Darshan',
+        'channel_id'  => 'UCdMj2twWfMHXrWgX5oVdoyA', // Shree Kashi Vishwanath Mandir Trust
+        'channel'     => 'Shree Kashi Vishwanath Mandir Trust',
         'verified_on' => '2026-10-21',
     ],
     [
@@ -132,9 +143,10 @@ return [
         'name_en'     => 'Trimbakeshwar',
         'place_hi'    => 'नासिक, महाराष्ट्र',
         'place_en'    => 'Nashik, Maharashtra',
-        'youtube_id'  => 'EMMWSBPvbrE',
-        'channel'     => 'Trimbakeshwar Darshan',
-        'verified_on' => '2026-10-22',
+        'youtube_id'  => null,
+        'channel_id'  => 'UCe4uXQYz9uf24MSUJWKSSVw', // Trimbakeshwar Temple Puja
+        'channel'     => 'Trimbakeshwar Temple Puja',
+        'verified_on' => '',
     ],
     [
         'order'       => 12,
@@ -144,7 +156,8 @@ return [
         'place_hi'    => 'देवघर, झारखंड',
         'place_en'    => 'Deoghar, Jharkhand',
         'youtube_id'  => 'gXFBJQWcleg',
-        'channel'     => 'KGS Astro',
-        'verified_on' => '2026-10-21',
+        'channel_id'  => 'UCYS-kqnf_wTH2OjRJQq4IVg', // official baidyanath dham
+        'channel'     => 'Official Baidyanath Dham',
+        'verified_on' => '2026-10-26',
     ],
 ];

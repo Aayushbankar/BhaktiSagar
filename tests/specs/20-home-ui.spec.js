@@ -140,7 +140,45 @@ test.describe('Home UI & filters', () => {
     expect(cssHref, 'style.css must carry ?v= cache-buster').toMatch(/style\.css\?v=\d{10,}/);
   });
 
-  test('quick links and footer links point at real page sections', async ({ page }) => {
+  test('text-size control cycles three steps, enlarges the page and persists', async ({ page }) => {
+    await page.goto('./');
+    const html = page.locator('html');
+    const btn = page.locator('#textSizeBtn');
+    await expect(btn).toBeVisible();
+    await expect(btn).toHaveAttribute('aria-label', 'Text size / अक्षर का आकार');
+    await expect(btn).toHaveAttribute('data-size', '1');
+    await expect(html).toHaveAttribute('data-textsize', '1');
+
+    const rootPx = () => page.evaluate(
+      () => parseFloat(getComputedStyle(document.documentElement).fontSize));
+    const base = await rootPx();
+    expect(base).toBeGreaterThan(0);
+
+    // step 2: root font-size really grows (every rem in the UI scales with it)
+    await btn.click();
+    await expect(btn).toHaveAttribute('data-size', '2');
+    await expect(html).toHaveAttribute('data-textsize', '2');
+    expect(await rootPx()).toBeGreaterThan(base);
+
+    // step 3
+    await btn.click();
+    await expect(btn).toHaveAttribute('data-size', '3');
+    await expect(html).toHaveAttribute('data-textsize', '3');
+    expect(await rootPx()).toBeGreaterThan(base * 1.15);
+
+    // the choice survives a reload — the inline head script applies it early
+    await page.reload();
+    await expect(html).toHaveAttribute('data-textsize', '3');
+    await expect(btn).toHaveAttribute('data-size', '3');
+
+    // one more tap wraps back to the default
+    await btn.click();
+    await expect(html).toHaveAttribute('data-textsize', '1');
+    await expect(btn).toHaveAttribute('data-size', '1');
+    expect(Math.abs((await rootPx()) - base)).toBeLessThan(0.5);
+  });
+
+  test('quick links and footer links point at real page sections', async ({ page, request }) => {
     await page.goto('./');
     const nav = page.locator('#quickNav');
     await expect(nav).toBeVisible();
@@ -155,12 +193,24 @@ test.describe('Home UI & filters', () => {
     }
     await expect(nav.locator('a[href="#trackGrid"]')).toBeVisible();
     await expect(nav.locator('a[href="#playerCol"]')).toBeVisible();
-    await expect(nav.locator('a[data-nav="jyoSection"]')).toBeVisible();
+
+    // jyoSection link is only visible when there are live darshans
+    const liveCount = (await (await request.get('api/?action=suggest')).json()).jyotirlingas
+      ?.filter((x) => x.available && x.youtube_id).length ?? 0;
+    if (liveCount > 0) {
+      await expect(nav.locator('a[data-nav="jyoSection"]')).toBeVisible();
+    } else {
+      await expect(nav.locator('a[data-nav="jyoSection"]')).toBeHidden();
+    }
 
     // footer mirrors the section links and adds the language switcher
     const footer = page.locator('.footer-links');
     await expect(footer).toBeVisible();
-    await expect(footer.locator('a[data-nav="jyoSection"]')).toBeVisible();
+    if (liveCount > 0) {
+      await expect(footer.locator('a[data-nav="jyoSection"]')).toBeVisible();
+    } else {
+      await expect(footer.locator('a[data-nav="jyoSection"]')).toBeHidden();
+    }
     await expect(footer.locator('a[href="#trackGrid"]')).toBeVisible();
     await expect(footer.locator('a[href="#playerCol"]')).toBeVisible();
     await expect(page.locator('.footer-langs a')).toHaveCount(4);

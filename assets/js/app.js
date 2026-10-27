@@ -14,6 +14,7 @@
   var LYRIC_SIZE_KEY = 'bs.lyrics.size';
   var LYRIC_SIZES = [0.95, 1.1, 1.3, 1.5];   // rem
   var LYRIC_SIZE_DEFAULT = 1;
+  var TEXTSIZE_KEY = 'bs.textsize';          // '1' | '2' | '3' (root font-size steps)
 
   // Route handed over by index.php: {kind, lang, path, track, festival, date, notFound}.
   var route = window.__ROUTE__ || {};
@@ -459,11 +460,13 @@
   /* ---------------- ज्योतिर्लिंग लाइव दर्शन ---------------- */
 
   function jyoName(j) {
+    if (!j) { return ''; }
     if (lang === 'en' && j.name_en) { return j.name_en; }
     return j.name_hi || j.name_en || '';
   }
 
   function jyoPlace(j) {
+    if (!j) { return ''; }
     if (lang === 'en' && j.place_en) { return j.place_en; }
     return j.place_hi || j.place_en || '';
   }
@@ -579,33 +582,51 @@
       playing ? str('card.pause') + name : str('jyo.play', { name: name }));
   }
 
+  /**
+   * The embed reports onError when a "live" id has gone bad between checks
+   * (deleted / private / embedding disabled): mark it unavailable and re-render
+   * so the broken player disappears. data/jyotirlinga-status.json stays the
+   * source of truth across reloads — this only fixes the current session.
+   */
+  function hideJyoCard(box) {
+    var card = box && box.closest('.track-card');
+    if (!card) { return; }
+    var i = parseInt(card.getAttribute('data-jindex'), 10);
+    var item = state.jyoLive[i];
+    if (!item) { return; }
+    item.available = false;
+    renderJyo();
+  }
+
   function bindJyoPreviewStates() {
     window.addEventListener('message', function (e) {
       var d = e.data;
       if (!d) { return; }
       var msg = null;
       if (typeof d === 'string') {
-        if (d.indexOf('infoDelivery') < 0) { return; }
+        if (d.indexOf('infoDelivery') < 0 && d.indexOf('onError') < 0) { return; }
         try { msg = JSON.parse(d); } catch (err) { return; }
-      } else if (typeof d === 'object' && d.event === 'infoDelivery') {
+      } else if (typeof d === 'object' && (d.event === 'infoDelivery' || d.event === 'onError')) {
         msg = d;
       }
-      if (!msg || msg.event !== 'infoDelivery' || !msg.info) { return; }
+      if (!msg || !msg.event) { return; }
+      var box = null;
       var frames = document.querySelectorAll('.jyo-preview iframe');
       for (var i = 0; i < frames.length; i += 1) {
-        if (frames[i].contentWindow !== e.source) { continue; }
-        var box = frames[i].parentNode;
-        var st = msg.info.playerState;
-        // 1 = playing, 3 = buffering; everything else is a pause icon
-        var playing = st === 1 || st === 3;
-        // a state report captured before our last command may arrive late —
-        // skip reports that contradict a still-pending pause/resume
-        var pending = box.getAttribute('data-pending');
-        if ((pending === '1' && playing) || (pending === '0' && !playing)) { return; }
-        box.removeAttribute('data-pending');
-        setPreviewPlaying(box, playing);
-        return;
+        if (frames[i].contentWindow === e.source) { box = frames[i].parentNode; break; }
       }
+      if (!box) { return; }
+      if (msg.event === 'onError') { hideJyoCard(box); return; }
+      if (msg.event !== 'infoDelivery' || !msg.info) { return; }
+      var st = msg.info.playerState;
+      // 1 = playing, 3 = buffering; everything else is a pause icon
+      var playing = st === 1 || st === 3;
+      // a state report captured before our last command may arrive late —
+      // skip reports that contradict a still-pending pause/resume
+      var pending = box.getAttribute('data-pending');
+      if ((pending === '1' && playing) || (pending === '0' && !playing)) { return; }
+      box.removeAttribute('data-pending');
+      setPreviewPlaying(box, playing);
     });
   }
 
@@ -623,7 +644,11 @@
 
   function renderJyo() {
     if (!el.jyoSection || !el.jyoGrid) { return; }
-    var items = (state.jyotirlingas || []).filter(function (j) { return !!j.youtube_id; });
+    // youtube_id null = no stream yet; available false = stream broken
+    // (UNPLAYABLE in data/jyotirlinga-status.json, or onError this session)
+    var items = (state.jyotirlingas || []).filter(function (j) {
+      return !!j.youtube_id && j.available !== false;
+    });
     state.jyoLive = items;
     if (!items.length) { el.jyoSection.hidden = true; syncNav(); return; }
     el.jyoSection.hidden = false;
@@ -1184,6 +1209,10 @@
       });
     }
 
+    if (el.textSizeBtn) {
+      el.textSizeBtn.addEventListener('click', cycleTextSize);
+    }
+
     el.miniToggle.addEventListener('click', togglePlay);
     el.miniNext.addEventListener('click', nextTrack);
     el.miniPrev.addEventListener('click', prevTrack);
@@ -1211,9 +1240,33 @@
     });
   }
 
+  /* ---------------- text size (senior-friendly) ---------------- */
+
+  /** Three root font-size steps, persisted; a tiny inline head script already
+   *  applied it before first paint — this keeps the button in sync. */
+  function textSizeStep() {
+    var s = storeGet(TEXTSIZE_KEY);
+    return s === '2' || s === '3' ? s : '1';
+  }
+
+  function applyTextSize(step) {
+    document.documentElement.setAttribute('data-textsize', step);
+    if (el.textSizeBtn) {
+      el.textSizeBtn.setAttribute('data-size', step);
+    }
+  }
+
+  function cycleTextSize() {
+    var order = { '1': '2', '2': '3', '3': '1' };
+    var next = order[textSizeStep()] || '1';
+    storeSet(TEXTSIZE_KEY, next);
+    applyTextSize(next);
+  }
+
   /* ---------------- boot ---------------- */
 
   function cacheEls() {
+    el.textSizeBtn = $('textSizeBtn');
     el.clockIst = $('clockIst');
     el.clockLocal = $('clockLocal');
     el.dateHi = $('dateHi');
@@ -1411,6 +1464,7 @@
 
   function boot() {
     cacheEls();
+    applyTextSize(textSizeStep());
     renderClock();
     renderDates();
     bindEvents();

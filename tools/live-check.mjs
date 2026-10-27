@@ -10,8 +10,13 @@
  *   node live-check.mjs ID1,ID2,...
  *   node live-check.mjs --file ids.txt --json out.json
  *   node live-check.mjs ID1 --verbose
+ *   node live-check.mjs --update ID1,ID2
  *
  * Result per id: LIVE | SCHEDULED | NOT_LIVE | UNPLAYABLE
+ *
+ * --update merges the checked ids into data/jyotirlinga-status.json
+ * ({ id: { status, checked_on } }). The site hides cards whose status is
+ * UNPLAYABLE; LIVE / SCHEDULED / NOT_LIVE embeds still work, so they stay.
  */
 import { readFileSync, writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
@@ -26,11 +31,13 @@ let file = null;
 let jsonOut = null;
 let verbose = false;
 let pause = 2500;
+let update = false;
 for (let i = 0; i < args.length; i++) {
   if (args[i] === '--file') { file = args[++i]; }
   else if (args[i] === '--json') { jsonOut = args[++i]; }
   else if (args[i] === '--pause') { pause = parseInt(args[++i], 10); }
   else if (args[i] === '--verbose') { verbose = true; }
+  else if (args[i] === '--update') { update = true; }
   else if (!args[i].startsWith('--')) {
     ids.push(...args[i].split(',').map((s) => s.trim()).filter(Boolean));
   }
@@ -138,6 +145,20 @@ for (const id of ids) {
 if (jsonOut) {
   writeFileSync(jsonOut, JSON.stringify(results, null, 2), 'utf8');
   console.log(`\nwrote ${jsonOut}`);
+}
+
+if (update) {
+  // merge only the ids checked in this run; keep entries for ids not re-checked
+  const statusPath = resolve(__dirname, '../data/jyotirlinga-status.json');
+  let prev = {};
+  try { prev = JSON.parse(readFileSync(statusPath, 'utf8')); } catch { /* first run */ }
+  if (typeof prev !== 'object' || prev === null || Array.isArray(prev)) { prev = {}; }
+  const today = new Date().toISOString().slice(0, 10);
+  for (const r of results) {
+    prev[r.id] = { status: r.status, checked_on: today };
+  }
+  writeFileSync(statusPath, JSON.stringify(prev, null, 2) + '\n', 'utf8');
+  console.log(`updated ${statusPath}`);
 }
 
 const counts = results.reduce((a, r) => (a[r.status] = (a[r.status] || 0) + 1, a), {});

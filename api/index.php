@@ -233,9 +233,16 @@ function panchang_file(string $root, array $loc, array $registry): string
 
 /* ---------------- Jyotirlinga live darshan ---------------- */
 
+require_once __DIR__ . '/../lib/live.php';
+
 /**
- * The twelve Jyotirlingas with their YouTube LIVE darshan ids. Entries whose
- * youtube_id is null have no live stream yet; the site hides them.
+ * The twelve Jyotirlingas with their YouTube LIVE darshan streams.
+ *
+ * Each entry has a `channel_id` (official YouTube channel). The API resolves
+ * the *currently* live video ID from that channel on every request.
+ * Only streams that are LIVE right now get `available = true` and a `youtube_id`.
+ * Entries without a channel_id or with no live stream right now get
+ * `available = false` and `youtube_id = null` — the site hides them.
  */
 function load_jyotirlingas(string $root): array
 {
@@ -248,7 +255,13 @@ function load_jyotirlingas(string $root): array
         if (!is_array($j)) {
             continue;
         }
-        $id = isset($j['youtube_id']) ? (string) $j['youtube_id'] : '';
+        $channelId = isset($j['channel_id']) ? (string) $j['channel_id'] : '';
+        $liveId = null;
+        $available = false;
+        if ($channelId !== '' && preg_match('/^UC[A-Za-z0-9_-]{22}$/', $channelId)) {
+            $liveId = resolve_live_id_cached($channelId, 5); // 5-min cache
+            $available = $liveId !== null;
+        }
         $out[] = [
             'order' => (int) ($j['order'] ?? 0),
             'slug' => (string) ($j['slug'] ?? ''),
@@ -256,9 +269,10 @@ function load_jyotirlingas(string $root): array
             'name_en' => (string) ($j['name_en'] ?? ''),
             'place_hi' => (string) ($j['place_hi'] ?? ''),
             'place_en' => (string) ($j['place_en'] ?? ''),
-            'youtube_id' => $id === '' ? null : $id,
+            'youtube_id' => $liveId,
             'channel' => (string) ($j['channel'] ?? ''),
             'verified_on' => (string) ($j['verified_on'] ?? ''),
+            'available' => $available,
         ];
     }
     return $out;

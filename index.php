@@ -87,6 +87,13 @@ $assetVer = static function (string $path): string {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;700&family=Noto+Sans+Gujarati:wght@400;600;700&family=Tiro+Devanagari+Hindi:ital@0;1&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="<?= e($base) ?>/assets/css/style.css?v=<?= e($assetVer('assets/css/style.css')) ?>">
+<script>
+/* apply the stored text size before first paint (senior-friendly default) */
+try {
+  var s = localStorage.getItem('bs.textsize');
+  document.documentElement.setAttribute('data-textsize', (s === '2' || s === '3') ? s : '1');
+} catch (e) { document.documentElement.setAttribute('data-textsize', '1'); }
+</script>
 <script type="application/ld+json"><?= $jsonld ?></script>
 </head>
 <body>
@@ -112,6 +119,12 @@ $assetVer = static function (string $path): string {
        <?= $isCurrent ? 'aria-current="page"' : '' ?>><?= e(bs_lang_label($code)) ?></a>
     <?php endforeach; ?>
   </nav>
+
+  <button type="button" id="textSizeBtn" class="text-size-btn" data-size="1"
+          aria-label="<?= e($t('textsize.aria')) ?>" title="<?= e($t('textsize.aria')) ?>">
+    <span class="ts-glyph" aria-hidden="true">A</span>
+    <span class="ts-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
 
   <div class="clockbox" aria-label="<?= e($t('clock.aria')) ?>">
     <span class="clock-main" id="clockIst">--:--:--</span>
