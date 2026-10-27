@@ -72,8 +72,8 @@ return [
         'place_hi'    => 'परली, महाराष्ट्र',
         'place_en'    => 'Parli, Maharashtra',
         'youtube_id'  => null,
-        'channel_id'  => 'UCy0WURYusTNfKG6MNf8sjvw', // Parli Vaijnath Jyotirlinga Dham
-        'channel'     => 'Parli Vaijnath Jyotirlinga Dham',
+        'channel_id'  => 'UCp-YfmdOZ0AQKSaOWufITjw', // Shri Vaijnath Jyotirlinga (official Instagram link)
+        'channel'     => 'Shri Vaijnath Jyotirlinga',
         'verified_on' => '',
     ],
     [
