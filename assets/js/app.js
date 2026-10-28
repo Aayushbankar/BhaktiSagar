@@ -549,22 +549,10 @@
     var previews = el.jyoGrid.querySelectorAll('.jyo-preview');
     if (!previews.length) { return; }
 
-    // Use IntersectionObserver for lazy loading: only mount iframe when in viewport
-    var observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          var box = entry.target;
-          if (box.getAttribute('data-mounted') !== '1') {
-            mountJyoPreview(box);
-          }
-          observer.unobserve(box);
-        }
-      });
-    }, { rootMargin: '100px', threshold: 0.1 });
-
+    // Mount all iframes immediately for autoplay (muted) on page load
     previews.forEach(function (box) {
       if (box.getAttribute('data-mounted') !== '1') {
-        observer.observe(box);
+        mountJyoPreview(box);
       }
     });
   }

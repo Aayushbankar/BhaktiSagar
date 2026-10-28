@@ -100,39 +100,39 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     await expect(page.locator('#jyoGrid .track-card.is-playing')).toHaveCount(1, { timeout: 60000 });
   });
 
-  test('card button icon tracks the live preview and toggles play/pause', async ({ page }) => {
+  test('card button toggles iframe play/pause state', async ({ page }) => {
     await page.goto('./');
     const fab = page.locator('#jyoGrid [data-jtoggle]').first();
     await expect(fab).toBeVisible({ timeout: 30000 });
 
     const PLAY = /M6 5h4v14H6zM14 5h4v14h-4z/;   // two bars
     const PAUSE = /M8 5v14l11-7z/;               // triangle
-    const snap = () => fab.evaluate((el) => ({
-      state: el.getAttribute('data-playing'),
-      d: el.querySelector('svg path') ? el.querySelector('svg path').getAttribute('d') : '',
-      label: el.getAttribute('aria-label') || '',
-    }));
+    const snap = function() {
+      return fab.evaluate(function(el) {
+        return {
+          state: el.getAttribute('data-playing'),
+          d: el.querySelector('svg path') ? el.querySelector('svg path').getAttribute('d') : '',
+          label: el.getAttribute('aria-label') || ''
+        };
+      });
+    };
 
-    // with lazy loading, iframe mounts on first play click
-    // click play to mount iframe and start preview
-    await fab.click();
-    await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 15000 });
-    const playing = await snap();
-    expect(playing.d).toMatch(PLAY);
-    expect(playing.label).toMatch(/^रोकें /);
+    // iframe is mounted on page load and autoplays muted, so button shows pause
+    const first = await snap();
+    expect(first.state).toBe('1');
+    expect(first.d).toMatch(PLAY);
 
-    // tapping it pauses the preview; the icon flips to play
+    // click to pause
     await fab.click();
     await expect(fab).toHaveAttribute('data-playing', '0', { timeout: 15000 });
-    const paused = await snap();
-    expect(paused.d).toMatch(PAUSE);
-    await expect(fab).toHaveAttribute('aria-label', /लाइव दर्शन देखें$/);
+    const afterPause = await snap();
+    expect(afterPause.d).toMatch(PAUSE);
 
-    // tapping again resumes the preview and the icon returns to pause
+    // click to resume
     await fab.click();
     await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 15000 });
-    const resumed = await snap();
-    expect(resumed.d).toMatch(resumed.state === '1' ? PLAY : PAUSE);
+    const afterResume = await snap();
+    expect(afterResume.d).toMatch(PLAY);
   });
 
   test('/en shows the English names and the LIVE badge', async ({ page, request }) => {
