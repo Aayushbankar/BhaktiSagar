@@ -86,6 +86,8 @@
   "player.openYt": "YouTube इत्यत्र उद्घाटयतु",
   "player.mute": "ध्वनिं निरोधयतु",
   "player.unmute": "ध्वनिं उद्घाटयतु",
+  "player.fullscreen": "पूर्णस्क्रीणम्",
+  "player.exitFullscreen": "पूर्णस्क्रीणं बन्धयतु",
 
   "player.errorSkip": "इदं विडियो न चलतु शक्नोति — अगलं गीतं चालयामः…",
   "player.errorNone": "किमपि विडियो न चलतु शक्नोति — अन्यं गीतं चिनुत वा YouTube इत्यत्र उद्घाटयतु ।",

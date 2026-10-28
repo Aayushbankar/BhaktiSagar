@@ -927,6 +927,39 @@
     });
   }
 
+function applyFullscreenUI(isFullscreen) {
+    setHidden(el.iconFullscreen, isFullscreen);
+    setHidden(el.iconExitFullscreen, !isFullscreen);
+    setHidden(el.miniIconFullscreen, isFullscreen);
+    setHidden(el.miniIconExitFullscreen, !isFullscreen);
+    var label = str(isFullscreen ? 'player.exitFullscreen' : 'player.fullscreen');
+    [el.btnFullscreen, el.miniFullscreen].forEach(function (btn) {
+      if (!btn) { return; }
+      btn.setAttribute('aria-label', label);
+    });
+  }
+
+  function toggleFullscreen() {
+    var fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    var target = el.playerFrame || document.documentElement;
+    if (fs) {
+      if (document.exitFullscreen) { document.exitFullscreen(); }
+      else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+      else if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); }
+      else if (document.msExitFullscreen) { document.msExitFullscreen(); }
+    } else {
+      if (target.requestFullscreen) { target.requestFullscreen(); }
+      else if (target.webkitRequestFullscreen) { target.webkitRequestFullscreen(); }
+      else if (target.mozRequestFullScreen) { target.mozRequestFullScreen(); }
+      else if (target.msRequestFullscreen) { target.msRequestFullscreen(); }
+    }
+  }
+
+  function syncFullscreenUI() {
+    var fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    applyFullscreenUI(!!fs);
+  }
+
   function setMuted(muted) {
     state.muted = !!muted;
     if (state.ytPlayer) {
@@ -1202,6 +1235,8 @@
     }
     if (el.btnSound) { el.btnSound.addEventListener('click', toggleSound); }
     if (el.miniSound) { el.miniSound.addEventListener('click', toggleSound); }
+    if (el.btnFullscreen) { el.btnFullscreen.addEventListener('click', toggleFullscreen); }
+    if (el.miniFullscreen) { el.miniFullscreen.addEventListener('click', toggleFullscreen); }
 
     if (el.citySelect) {
       el.citySelect.addEventListener('change', function () {
@@ -1311,11 +1346,14 @@
     el.btnNext = $('btnNext');
     el.btnPrev = $('btnPrev');
     el.btnSound = $('btnSound');
+    el.btnFullscreen = $('btnFullscreen');
     el.btnOpenYt = $('btnOpenYt');
     el.iconPlay = $('iconPlay');
     el.iconPause = $('iconPause');
     el.iconSoundOn = $('iconSoundOn');
     el.iconSoundOff = $('iconSoundOff');
+    el.iconFullscreen = $('iconFullscreen');
+    el.iconExitFullscreen = $('iconExitFullscreen');
     el.playerPlaceholder = $('playerPlaceholder');
     el.ytPlayerHost = $('ytPlayerHost');
     el.playerCol = $('playerCol');
@@ -1326,13 +1364,17 @@
     el.miniNext = $('miniNext');
     el.miniPrev = $('miniPrev');
     el.miniSound = $('miniSound');
+    el.miniFullscreen = $('miniFullscreen');
     el.miniOpen = $('miniOpen');
     el.miniIconPlay = $('miniIconPlay');
     el.miniIconPause = $('miniIconPause');
     el.miniIconSoundOn = $('miniIconSoundOn');
     el.miniIconSoundOff = $('miniIconSoundOff');
+    el.miniIconFullscreen = $('miniIconFullscreen');
+    el.miniIconExitFullscreen = $('miniIconExitFullscreen');
     el.footerMeta = $('footerMeta');
     el.topbar = document.querySelector('.topbar');
+    el.playerFrame = document.getElementById('playerFrame');
     el.navBits = document.querySelectorAll('[data-nav]');
   }
 
@@ -1474,6 +1516,11 @@
     updateTopbarH();
     syncNav();
     applyMuteUI();
+    syncFullscreenUI();
+    document.addEventListener('fullscreenchange', syncFullscreenUI);
+    document.addEventListener('webkitfullscreenchange', syncFullscreenUI);
+    document.addEventListener('mozfullscreenchange', syncFullscreenUI);
+    document.addEventListener('MSFullscreenChange', syncFullscreenUI);
 
     setInterval(renderClock, 1000);
     setInterval(renderDates, 60 * 1000);

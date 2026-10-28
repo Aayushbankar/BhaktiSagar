@@ -355,6 +355,10 @@ try {
           <svg viewBox="0 0 24 24" aria-hidden="true" id="iconSoundOn"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 12c0-1.6-.9-3-2.3-3.7v7.4c1.4-.7 2.3-2.1 2.3-3.7z"/></svg>
           <svg viewBox="0 0 24 24" aria-hidden="true" id="iconSoundOff" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4.5 4.5l15 15"/></svg>
         </button>
+        <button type="button" class="ctrl-btn" id="btnFullscreen" aria-label="<?= e($t('player.fullscreen')) ?>">
+          <svg viewBox="0 0 24 24" aria-hidden="true" id="iconFullscreen"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+          <svg viewBox="0 0 24 24" aria-hidden="true" id="iconExitFullscreen" hidden><path d="M5 16h3v3h2v-5H5v3zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
+        </button>
         <a class="yt-link" id="btnOpenYt" href="https://www.youtube.com/" target="_blank" rel="noopener"><?= e($t('player.openYt')) ?></a>
       </div>
 
@@ -384,6 +388,10 @@ try {
   <button type="button" class="mini-btn" id="miniSound" data-muted="0" aria-pressed="false" aria-label="<?= e($t('player.mute')) ?>">
     <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconSoundOn"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 12c0-1.6-.9-3-2.3-3.7v7.4c1.4-.7 2.3-2.1 2.3-3.7z"/></svg>
     <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconSoundOff" hidden><path d="M4 9v6h4l5 4V5L8 9H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4.5 4.5l15 15"/></svg>
+  </button>
+  <button type="button" class="mini-btn" id="miniFullscreen" aria-label="<?= e($t('player.fullscreen')) ?>">
+    <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconFullscreen"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+    <svg viewBox="0 0 24 24" aria-hidden="true" id="miniIconExitFullscreen" hidden><path d="M5 16h3v3h2v-5H5v3zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
   </button>
   <button type="button" class="mini-btn" id="miniNext" aria-label="<?= e($t('mini.next')) ?>">
     <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5v14l10-7z"/><rect x="16.8" y="5" width="2.2" height="14" rx="1"/></svg>

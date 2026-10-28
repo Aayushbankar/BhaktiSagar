@@ -86,6 +86,8 @@
   "player.openYt": "YouTube पर खोलें",
   "player.mute": "ध्वनि बंद करें",
   "player.unmute": "ध्वनि चालू करें",
+  "player.fullscreen": "पूर्ण स्क्रीन",
+  "player.exitFullscreen": "पूर्ण स्क्रीन बंद करें",
 
   "player.errorSkip": "यह वीडियो नहीं चल सका – अगला गीत चलाते हैं…",
   "player.errorNone": "कोई वीडियो नहीं चल सका – दूसरा गीत चुनें या YouTube पर खोलें।",

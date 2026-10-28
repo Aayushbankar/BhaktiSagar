@@ -86,6 +86,8 @@
   "player.openYt": "Open on YouTube",
   "player.mute": "Mute sound",
   "player.unmute": "Unmute sound",
+  "player.fullscreen": "Fullscreen",
+  "player.exitFullscreen": "Exit fullscreen",
 
   "player.errorSkip": "This video could not play – moving to the next song…",
   "player.errorNone": "No video could play – pick another song or open it on YouTube.",

@@ -1,0 +1,34 @@
+function applyFullscreenUI(isFullscreen) {
+    setHidden(el.iconFullscreen, isFullscreen);
+    setHidden(el.iconExitFullscreen, !isFullscreen);
+    setHidden(el.miniIconFullscreen, isFullscreen);
+    setHidden(el.miniIconExitFullscreen, !isFullscreen);
+    var label = str(isFullscreen ? 'player.exitFullscreen' : 'player.fullscreen');
+    [el.btnFullscreen, el.miniFullscreen].forEach(function (btn) {
+      if (!btn) { return; }
+      btn.setAttribute('aria-label', label);
+    });
+  }
+
+  function toggleFullscreen() {
+    var fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    var target = el.playerFrame || document.documentElement;
+    if (fs) {
+      if (document.exitFullscreen) { document.exitFullscreen(); }
+      else if (document.webkitExitFullscreen) { document.webkitExitFullscreen(); }
+      else if (document.mozCancelFullScreen) { document.mozCancelFullScreen(); }
+      else if (document.msExitFullscreen) { document.msExitFullscreen(); }
+    } else {
+      if (target.requestFullscreen) { target.requestFullscreen(); }
+      else if (target.webkitRequestFullscreen) { target.webkitRequestFullscreen(); }
+      else if (target.mozRequestFullScreen) { target.mozRequestFullScreen(); }
+      else if (target.msRequestFullscreen) { target.msRequestFullscreen(); }
+    }
+  }
+
+  function syncFullscreenUI() {
+    var fs = document.fullscreenElement || document.webkitFullscreenElement || document.mozFullScreenElement || document.msFullscreenElement;
+    applyFullscreenUI(!!fs);
+  }
+
+  function setMuted(muted) {

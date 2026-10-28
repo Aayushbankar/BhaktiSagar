@@ -86,6 +86,8 @@
   "player.openYt": "YouTube પર ખોલો",
   "player.mute": "અવાજ બંધ કરો",
   "player.unmute": "અવાજ ચાલુ કરો",
+  "player.fullscreen": "ફુલસ્ક્રીન",
+  "player.exitFullscreen": "ફુલસ્ક્રીન બંધ કરો",
 
   "player.errorSkip": "આ વિડિયો ચાલી શક્યો નથી – આગળનું ગીત ચલાવીએ છીએ…",
   "player.errorNone": "કોઈ વિડિયો ચાલી શક્યો નથી – બીજું ગીત પસંદ કરો અથવા YouTube પર ખોલો.",
