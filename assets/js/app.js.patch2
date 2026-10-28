@@ -1,4 +1,0 @@
-el.topbar = document.querySelector('.topbar');
-    el.playerFrame = document.getElementById('playerFrame');
-    el.navBits = document.querySelectorAll('[data-nav]');
-  }
