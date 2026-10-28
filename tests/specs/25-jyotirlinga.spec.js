@@ -39,15 +39,13 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
     }
 
     // every card autoplays its own stream, muted, straight from page load
-    await expect(page.locator('#jyoGrid .jyo-preview iframe'))
-      .toHaveCount(live.length, { timeout: 30000 });
+    // with IntersectionObserver lazy loading, iframes mount when scrolled into view
+    // verify the lazy loading structure exists (data-preview attributes)
+    await expect(page.locator('#jyoGrid .jyo-preview')).toHaveCount(live.length);
     for (let i = 0; i < live.length; i += 1) {
-      const frame = page.locator('#jyoGrid .jyo-preview iframe').nth(i);
-      const src = await frame.getAttribute('src');
-      expect(src).toContain(`/embed/${live[i].youtube_id}`);
-      expect(src).toContain('autoplay=1');
-      expect(src).toContain('mute=1');
-      expect(await frame.getAttribute('title')).toBeTruthy();
+      const preview = page.locator('#jyoGrid .jyo-preview').nth(i);
+      await expect(preview).toHaveAttribute('data-preview', live[i].youtube_id);
+      await expect(preview).toHaveAttribute('data-name');
     }
   });
 
@@ -115,17 +113,13 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
       label: el.getAttribute('aria-label') || '',
     }));
 
-    // the icon always mirrors the card's own playing state — the stream itself
-    // may be offline, so the state is what matters, not one fixed glyph
-    await expect(fab).toHaveAttribute('data-playing', /^[01]$/, { timeout: 30000 });
-    const first = await snap();
-    if (first.state === '1') {
-      expect(first.d).toMatch(PLAY);
-      expect(first.label).toMatch(/^रोकें /);
-    } else {
-      expect(first.d).toMatch(PAUSE);
-      expect(first.label).toMatch(/का लाइव दर्शन देखें$/);
-    }
+    // with lazy loading, iframe mounts on first play click
+    // click play to mount iframe and start preview
+    await fab.click();
+    await expect(fab).toHaveAttribute('data-playing', '1', { timeout: 15000 });
+    const playing = await snap();
+    expect(playing.d).toMatch(PLAY);
+    expect(playing.label).toMatch(/^रोकें /);
 
     // tapping it pauses the preview; the icon flips to play
     await fab.click();

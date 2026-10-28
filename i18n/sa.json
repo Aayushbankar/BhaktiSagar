@@ -130,6 +130,7 @@
   "footer.location": "स्थानम्",
   "footer.updated": "अद्यतमम्",
   "footer.links": "साइटसम्पर्काः",
+  "footer.visits": "पर्यटनानि: {count}",
 
   "api.unavailable": "API अनुपलब्धम् — कृपया XAMPP/MySQL पश्यतु ।",
   "load.error": "आँकडाः लोडं न कर्तुं शक्नोति ({err}) ।",

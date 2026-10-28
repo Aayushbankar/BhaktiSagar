@@ -492,10 +492,11 @@
   function jyoCardHtml(j, i) {
     var name = jyoName(j);
     var place = jyoPlace(j);
+    var eager = i < 4 ? 'eager' : 'lazy'; // first 4 items load eagerly
     return '<article class="track-card is-jyo" data-jindex="' + i + '">' +
       '<div class="thumb">' +
         '<span class="badge badge-live">' + esc(str('jyo.live')) + '</span>' +
-        '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="lazy" decoding="async">' +
+        '<img src="' + esc(ytThumb(j.youtube_id)) + '" alt="' + esc(name) + '" loading="' + eager + '" decoding="async">' +
         '<div class="jyo-preview" data-preview="' + esc(j.youtube_id) + '" data-name="' + esc(name) + '"></div>' +
         '<button type="button" class="play-fab" data-jtoggle="' + i + '" data-playing="1" aria-label="' +
           esc(str('card.pause') + name) + '">' +
@@ -545,7 +546,27 @@
 
   function mountJyoPreviews() {
     if (!el.jyoGrid) { return; }
-    el.jyoGrid.querySelectorAll('.jyo-preview').forEach(mountJyoPreview);
+    var previews = el.jyoGrid.querySelectorAll('.jyo-preview');
+    if (!previews.length) { return; }
+
+    // Use IntersectionObserver for lazy loading: only mount iframe when in viewport
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          var box = entry.target;
+          if (box.getAttribute('data-mounted') !== '1') {
+            mountJyoPreview(box);
+          }
+          observer.unobserve(box);
+        }
+      });
+    }, { rootMargin: '100px', threshold: 0.1 });
+
+    previews.forEach(function (box) {
+      if (box.getAttribute('data-mounted') !== '1') {
+        observer.observe(box);
+      }
+    });
   }
 
   /**
@@ -779,6 +800,7 @@
       var inSlot = (t.slots || []).indexOf(slotKey) !== -1;
       var playing = state.playing && state.queueIndex >= 0 && state.queue[state.queueIndex] &&
         state.queue[state.queueIndex].slug === t.slug;
+      var eager = i < 4 ? 'eager' : 'lazy';
 
       html += '<article class="track-card' + (playing ? ' is-playing' : '') +
         (routeTrack && t.slug === routeTrack ? ' is-focused' : '') +
@@ -786,7 +808,7 @@
         '<div class="thumb">' +
           '<span class="badge badge-' + esc(t.type) + '">' + esc(typeLabel(t.type)) + '</span>' +
           (t.youtube_id
-            ? '<img src="' + esc(ytThumb(t.youtube_id)) + '" alt="' + esc(trackTitle(t)) + '" loading="lazy" decoding="async">'
+            ? '<img src="' + esc(ytThumb(t.youtube_id)) + '" alt="' + esc(trackTitle(t)) + '" loading="' + eager + '" decoding="async">'
             : '') +
           '<button type="button" class="play-fab" data-play="' + i + '" aria-label="' +
             esc(playing ? str('card.pause') : str('card.play')) + esc(trackTitle(t)) + '">' +
@@ -1515,21 +1537,13 @@ function applyFullscreenUI(isFullscreen) {
     renderQueue();
     state.booted = true;
 
-    var locName = state.location ? cityLabel(state.location, locLang()) : '';
-    var srcLabel = data.source === 'mysql' ? str('footer.mysql') : str('footer.catalog');
-    var panchangSrc = state.panchang
-      ? ' · ' + str('footer.panchang') + ': ' +
-        (state.panchang.source === 'mysql' ? str('footer.mysql') : str('footer.dataset'))
-      : '';
-    el.footerMeta.textContent =
-      str('footer.source') + ': ' + srcLabel +
-      ' · ' + state.tracks.length + ' ' + str('footer.tracks') +
-      panchangSrc +
-      (locName ? ' · ' + str('footer.location') + ': ' + locName : '') +
-      ' · ' + str('footer.updated') + ': ' +
-      (data.generated_at
-        ? new Date(data.generated_at).toLocaleString(lang === 'en' ? 'en-IN' : 'hi-IN')
-        : '–');
+    // Visit counter in footer
+    var visitCount = storeGet('bs.visitCount') || 0;
+    visitCount++;
+    storeSet('bs.visitCount', visitCount);
+    if (el.footerMeta) {
+      el.footerMeta.textContent = str('footer.visits', { count: visitCount });
+    }
   }
 
   function loadSuggest() {

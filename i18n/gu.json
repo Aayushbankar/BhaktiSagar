@@ -130,6 +130,7 @@
   "footer.location": "સ્થાન",
   "footer.updated": "અપડેટ",
   "footer.links": "સાઇટની લિંક્સ",
+  "footer.visits": "મુલાકાતો: {count}",
 
   "api.unavailable": "API ઉપલબ્ધ નથી – કૃપા કરીને XAMPP/MySQL તપાસો.",
   "load.error": "ડેટા લોડ થઈ શક્યો નથી ({err}).",

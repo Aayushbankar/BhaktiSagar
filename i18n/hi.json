@@ -130,6 +130,7 @@
   "footer.location": "स्थान",
   "footer.updated": "अपडेट",
   "footer.links": "साइट के लिंक",
+  "footer.visits": "दौरा: {count}",
 
   "api.unavailable": "API अनुपलब्ध – कृपया XAMPP/MySQL जाँचें।",
   "load.error": "डेटा लोड नहीं हो सका ({err})।",

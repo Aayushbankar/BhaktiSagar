@@ -130,6 +130,7 @@
   "footer.location": "place",
   "footer.updated": "updated",
   "footer.links": "Site links",
+  "footer.visits": "Visits: {count}",
 
   "api.unavailable": "API unavailable – please check XAMPP/MySQL.",
   "load.error": "The data could not be loaded ({err}).",
