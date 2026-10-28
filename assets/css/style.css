@@ -506,11 +506,31 @@ a { color: var(--maroon); }
 .play-fab:hover { transform: scale(1.08); background: var(--saffron); color: #fff; }
 .track-card.is-playing .play-fab { transform: scale(1.08); background: var(--saffron); color: #fff; }
 
+.fullscreen-fab {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 2;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  border: none;
+  display: grid;
+  place-items: center;
+  background: rgba(255,255,255,.94);
+  color: var(--maroon);
+  box-shadow: 0 6px 16px rgba(0,0,0,.28);
+  transition: transform .15s ease, background .15s ease;
+}
+.fullscreen-fab svg { width: 20px; height: 20px; fill: currentColor; }
+.fullscreen-fab:hover { transform: scale(1.08); background: var(--saffron); color: #fff; }
+
 /* Mobile jyotirlinga cards */
 @media (max-width: 480px) {
   .jyo-preview iframe { pointer-events: auto; } /* allow touch to play on mobile */
   .play-fab { width: 56px; height: 56px; right: 12px; bottom: 12px; }
   .play-fab svg { width: 28px; height: 28px; }
+  .fullscreen-fab { width: 48px; height: 48px; left: 12px; bottom: 12px; }
+  .fullscreen-fab svg { width: 24px; height: 24px; }
   .badge-live { font-size: .75rem; padding: 4px 10px; }
 }
 

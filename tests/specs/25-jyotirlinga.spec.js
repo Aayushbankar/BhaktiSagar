@@ -38,17 +38,19 @@ test.describe('ज्योतिर्लिंग लाइव दर्शन
       expect(await img.getAttribute('alt')).toBeTruthy();
     }
 
-    // every card autoplays its own stream, muted, straight from page load
-    await expect(page.locator('#jyoGrid .jyo-preview iframe'))
-      .toHaveCount(live.length, { timeout: 30000 });
-    for (let i = 0; i < live.length; i += 1) {
-      const frame = page.locator('#jyoGrid .jyo-preview iframe').nth(i);
-      const src = await frame.getAttribute('src');
-      expect(src).toContain(`/embed/${live[i].youtube_id}`);
-      expect(src).toContain('autoplay=1');
-      expect(src).toContain('mute=1');
-      expect(await frame.getAttribute('title')).toBeTruthy();
-    }
+    // iframes are lazy-loaded on user interaction (play/fullscreen click)
+    // initially no iframes should be present
+    await expect(page.locator('#jyoGrid .jyo-preview iframe')).toHaveCount(0);
+
+    // clicking play button on first card should lazy-load its iframe
+    await page.locator('#jyoGrid [data-jtoggle]').first().click();
+    await expect(page.locator('#jyoGrid .jyo-preview iframe')).toHaveCount(1, { timeout: 30000 });
+    const frame = page.locator('#jyoGrid .jyo-preview iframe').first();
+    const src = await frame.getAttribute('src');
+    expect(src).toContain(`/embed/${live[0].youtube_id}`);
+    expect(src).toContain('autoplay=1');
+    expect(src).toContain('mute=1');
+    expect(await frame.getAttribute('title')).toBeTruthy();
   });
 
   test('clicking a darshan loads it into the player queue', async ({ page, request }) => {

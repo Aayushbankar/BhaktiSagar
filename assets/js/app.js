@@ -501,6 +501,10 @@
           esc(str('card.pause') + name) + '">' +
           playGlyph(true) +
         '</button>' +
+        '<button type="button" class="fullscreen-fab" data-jfs="' + i + '" aria-label="' +
+          esc(str('player.fullscreen') + ' ' + name) + '">' +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>' +
+        '</button>' +
       '</div>' +
       '<div class="track-body">' +
         '<h3 class="track-title">' + esc(name) + '</h3>' +
@@ -662,7 +666,7 @@
       var html = '';
       items.forEach(function (j, i) { html += jyoCardHtml(j, i); });
       el.jyoGrid.innerHTML = html;
-      mountJyoPreviews();
+      // NOTE: mountJyoPreviews() removed — iframes now load lazily on user interaction
     }
     updateJyoPlaying();
   }
@@ -788,6 +792,12 @@
             esc(playing ? str('card.pause') : str('card.play')) + esc(trackTitle(t)) + '">' +
             playGlyph(playing) +
           '</button>' +
+          (t.youtube_id
+            ? '<button type="button" class="fullscreen-fab" data-track-fs="' + i + '" aria-label="' +
+              esc(str('player.fullscreen') + ' ' + trackTitle(t)) + '">' +
+              '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>' +
+            '</button>'
+            : '') +
         '</div>' +
         '<div class="track-body">' +
           '<h3 class="track-title">' + esc(trackTitle(t)) + '</h3>' +
@@ -1176,6 +1186,18 @@ function applyFullscreenUI(isFullscreen) {
       }
     });
 
+    el.trackGrid.addEventListener('click', function (e) {
+      var fsBtn = e.target.closest('[data-track-fs]');
+      if (fsBtn) {
+        var index = parseInt(fsBtn.getAttribute('data-track-fs'), 10);
+        var t = state.filtered[index];
+        if (t && t.youtube_id) {
+          // open in new tab at fullscreen
+          window.open('https://www.youtube.com/embed/' + t.youtube_id + '?autoplay=1&fs=1', '_blank');
+        }
+      }
+    });
+
     el.specialGrid.addEventListener('click', function (e) {
       var btn = e.target.closest('[data-splay]');
       if (!btn) { return; }
@@ -1197,10 +1219,37 @@ function applyFullscreenUI(isFullscreen) {
         var card = toggle.closest('.track-card');
         var box = card && card.querySelector('.jyo-preview');
         if (box) {
+          // lazy-load iframe if not already mounted
+          if (box.getAttribute('data-mounted') !== '1') {
+            mountJyoPreview(box);
+          }
           var resume = toggle.getAttribute('data-playing') !== '1';
           box.setAttribute('data-pending', resume ? '1' : '0');
           setPreviewPlaying(box, resume);
           jyoPreviewBoxCommand(box, resume ? 'playVideo' : 'pauseVideo');
+        }
+        return;
+      }
+      // fullscreen button for individual jyotirlinga card
+      var fsBtn = e.target.closest('[data-jfs]');
+      if (fsBtn) {
+        var card = fsBtn.closest('.track-card');
+        var box = card && card.querySelector('.jyo-preview');
+        if (box) {
+          // lazy-load iframe if not already mounted
+          if (box.getAttribute('data-mounted') !== '1') {
+            mountJyoPreview(box);
+          }
+          var frame = box.querySelector('iframe');
+          if (frame && frame.requestFullscreen) {
+            frame.requestFullscreen();
+          } else if (frame && frame.webkitRequestFullscreen) {
+            frame.webkitRequestFullscreen();
+          } else if (frame && frame.mozRequestFullScreen) {
+            frame.mozRequestFullScreen();
+          } else if (frame && frame.msRequestFullscreen) {
+            frame.msRequestFullscreen();
+          }
         }
         return;
       }
