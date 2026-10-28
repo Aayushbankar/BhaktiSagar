@@ -1525,12 +1525,13 @@ function applyFullscreenUI(isFullscreen) {
     renderQueue();
     state.booted = true;
 
-    // Visit counter in footer
+    // Visit counter + copyright in footer
     var visitCount = storeGet('bs.visitCount') || 0;
     visitCount++;
     storeSet('bs.visitCount', visitCount);
     if (el.footerMeta) {
-      el.footerMeta.textContent = str('footer.visits', { count: visitCount });
+      var year = new Date().getFullYear();
+      el.footerMeta.textContent = str('footer.visits', { count: visitCount }) + ' · ' + str('footer.copyright', { year: year });
     }
   }
 

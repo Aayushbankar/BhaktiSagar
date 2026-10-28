@@ -131,6 +131,7 @@
   "footer.updated": "અપડેટ",
   "footer.links": "સાઇટની લિંક્સ",
   "footer.visits": "મુલાકાતો: {count}",
+  "footer.copyright": "© {year} ભક્તિ સાગર. સર્વ અધિકારો સુરક્ષિત.",
 
   "api.unavailable": "API ઉપલબ્ધ નથી – કૃપા કરીને XAMPP/MySQL તપાસો.",
   "load.error": "ડેટા લોડ થઈ શક્યો નથી ({err}).",

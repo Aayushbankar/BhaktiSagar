@@ -131,6 +131,7 @@
   "footer.updated": "अपडेट",
   "footer.links": "साइट के लिंक",
   "footer.visits": "दौरा: {count}",
+  "footer.copyright": "© {year} भक्ति सागर। सर्वाधिकार सुरक्षित।",
 
   "api.unavailable": "API अनुपलब्ध – कृपया XAMPP/MySQL जाँचें।",
   "load.error": "डेटा लोड नहीं हो सका ({err})।",
