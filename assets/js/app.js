@@ -666,7 +666,7 @@
       var html = '';
       items.forEach(function (j, i) { html += jyoCardHtml(j, i); });
       el.jyoGrid.innerHTML = html;
-      // NOTE: mountJyoPreviews() removed — iframes now load lazily on user interaction
+      mountJyoPreviews(); // auto-mount iframes so they autoplay (muted) on page load
     }
     updateJyoPlaying();
   }
