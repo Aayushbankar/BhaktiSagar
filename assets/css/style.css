@@ -527,6 +527,10 @@ a { color: var(--maroon); }
 /* Mobile jyotirlinga cards */
 @media (max-width: 480px) {
   .jyo-preview iframe { pointer-events: auto; } /* allow touch to play on mobile */
+  .track-card.is-jyo .play-fab,
+  .track-card.is-jyo .fullscreen-fab {
+    display: none; /* hide buttons on mobile so they don't overlay the video */
+  }
   .play-fab { width: 56px; height: 56px; right: 12px; bottom: 12px; }
   .play-fab svg { width: 28px; height: 28px; }
   .fullscreen-fab { width: 48px; height: 48px; left: 12px; bottom: 12px; }
