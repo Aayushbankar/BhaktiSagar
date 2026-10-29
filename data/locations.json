@@ -1,0 +1,28 @@
+{
+  "default": "new-delhi",
+  "locations": [
+    { "key": "new-delhi",   "name_hi": "नई दिल्ली",       "name_en": "New Delhi",       "country_hi": "भारत",            "country_en": "India",         "lat": 28.6139,  "lng": 77.2090,  "elevation": 216, "timezone": "Asia/Kolkata" },
+    { "key": "mumbai",      "name_hi": "मुंबई",            "name_en": "Mumbai",          "country_hi": "भारत",            "country_en": "India",         "lat": 19.0760,  "lng": 72.8777,  "elevation": 14,  "timezone": "Asia/Kolkata" },
+    { "key": "kolkata",     "name_hi": "कोलकाता",          "name_en": "Kolkata",         "country_hi": "भारत",            "country_en": "India",         "lat": 22.5726,  "lng": 88.3639,  "elevation": 9,   "timezone": "Asia/Kolkata" },
+    { "key": "chennai",     "name_hi": "चेन्नई",           "name_en": "Chennai",         "country_hi": "भारत",            "country_en": "India",         "lat": 13.0827,  "lng": 80.2707,  "elevation": 6,   "timezone": "Asia/Kolkata" },
+    { "key": "bengaluru",   "name_hi": "बेंगलुरु",         "name_en": "Bengaluru",       "country_hi": "भारत",            "country_en": "India",         "lat": 12.9716,  "lng": 77.5946,  "elevation": 920, "timezone": "Asia/Kolkata" },
+    { "key": "varanasi",    "name_hi": "वाराणसी",          "name_en": "Varanasi",        "country_hi": "भारत",            "country_en": "India",         "lat": 25.3176,  "lng": 82.9739,  "elevation": 80,  "timezone": "Asia/Kolkata" },
+    { "key": "kathmandu",   "name_hi": "काठमांडू",         "name_en": "Kathmandu",       "country_hi": "नेपाल",           "country_en": "Nepal",         "lat": 27.7172,  "lng": 85.3240,  "elevation": 1400,"timezone": "Asia/Kathmandu" },
+    { "key": "colombo",     "name_hi": "कोलंबो",           "name_en": "Colombo",         "country_hi": "श्रीलंका",         "country_en": "Sri Lanka",     "lat": 6.9271,   "lng": 79.8612,  "elevation": 7,   "timezone": "Asia/Colombo" },
+    { "key": "dhaka",       "name_hi": "ढाका",             "name_en": "Dhaka",           "country_hi": "बांग्लादेश",       "country_en": "Bangladesh",    "lat": 23.8103,  "lng": 90.4125,  "elevation": 33,  "timezone": "Asia/Dhaka" },
+    { "key": "singapore",   "name_hi": "सिंगापुर",         "name_en": "Singapore",       "country_hi": "सिंगापुर",         "country_en": "Singapore",     "lat": 1.3521,   "lng": 103.8198, "elevation": 15,  "timezone": "Asia/Singapore" },
+    { "key": "kualalumpur", "name_hi": "कुआलालंपुर",       "name_en": "Kuala Lumpur",    "country_hi": "मलेशिया",          "country_en": "Malaysia",      "lat": 3.1390,   "lng": 101.6869, "elevation": 56,  "timezone": "Asia/Kuala_Lumpur" },
+    { "key": "denpasar",    "name_hi": "देनपसार (बाली)",   "name_en": "Denpasar (Bali)", "country_hi": "इंडोनेशिया",       "country_en": "Indonesia",     "lat": -8.6500,  "lng": 115.2167, "elevation": 4,   "timezone": "Asia/Makassar" },
+    { "key": "dubai",       "name_hi": "दुबई",             "name_en": "Dubai",           "country_hi": "संयुक्त अरब अमीरात","country_en": "UAE",           "lat": 25.2048,  "lng": 55.2708,  "elevation": 5,   "timezone": "Asia/Dubai" },
+    { "key": "london",      "name_hi": "लंदन",             "name_en": "London",          "country_hi": "ब्रिटेन",          "country_en": "United Kingdom","lat": 51.5074,  "lng": -0.1278,  "elevation": 11,  "timezone": "Europe/London" },
+    { "key": "new-york",    "name_hi": "न्यूयॉर्क",        "name_en": "New York",        "country_hi": "अमेरिका",          "country_en": "USA",           "lat": 40.7128,  "lng": -74.0060, "elevation": 10,  "timezone": "America/New_York" },
+    { "key": "chicago",     "name_hi": "शिकागो",           "name_en": "Chicago",         "country_hi": "अमेरिका",          "country_en": "USA",           "lat": 41.8781,  "lng": -87.6298, "elevation": 181, "timezone": "America/Chicago" },
+    { "key": "los-angeles", "name_hi": "लॉस एंजिल्स",      "name_en": "Los Angeles",     "country_hi": "अमेरिका",          "country_en": "USA",           "lat": 34.0522,  "lng": -118.2437,"elevation": 71,  "timezone": "America/Los_Angeles" },
+    { "key": "toronto",     "name_hi": "टोरंटो",           "name_en": "Toronto",         "country_hi": "कनाडा",            "country_en": "Canada",        "lat": 43.6532,  "lng": -79.3832, "elevation": 76,  "timezone": "America/Toronto" },
+    { "key": "sydney",      "name_hi": "सिडनी",            "name_en": "Sydney",          "country_hi": "ऑस्ट्रेलिया",       "country_en": "Australia",     "lat": -33.8688, "lng": 151.2093, "elevation": 19,  "timezone": "Australia/Sydney" },
+    { "key": "auckland",    "name_hi": "ऑकलैंड",           "name_en": "Auckland",        "country_hi": "न्यूज़ीलैंड",       "country_en": "New Zealand",   "lat": -36.8485, "lng": 174.7633, "elevation": 22,  "timezone": "Pacific/Auckland" },
+    { "key": "suva",        "name_hi": "सुवा (फ़िजी)",      "name_en": "Suva (Fiji)",     "country_hi": "फ़िजी",            "country_en": "Fiji",          "lat": -18.1416, "lng": 178.4419, "elevation": 5,   "timezone": "Pacific/Fiji" },
+    { "key": "port-louis",  "name_hi": "पोर्ट-लुई",        "name_en": "Port Louis",      "country_hi": "मॉरीशस",           "country_en": "Mauritius",     "lat": -20.1609, "lng": 57.5012,  "elevation": 43,  "timezone": "Indian/Mauritius" },
+    { "key": "durban",      "name_hi": "डरबन",             "name_en": "Durban",          "country_hi": "दक्षिण अफ्रीका",     "country_en": "South Africa",  "lat": -29.8587, "lng": 31.0218,  "elevation": 22,  "timezone": "Africa/Johannesburg" }
+  ]
+}

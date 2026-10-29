@@ -1,0 +1,1852 @@
+{
+    "ok": true,
+    "slots": [
+        {
+            "key": "brahma",
+            "label_hi": "ब्रह्म मुहूर्त",
+            "label_en": "Brahma Muhurta",
+            "range": "4:00 AM – 6:00 AM",
+            "from": 240,
+            "to": 360
+        },
+        {
+            "key": "pratah",
+            "label_hi": "प्रातः काल",
+            "label_en": "Morning",
+            "range": "6:00 AM – 11:00 AM",
+            "from": 360,
+            "to": 660
+        },
+        {
+            "key": "divas",
+            "label_hi": "दिवस",
+            "label_en": "Day time",
+            "range": "11:00 AM – 4:00 PM",
+            "from": 660,
+            "to": 960
+        },
+        {
+            "key": "sandhya",
+            "label_hi": "संध्या समय",
+            "label_en": "Evening",
+            "range": "4:00 PM – 7:00 PM",
+            "from": 960,
+            "to": 1140
+        },
+        {
+            "key": "aarti",
+            "label_hi": "संध्या आरती",
+            "label_en": "Evening Aarti",
+            "range": "7:00 PM – 9:00 PM",
+            "from": 1140,
+            "to": 1260
+        },
+        {
+            "key": "ratri",
+            "label_hi": "रात्रि",
+            "label_en": "Night",
+            "range": "9:00 PM – 4:00 AM",
+            "from": 1260,
+            "to": 240
+        }
+    ],
+    "tracks": [
+        {
+            "slug": "gayatri-mantra-108",
+            "title_hi": "गायत्री मंत्र – 108 बार",
+            "title_en": "Gayatri Mantra (108 times)",
+            "title_gu": "ગાયત્રી મંત્ર – 108 બાર",
+            "type": "shloka",
+            "deity": "गायत्री / सूर्य देव",
+            "singer": "वैदिक जाप",
+            "youtube_id": "Z8C0WKUsWM8",
+            "slots": [
+                "brahma",
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "mantra,vedic,morning,108",
+            "blurb": "तीनों लोक को प्रकाशित करने वाला ऋग्वेद का परम गायत्री मंत्र।",
+            "sort_order": 10,
+            "lyrics": 1
+        },
+        {
+            "slug": "mahamrityunjaya-mantra-108",
+            "title_hi": "महामृत्युंजय मंत्र – 108 बार",
+            "title_en": "Mahamrityunjaya Mantra (108 times)",
+            "title_gu": "મહામૃત્યુંજય મંત્ર – 108 બાર",
+            "type": "shloka",
+            "deity": "भगवान शिव",
+            "singer": "शंकर साहनी",
+            "youtube_id": "adyjwFgXRNY",
+            "slots": [
+                "brahma",
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "mantra,shiv,healing,protection",
+            "blurb": "आयु, आरोग्य और मोक्ष का प्रार्थना मंत्र – संध्या एवं प्रातः जाप हेतु।",
+            "sort_order": 20,
+            "lyrics": 1
+        },
+        {
+            "slug": "shiva-tandava-stotram",
+            "title_hi": "शिव तांडव स्तोत्रम्",
+            "title_en": "Shiva Tandava Stotram",
+            "title_gu": "શિવ તાંડવ સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "भगवान शिव",
+            "singer": "संस्कृत स्तोत्र",
+            "youtube_id": "0cliGYrmz48",
+            "slots": [
+                "pratah",
+                "divas",
+                "ratri"
+            ],
+            "tags": "stotra,shiv,sanskrit,tandava",
+            "blurb": "रावण द्वारा रचित शिव की तांडव लीला का दिव्य स्तोत्र।",
+            "sort_order": 30,
+            "lyrics": 0
+        },
+        {
+            "slug": "shiv-amritwani",
+            "title_hi": "शिव अमृतवाणी",
+            "title_en": "Shiv Amritwani",
+            "title_gu": "શિવ અમૃતવાણી",
+            "type": "shloka",
+            "deity": "भगवान शिव",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "kYFriF5zHMM",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "stotra,shiv,om namah shivaya,amritwani",
+            "blurb": "ॐ नमः शिवाय से युक्त शिव स्तुति का संपूर्ण पाठ।",
+            "sort_order": 40,
+            "lyrics": 0
+        },
+        {
+            "slug": "hanuman-chalisa",
+            "title_hi": "श्री हनुमान चालीसा",
+            "title_en": "Shri Hanuman Chalisa",
+            "title_gu": "શ્રી હનુમાન ચાલીસા",
+            "type": "bhajan",
+            "deity": "हनुमान जी",
+            "singer": "हरिहरन, गुलशन कुमार",
+            "youtube_id": "AETFvQonfV8",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "chalisa,hanuman,tulsidas,tuesday",
+            "blurb": "गोस्वामी तुलसीदास रचित – संकट हरने वाला चालीसा पाठ।",
+            "sort_order": 50,
+            "lyrics": 0
+        },
+        {
+            "slug": "achyutam-keshavam",
+            "title_hi": "अच्युतम केशवम कृष्ण दामोदरम",
+            "title_en": "Achyutam Keshavam Krishna Damodaram",
+            "title_gu": "અચ્યુતમ કેશવમ કૃષ્ણ દામોદરમ",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "लोकप्रिय कृष्ण भजन",
+            "youtube_id": "ACnkL2u3XTM",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "krishna,bhajan,devotion",
+            "blurb": "कान्हा की दया और लीला का मधुर स्मरण कराने वाला भजन।",
+            "sort_order": 60,
+            "lyrics": 2
+        },
+        {
+            "slug": "raghupati-raghav-raja-ram",
+            "title_hi": "रघुपति राघव राजा राम",
+            "title_en": "Raghupati Raghav Raja Ram (Ram Dhun)",
+            "title_gu": "રઘુપતિ રાઘવ રાજા રામ",
+            "type": "bhajan",
+            "deity": "श्री राम",
+            "singer": "पालक मुच्छल",
+            "youtube_id": "XybXCDs6UD0",
+            "slots": [
+                "brahma",
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "ram,bhajan,ramdhun,morning",
+            "blurb": "महात्मा गांधी का प्रिय राम धुन – प्रातः स्मरण हेतु।",
+            "sort_order": 70,
+            "lyrics": 3
+        },
+        {
+            "slug": "vaishnav-jan-to",
+            "title_hi": "वैष्णव जन तो तेने कहिये",
+            "title_en": "Vaishnava Jana To Tene Kahiye",
+            "title_gu": "વૈષ્ણવ જન તો તેને કહિયે",
+            "type": "bhajan",
+            "deity": "श्री विष्णु",
+            "singer": "नरसैंया मेहता (प्रभातीय)",
+            "youtube_id": "rRSLEohu7MA",
+            "slots": [
+                "brahma",
+                "pratah"
+            ],
+            "tags": "bhajan,prabhatiya,gandhi,gujarati",
+            "blurb": "संत नरसैय्यो का आदर्श भक्त का चित्रण करने वाला प्रसिद्ध भजन।",
+            "sort_order": 80,
+            "lyrics": 4
+        },
+        {
+            "slug": "krishna-govind-hare-murari",
+            "title_hi": "श्री कृष्ण गोविंद हरे मुरारी",
+            "title_en": "Shri Krishna Govind Hare Murari",
+            "title_gu": "શ્રી કૃષ્ણ ગોવિંદ હરે મુરારી",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "लोकप्रिय कृष्ण भजन",
+            "youtube_id": "ne3Mjg1M-Uo",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "krishna,bhajan,peaceful",
+            "blurb": "नाथ नारायण वासुदेव का मधुर स्मरण – शांति और भक्ति हेतु।",
+            "sort_order": 90,
+            "lyrics": 3
+        },
+        {
+            "slug": "jai-ganesh-deva",
+            "title_hi": "जय गणेश जय गणेश देवा",
+            "title_en": "Jai Ganesh Jai Ganesh Deva (Ganesh Aarti)",
+            "title_gu": "જય ગણેશ જય ગણેશ દેવા",
+            "type": "aarti",
+            "deity": "श्री गणेश",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "Yuex2EnsGiY",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,ganesh,mangal,vinayak",
+            "blurb": "विघ्नहर्ता गणपति बाप्पा की सबसे लोकप्रिय आरती।",
+            "sort_order": 100,
+            "lyrics": 4
+        },
+        {
+            "slug": "om-jai-jagdish-hare-lata",
+            "title_hi": "ओम जय जगदीश हरे",
+            "title_en": "Om Jai Jagdish Hare (Lata Mangeshkar)",
+            "title_gu": "ઓમ જય જગદીશ હરે",
+            "type": "aarti",
+            "deity": "भगवान विष्णु",
+            "singer": "लता मंगेशकर",
+            "youtube_id": "H_9JanyPGso",
+            "slots": [
+                "aarti",
+                "ratri"
+            ],
+            "tags": "aarti,vishnu,evening,shej",
+            "blurb": "संध्या और शयन काल की विष्णु आरती – मधुर लता स्वर में।",
+            "sort_order": 110,
+            "lyrics": 7
+        },
+        {
+            "slug": "om-jai-jagdish-hare-anuradha",
+            "title_hi": "ओम जय जगदीश हरे (आरती)",
+            "title_en": "Om Jai Jagdish Hare Aarti (Anuradha Paudwal)",
+            "title_gu": "ઓમ જય જગદીશ હરે (આરતી)",
+            "type": "aarti",
+            "deity": "भगवान विष्णु",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "3ucCEjXS9n8",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,vishnu,evening",
+            "blurb": "सायंकालीन आरती संग्रह की सबसे सुनी जाने वाली विष्णु आरती।",
+            "sort_order": 120,
+            "lyrics": 7
+        },
+        {
+            "slug": "om-jai-shiv-omkara",
+            "title_hi": "ओम जय शिव ओमकारा",
+            "title_en": "Om Jai Shiv Omkara (Shiv Aarti)",
+            "title_gu": "ઓમ જય શિવ ઓમકારા",
+            "type": "aarti",
+            "deity": "भगवान शिव",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "BhwOproElxU",
+            "slots": [
+                "pratah",
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "aarti,shiv,monday,somwar",
+            "blurb": "सोमवार और संध्या की शिव आरती – ब्रह्मा विष्णु सदाशिव स्वरूप।",
+            "sort_order": 130,
+            "lyrics": 5
+        },
+        {
+            "slug": "jai-ambe-gauri",
+            "title_hi": "जय अम्बे गौरी",
+            "title_en": "Jai Ambe Gauri (Durga Aarti)",
+            "title_gu": "જય અમ્બે ગૌરી",
+            "type": "aarti",
+            "deity": "माँ दुर्गा",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "RY1jmTTjvhI",
+            "slots": [
+                "pratah",
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,durga,navratri,mata",
+            "blurb": "नवरात्रि और प्रतिदिन की माता रानी की प्रसिद्ध आरती।",
+            "sort_order": 140,
+            "lyrics": 4
+        },
+        {
+            "slug": "om-jai-lakshmi-mata",
+            "title_hi": "ओम जय लक्ष्मी माता",
+            "title_en": "Om Jai Lakshmi Mata (Lakshmi Aarti)",
+            "title_gu": "ઓમ જય લક્ષ્મી માતા",
+            "type": "aarti",
+            "deity": "माँ लक्ष्मी",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "SyqgAt-T0iQ",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,lakshmi,diwali,shukravar",
+            "blurb": "धन और समृद्धि की अधिष्ठात्री माँ लक्ष्मी की आरती।",
+            "sort_order": 150,
+            "lyrics": 4
+        },
+        {
+            "slug": "aarti-kunj-bihari-ki",
+            "title_hi": "आरती कुंज बिहारी की",
+            "title_en": "Aarti Kunj Bihari Ki (Krishna Aarti)",
+            "title_gu": "આરતી કુંજ બિહારી કી",
+            "type": "aarti",
+            "deity": "श्री कृष्ण",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "v8Hasz1MlHo",
+            "slots": [
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "aarti,krishna,banke bihari,evening",
+            "blurb": "श्री गिरधर कृष्ण मुरारी की संध्या आरती – बृंदावन धुन।",
+            "sort_order": 160,
+            "lyrics": 4
+        },
+        {
+            "slug": "aarti-kije-hanuman-lala-ki",
+            "title_hi": "आरती कीजै हनुमान लला की",
+            "title_en": "Aarti Kije Hanuman Lala Ki",
+            "title_gu": "આરતી કીજૈ હનુમાન લલા કી",
+            "type": "aarti",
+            "deity": "हनुमान जी",
+            "singer": "शेमारू भक्ति",
+            "youtube_id": "-2MUR3CG5ak",
+            "slots": [
+                "pratah",
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "aarti,hanuman,tulsidas,mangal",
+            "blurb": "तुलसीदास द्वारा रचित हनुमान जी की आरती – संकट विनाशक।",
+            "sort_order": 170,
+            "lyrics": 5
+        },
+        {
+            "slug": "mahadev-shankar-hain",
+            "title_hi": "महादेव शंकर हैं जग से निराले",
+            "title_en": "Mahadev Shankar Hain Jag Se Nirale",
+            "title_gu": "મહાદેવ શંકર હૈં જગ સે નિરાલે",
+            "type": "bhajan",
+            "deity": "भगवान शिव",
+            "singer": "हरिहरन, गुलशन कुमार",
+            "youtube_id": "ivj1IlpAmI4",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya"
+            ],
+            "tags": "shiv,bhajan,somwar,monday,savan",
+            "blurb": "सोमवार व सावन का प्रसिद्ध शिव भजन – महादेव की महिमा का गान।",
+            "sort_order": 180,
+            "lyrics": 2
+        },
+        {
+            "slug": "bajrang-baan",
+            "title_hi": "बजरंग बाण",
+            "title_en": "Bajrang Baan",
+            "title_gu": "બજરંગ બાણ",
+            "type": "bhajan",
+            "deity": "हनुमान जी",
+            "singer": "हरिहरन, गुलशन कुमार",
+            "youtube_id": "ZMJkjmPEdWc",
+            "slots": [
+                "pratah",
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "hanuman,bajrangbaan,mangal,shanivar,vrat",
+            "blurb": "संकट और भय नाश करने वाला बजरंगबली का बाण – मंगलवार/शनिवार पाठ हेतु।",
+            "sort_order": 190,
+            "lyrics": 0
+        },
+        {
+            "slug": "sankat-mochan-hanuman-ashtak",
+            "title_hi": "संकटमोचन हनुमान अष्टक",
+            "title_en": "Sankat Mochan Hanuman Ashtak",
+            "title_gu": "સંકટમોચન હનુમાન અષ્ટક",
+            "type": "bhajan",
+            "deity": "हनुमान जी",
+            "singer": "हरिहरन",
+            "youtube_id": "HH_a6aRO1TE",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "hanuman,ashtak,mangal,shanivar,stotra",
+            "blurb": "संकटमोचन अष्टक – तुलसीदास द्वारा रचित हनुमान जी की आठ पंक्तियों की स्तुति।",
+            "sort_order": 200,
+            "lyrics": 0
+        },
+        {
+            "slug": "ganesh-amritwani",
+            "title_hi": "श्री गणेश अमृतवाणी",
+            "title_en": "Shri Ganesh Amritwani",
+            "title_gu": "શ્રી ગણેશ અમૃતવાણી",
+            "type": "shloka",
+            "deity": "श्री गणेश",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "-TEKQCS2kd8",
+            "slots": [
+                "pratah",
+                "divas"
+            ],
+            "tags": "ganesh,amritwani,budhvar,wednesday,stotra",
+            "blurb": "गणेश जी के संपूर्ण स्तोत्र-मंत्रों का अमृतमयी पाठ – बुधवार शुभ।",
+            "sort_order": 210,
+            "lyrics": 0
+        },
+        {
+            "slug": "vishnu-amritwani",
+            "title_hi": "श्री विष्णु अमृतवाणी",
+            "title_en": "Shree Vishnu Amritwani",
+            "title_gu": "શ્રી વિષ્ણુ અમૃતવાણી",
+            "type": "shloka",
+            "deity": "भगवान विष्णु",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "d4vXx4fqwVs",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya"
+            ],
+            "tags": "vishnu,amritwani,guruvar,thursday,stotra",
+            "blurb": "विष्णु सहस्त्रनाम व स्तोत्रों का संपूर्ण पाठ – गुरुवार व एकादशी शुभ।",
+            "sort_order": 220,
+            "lyrics": 0
+        },
+        {
+            "slug": "mere-ghar-aao-lakshmi-maa",
+            "title_hi": "मेरे घर आओ लक्ष्मी माँ",
+            "title_en": "Mere Ghar Aao Lakshmi Maa",
+            "title_gu": "મેરે ઘર આઓ લક્ષ્મી માઁ",
+            "type": "bhajan",
+            "deity": "माँ लक्ष्मी",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "5JMFiNOxejY",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "lakshmi,shukravar,diwali,friday",
+            "blurb": "धन-समृद्धि की कामना से माँ लक्ष्मी को घर बुलाने का मधुर भजन – शुक्रवार/दिवाली।",
+            "sort_order": 230,
+            "lyrics": 3
+        },
+        {
+            "slug": "shanaishwara-shani-bhajan",
+            "title_hi": "शनैश्वर शनैश्वर",
+            "title_en": "Shanaishwara Shanaishwara (Shani Bhajan)",
+            "title_gu": "શનૈશ્વર શનૈશ્વર",
+            "type": "bhajan",
+            "deity": "शनि देव",
+            "singer": "अनुराधा पौडवाल, हरिहरन",
+            "youtube_id": "7MhfQOgWMyc",
+            "slots": [
+                "pratah",
+                "divas"
+            ],
+            "tags": "shani,shanivar,saturday,bhajan",
+            "blurb": "शनि देव की कृपा का वरदान मांगने वाला प्रसिद्ध शनैश्वर भजन – शनिवार शुभ।",
+            "sort_order": 240,
+            "lyrics": 0
+        },
+        {
+            "slug": "ram-chandra-kripalu-bhajman",
+            "title_hi": "श्री रामचंद्र कृपालु भजमन",
+            "title_en": "Shri Ram Chandra Kripalu Bhajman (Ram Stuti)",
+            "title_gu": "શ્રી રામચંદ્ર કૃપાલુ ભજમન",
+            "type": "bhajan",
+            "deity": "श्री राम",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "_nGygyx1UJk",
+            "slots": [
+                "brahma",
+                "pratah"
+            ],
+            "tags": "ram,stuti,ravivar,ram-navami,morning",
+            "blurb": "तुलसीदास की राम स्तुति – प्रातः स्मरण एवं राम आराधना का प्रिय पाठ।",
+            "sort_order": 250,
+            "lyrics": 4
+        },
+        {
+            "slug": "ram-aarti-raghuvir",
+            "title_hi": "आरती कीजै श्री रघुवर जी की",
+            "title_en": "Ram Aarti – Aarti Kije Shri Raghuvar Ji Ki",
+            "title_gu": "આરતી કીજૈ શ્રી રઘુવર જી કી",
+            "type": "aarti",
+            "deity": "श्री राम",
+            "singer": "वैशाली सामंत",
+            "youtube_id": "BoOs7cBxd6k",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,ram,ravivar,ram-navami,evening",
+            "blurb": "श्री रघुवर जी की सायंकालीन आरती – रविवार व राम नवमी पर विशेष।",
+            "sort_order": 260,
+            "lyrics": 3
+        },
+        {
+            "slug": "surya-aarti-om-jai-surya",
+            "title_hi": "सूर्य आरती – ओम जय सूर्य भगवान",
+            "title_en": "Surya Aarti – Om Jai Surya Bhagwan",
+            "title_gu": "સૂર્ય આરતી – ઓમ જય સૂર્ય ભગવાન",
+            "type": "aarti",
+            "deity": "सूर्य देव",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "F9uURnkc8iA",
+            "slots": [
+                "brahma",
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "aarti,surya,ravivar,chhath,sandhya",
+            "blurb": "सूर्य देव को अर्पित आरती – रविवार, छठ व ब्रह्म मुहूर्त में शुभ।",
+            "sort_order": 270,
+            "lyrics": 2
+        },
+        {
+            "slug": "sukh-karta-dukh-harta",
+            "title_hi": "सुखकर्ता दुःखहर्ता (गणपती आरती)",
+            "title_en": "Sukh Karta Dukh Harta (Ganpati Aarti)",
+            "title_gu": "સુખકર્તા દુઃખહર્તા (ગણપતી આરતી)",
+            "type": "aarti",
+            "deity": "श्री गणेश",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "UlLAxTVT1Qk",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,ganesh,ganesh-chaturthi,mangal",
+            "blurb": "गणपति बाप्पा की मराठी प्रसिद्ध आरती – गणेश चतुर्थी का प्राण।",
+            "sort_order": 280,
+            "lyrics": 3
+        },
+        {
+            "slug": "durga-chalisa",
+            "title_hi": "श्री दुर्गा चालीसा",
+            "title_en": "Shri Durga Chalisa",
+            "title_gu": "શ્રી દુર્ગા ચાલીસા",
+            "type": "shloka",
+            "deity": "माँ दुर्गा",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "RQTXD23-JLg",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "durga,navratri,chalisa,mata,vrat",
+            "blurb": "माँ दुर्गा की शक्ति का गायन करने वाला चालीसा – नवरात्रि में विशेध पाठ।",
+            "sort_order": 290,
+            "lyrics": 0
+        },
+        {
+            "slug": "shiv-stuti-ashutosh",
+            "title_hi": "शिव स्तुति (आशुतोष शशाँक शेखर)",
+            "title_en": "Shiv Stuti – Ashutosh Shashank Shekhar",
+            "title_gu": "શિવ સ્તુતિ (આશુતોષ શશાઁક શેખર)",
+            "type": "bhajan",
+            "deity": "भगवान शिव",
+            "singer": "सोनू निगम",
+            "youtube_id": "33U6rtJQJ-g",
+            "slots": [
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "shiv,stuti,shivaratri,jagran,night",
+            "blurb": "शिवरात्रि जागरण की प्रसिद्ध स्तुति – शंकर शशाँक शेखर का गुणगान।",
+            "sort_order": 300,
+            "lyrics": 0
+        },
+        {
+            "slug": "govind-bolo-hari-gopal-bolo",
+            "title_hi": "गोविंद बोलो हरि गोपाल बोलो",
+            "title_en": "Govind Bolo Hari Gopal Bolo Dhun",
+            "title_gu": "ગોવિંદ બોલો હરિ ગોપાલ બોલો",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "वैशाली सामंत",
+            "youtube_id": "xeYzjXEP9Mc",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya"
+            ],
+            "tags": "krishna,ekadashi,dhun,vrat",
+            "blurb": "नाम-संकीर्तन की प्रसिद्ध धुन – एकादशी व्रत व कीर्तन में अत्यंत प्रिय।",
+            "sort_order": 310,
+            "lyrics": 2
+        },
+        {
+            "slug": "ekadashi-special-bhajans",
+            "title_hi": "एकादशी स्पेशल भजन संग्रह",
+            "title_en": "Ekadashi Special Bhajans (Collection)",
+            "title_gu": "એકાદશી સ્પેશલ ભજન સંગ્રહ",
+            "type": "bhajan",
+            "deity": "भगवान विष्णु",
+            "singer": "टी-सीरीज़ भक्ति सागर",
+            "youtube_id": "bK4z7Xuz53k",
+            "slots": [
+                "divas",
+                "sandhya"
+            ],
+            "tags": "ekadashi,vrat,vishnu,krishna,collection",
+            "blurb": "एकादशी पर्व का विशेष भजन-आरती संग्रह – व्रत कथा व कीर्तन हेतु।",
+            "sort_order": 320,
+            "lyrics": 0
+        },
+        {
+            "slug": "rang-dare-kanhaiya",
+            "title_hi": "रंग डारे कन्हैया रंग डारे",
+            "title_en": "Rang Daare Kanhaiya Rang Daare (Holi Geet)",
+            "title_gu": "રંગ ડારે કન્હૈયા રંગ ડારે",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "लखबीर सिंह लक्खा",
+            "youtube_id": "6lJyO9VnljM",
+            "slots": [
+                "divas"
+            ],
+            "tags": "holi,krishna,raslila,festival",
+            "blurb": "होली के रंगों में रंगे कन्हैया का प्रसिद्ध होली गीत।",
+            "sort_order": 330,
+            "lyrics": 1
+        },
+        {
+            "slug": "om-jai-shri-krishna-bhajan",
+            "title_hi": "ओम जय श्री कृष्ण",
+            "title_en": "Om Jai Shri Krishna Bhajan",
+            "title_gu": "ઓમ જય શ્રી કૃષ્ણ",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "sKpcFJ8Q6YE",
+            "slots": [
+                "divas",
+                "sandhya"
+            ],
+            "tags": "krishna,janmashtami,bhajan,radha",
+            "blurb": "कृष्ण जन्मोत्सव व रासलीला का मधुर भजन – जन्माष्टमी पर शुभ।",
+            "sort_order": 340,
+            "lyrics": 4
+        },
+        {
+            "slug": "kaanch-hi-baans-ke-bahangiya",
+            "title_hi": "काँच ही बाँस के बहंगिया",
+            "title_en": "Kaanch Hi Baans Ke Bahangiya (Chhath Geet)",
+            "title_gu": "કાઁચ હી બાઁસ કે બહંગિયા",
+            "type": "bhajan",
+            "deity": "छठी मैया व सूर्य देव",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "Eyq7vfxu4iA",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "chhath,surya,vrat,bhojpuri",
+            "blurb": "छठ पूजा का सर्वाधिक लोकप्रिय गीत – अर्घ्य व उषा काल हेतु।",
+            "sort_order": 350,
+            "lyrics": 1
+        },
+        {
+            "slug": "uga-hai-suraj-dev",
+            "title_hi": "उग्स हे सूरज देव",
+            "title_en": "Uga Hai Suraj Dev (Chhath Geet)",
+            "title_gu": "ઉગ્સ હે સૂરજ દેવ",
+            "type": "bhajan",
+            "deity": "सूर्य देव व छठी मैया",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "6e6Hp6R5SVU",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "chhath,surya,vrat,arghya",
+            "blurb": "सूर्योदय के साथ अर्घ्य देने का छठ गीत – सूर्य देव का आह्वान।",
+            "sort_order": 360,
+            "lyrics": 1
+        },
+        {
+            "slug": "karwa-chauth-maiya-jab-tak",
+            "title_hi": "मैया जब तक जीऊँ मैं सुहागन जीऊँ",
+            "title_en": "Maiya Jab Tak Jiyun Main Suhagan Jiyun (Karwa Chauth)",
+            "title_gu": "મૈયા જબ તક જીઊઁ મૈં સુહાગન જીઊઁ",
+            "type": "bhajan",
+            "deity": "माँ पार्वती",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "2RJvjuHNirU",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "karwachauth,vrat,mata,chandra",
+            "blurb": "करवा चौथ का सुहागिनों का प्रसिद्ध व्रत गीत – चंद्र दर्शन हेतु।",
+            "sort_order": 370,
+            "lyrics": 1
+        },
+        {
+            "slug": "devon-ke-guru-brihaspti",
+            "title_hi": "देवों के गुरु बृहस्पति",
+            "title_en": "Devon Ke Guru Brihaspti (Guru Bhajan)",
+            "title_gu": "દેવોં કે ગુરુ બૃહસ્પતિ",
+            "type": "bhajan",
+            "deity": "गुरु बृहस्पति",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "joYtHNy484E",
+            "slots": [
+                "pratah"
+            ],
+            "tags": "guru,guru-purnima,bhajan",
+            "blurb": "गुरु महिमा का गायन – गुरु पूर्णिमा पर गुरु-वंदना हेतु।",
+            "sort_order": 380,
+            "lyrics": 2
+        },
+        {
+            "slug": "guru-purnima-special",
+            "title_hi": "गुरु पूर्णिमा स्पेशल (गुरुर ब्रह्मा गुरुर विष्णु…)",
+            "title_en": "Guru Purnima Special Bhajans (Gurur Brahma Guru Vishnu)",
+            "title_gu": "ગુરુ પૂર્ણિમા સ્પેશલ (ગુરુર બ્રહ્મા ગુરુર વિષ્ણુ…)",
+            "type": "bhajan",
+            "deity": "गुरु तत्त्व",
+            "singer": "विभिन्न कलाकार",
+            "youtube_id": "_hx3CoFj5sw",
+            "slots": [
+                "pratah",
+                "divas"
+            ],
+            "tags": "guru,guru-purnima,stotra,kabir,vrat",
+            "blurb": "गुरु वंदना व कबीर अमृतवाणी सहित गुरु पूर्णिमा का भक्ति संग्रह।",
+            "sort_order": 390,
+            "lyrics": 3
+        },
+        {
+            "slug": "saraswati-vandana-ya-kundendu",
+            "title_hi": "या कुंदेन्दु तुषारहार धवला",
+            "title_en": "Ya Kundendu Tusharahara Dhavala (Saraswati Vandana)",
+            "title_gu": "યા કુંદેન્દુ તુષારહાર ધવલા",
+            "type": "shloka",
+            "deity": "माँ सरस्वती",
+            "singer": "राजश्री सोल",
+            "youtube_id": "DySzqHwNCxU",
+            "slots": [
+                "brahma",
+                "pratah"
+            ],
+            "tags": "saraswati,vidya,vasant-panchami,morning,mantra",
+            "blurb": "विद्या की अधिष्ठात्री माँ सरस्वती का प्रातः वंदन – वसंत पंचमी पर शुभ।",
+            "sort_order": 400,
+            "lyrics": 1
+        },
+        {
+            "slug": "ram-raksha-stotram",
+            "title_hi": "श्री राम रक्षा स्तोत्रम्",
+            "title_en": "Shri Ram Raksha Stotram",
+            "title_gu": "શ્રી રામ રક્ષા સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "श्री राम",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "-_axSlApc98",
+            "slots": [
+                "pratah",
+                "ratri"
+            ],
+            "tags": "ram,stotra,protection,ravivar,night",
+            "blurb": "बुधकोश द्वारा रचित रक्षास्तोत्र – सुरक्षा व श्रीराम कृपा का पाठ।",
+            "sort_order": 410,
+            "lyrics": 0
+        },
+        {
+            "slug": "vakratunda-mahakaya",
+            "title_hi": "वक्रतुंड महाकाय श्लोक",
+            "title_en": "Vakratunda Mahakaya Shloka (Ganesh)",
+            "title_gu": "વક્રતુંડ મહાકાય શ્લોક",
+            "type": "shloka",
+            "deity": "श्री गणेश",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "HQFquex8brQ",
+            "slots": [
+                "brahma",
+                "pratah",
+                "divas"
+            ],
+            "tags": "ganesh,shloka,mantra,morning,brahmamuhurta",
+            "blurb": "दिन का आरंभ करने वाला विघ्नहर्ता गणेश का प्रसिद्ध श्लोक – सभी कार्यों में मंगल की कामना।",
+            "sort_order": 420,
+            "lyrics": 0
+        },
+        {
+            "slug": "shiva-panchakshari-stotram",
+            "title_hi": "श्री शिव पंचाक्षर स्तोत्रम्",
+            "title_en": "Shri Shiv Panchakshari Stotram",
+            "title_gu": "શ્રી શિવ પંચાક્ષર સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "भगवान शिव",
+            "singer": "रमेशभाई ओझा",
+            "youtube_id": "4GwtuXPsqLw",
+            "slots": [
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "shiva,stotra,evening,night,namah,shankaracharya",
+            "blurb": "नगेन्द्र हराय त्रिलोचनाय से आरंभ होने वाला शंकराचार्य का पंचाक्षर स्तोत्र।",
+            "sort_order": 430,
+            "lyrics": 0
+        },
+        {
+            "slug": "aditya-hridayam-stotram",
+            "title_hi": "आदित्य हृदय स्तोत्रम्",
+            "title_en": "Aditya Hridayam Stotram",
+            "title_gu": "આદિત્ય હૃદય સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "सूर्य देव",
+            "singer": "शास्त्री बंधु",
+            "youtube_id": "EnMNC2cx5qw",
+            "slots": [
+                "brahma",
+                "pratah"
+            ],
+            "tags": "surya,stotra,ramayana,morning,brahmamuhurta,courage",
+            "blurb": "रामायण में अगस्त्य ऋषि द्वारा श्रीराम को सुनाया गया सूर्य स्तोत्र – साहस व ऊर्जा के लिए।",
+            "sort_order": 440,
+            "lyrics": 0
+        },
+        {
+            "slug": "purusha-suktam",
+            "title_hi": "पुरुष सूक्तम्",
+            "title_en": "Purusha Suktam",
+            "title_gu": "પુરુષ સૂક્તમ્",
+            "type": "shloka",
+            "deity": "विष्णु / पुरुष",
+            "singer": "राजश्री सोल",
+            "youtube_id": "r10RxUayVEQ",
+            "slots": [
+                "brahma",
+                "pratah"
+            ],
+            "tags": "vedic,purusha,morning,brahmamuhurta,shloka,yajurved",
+            "blurb": "यजुर्वेद का प्रमुख सूक्त – सृष्टि व परमात्मा की स्तुति, पूजा-पाठ का आदर्श पाठ।",
+            "sort_order": 450,
+            "lyrics": 0
+        },
+        {
+            "slug": "kanakadhara-stotram",
+            "title_hi": "कनकधारा स्तोत्रम्",
+            "title_en": "Kanakadhara Stotram",
+            "title_gu": "કનકધારા સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "माँ लक्ष्मी",
+            "singer": "एम. एस. सुब्बुलक्ष्मी",
+            "youtube_id": "Q_kNJc1Dw9U",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "lakshmi,stotra,thursday,morning,evening,prosperity",
+            "blurb": "आदि शंकराचार्य द्वारा रचित माँ लक्ष्मी का स्तोत्र – समृद्धि व कृपा की कामना।",
+            "sort_order": 460,
+            "lyrics": 0
+        },
+        {
+            "slug": "bhagavad-gita-sampurna",
+            "title_hi": "श्रीमद्भगवद्गीता – सम्पूर्ण पाठ",
+            "title_en": "Shrimad Bhagavad Gita – Complete Recitation",
+            "title_gu": "શ્રીમદ્ભગવદ્ગીતા – સમ્પૂર્ણ પાઠ",
+            "type": "shloka",
+            "deity": "श्री कृष्ण",
+            "singer": "डॉ. विद्याभूषण",
+            "youtube_id": "tZxnilHN8EE",
+            "slots": [
+                "pratah",
+                "divas",
+                "ratri"
+            ],
+            "tags": "gita,krishna,recitation,all-day,night,knowledge",
+            "blurb": "अठारों अध्यायों का सम्पूर्ण श्रवण-पाठ – ज्ञान और शांति के लिए दिनभर का संग।",
+            "sort_order": 470,
+            "lyrics": 0
+        },
+        {
+            "slug": "vishnu-sahasranamam",
+            "title_hi": "विष्णु सहस्रनाम",
+            "title_en": "Vishnu Sahasranamam",
+            "title_gu": "વિષ્ણુ સહસ્રનામ",
+            "type": "shloka",
+            "deity": "भगवान विष्णु",
+            "singer": "एम. एस. सुब्बुलक्ष्मी",
+            "youtube_id": "ATflA6WOy0I",
+            "slots": [
+                "pratah",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "vishnu,stotra,thursday,night,peace,protection",
+            "blurb": "विष्णु के एक हजार नामों का पाठ – शांति, समृद्धि और रक्षा के लिए।",
+            "sort_order": 480,
+            "lyrics": 0
+        },
+        {
+            "slug": "sankat-nashan-ganesh-stotram",
+            "title_hi": "संकटनाशन गणेश स्तोत्र",
+            "title_en": "Sankat Nashan Ganesh Stotram",
+            "title_gu": "સંકટનાશન ગણેશ સ્તોત્ર",
+            "type": "shloka",
+            "deity": "श्री गणेश",
+            "singer": "द आर्ट ऑफ लिविंग",
+            "youtube_id": "2rA2YMX-4L0",
+            "slots": [
+                "pratah",
+                "divas"
+            ],
+            "tags": "ganesh,stotra,morning,obstacle-removal,sankasht",
+            "blurb": "संकट नाशन गणेश स्तोत्र – विघ्नों के नाश और मनोकामना पूर्ति का पाठ।",
+            "sort_order": 490,
+            "lyrics": 0
+        },
+        {
+            "slug": "ashtalakshmi-stotram",
+            "title_hi": "अष्टलक्ष्मी स्तोत्रम्",
+            "title_en": "Ashtalakshmi Stotram",
+            "title_gu": "અષ્ટલક્ષ્મી સ્તોત્રમ્",
+            "type": "shloka",
+            "deity": "माँ लक्ष्मी",
+            "singer": "महागथा",
+            "youtube_id": "PLLEU9XUxw0",
+            "slots": [
+                "pratah",
+                "sandhya"
+            ],
+            "tags": "lakshmi,stotra,friday,morning,wealth,prosperity",
+            "blurb": "आठ रूपों वाली माँ लक्ष्मी की स्तुति – धन, ऐश्वर्य व समृद्धि के लिए।",
+            "sort_order": 500,
+            "lyrics": 0
+        },
+        {
+            "slug": "saraswati-aarti-om-jai-saraswati",
+            "title_hi": "ॐ जय सरस्वती माता (सरस्वती आरती)",
+            "title_en": "Om Jai Saraswati Mata (Saraswati Aarti)",
+            "title_gu": "ૐ જય સરસ્વતી માતા (સરસ્વતી આરતી)",
+            "type": "aarti",
+            "deity": "माँ सरस्वती",
+            "singer": "शिमरू भक्ति",
+            "youtube_id": "OXXnM3T83t4",
+            "slots": [
+                "brahma",
+                "pratah",
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,saraswati,vidya,basant-panchami,morning,evening",
+            "blurb": "विद्या व वीणावादिनी माँ सरस्वती की आरती – प्रातः पूजा और वसंत पंचमी पर विशेष।",
+            "sort_order": 510,
+            "lyrics": 0
+        },
+        {
+            "slug": "ganga-aarti-jai-gange",
+            "title_hi": "ॐ जय गंगे माता (गंगा आरती)",
+            "title_en": "Om Jai Gange Mata (Ganga Aarti)",
+            "title_gu": "ૐ જય ગંગે માતા (ગંગા આરતી)",
+            "type": "aarti",
+            "deity": "माँ गंगा",
+            "singer": "संजीवनी भेलंदे",
+            "youtube_id": "v1wNPND1-Rg",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,ganga,evening,pradosh,varanasi",
+            "blurb": "पतित पावनी माँ गंगा की आरती – संध्या के समय घाटों पर गाई जाने वाली प्रसिद्ध आरती।",
+            "sort_order": 520,
+            "lyrics": 0
+        },
+        {
+            "slug": "shani-aarti-jai-jai-shani-dev",
+            "title_hi": "जय जय शनि देव (शनि आरती)",
+            "title_en": "Jai Jai Shani Dev (Shani Aarti)",
+            "title_gu": "જય જય શનિ દેવ (શનિ આરતી)",
+            "type": "aarti",
+            "deity": "शनि देव",
+            "singer": "राजश्री सोल",
+            "youtube_id": "42fouuhg9Pw",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,shani,shanivar,saturday,evening",
+            "blurb": "शनिदेव की आरती – शनिवार को विशेष फलदायी, शनि कृपा व शुभ फल की कामना।",
+            "sort_order": 530,
+            "lyrics": 0
+        },
+        {
+            "slug": "ambe-tu-hai-jagdambe-aarti",
+            "title_hi": "आरती अम्बे तू है जगदम्बे",
+            "title_en": "Ambe Tu Hai Jagdambe Kali (Aarti)",
+            "title_gu": "આરતી અમ્બે તૂ હૈ જગદમ્બે",
+            "type": "aarti",
+            "deity": "माँ दुर्गा",
+            "singer": "अनुराधा पौडवाल",
+            "youtube_id": "p3kwaGPwgN4",
+            "slots": [
+                "sandhya",
+                "aarti"
+            ],
+            "tags": "aarti,shakti,durga,navratri,navami,evening",
+            "blurb": "जगदम्बा माँ की आरती – नवरात्रि व नवमी पर विशेष पाठ।",
+            "sort_order": 540,
+            "lyrics": 0
+        },
+        {
+            "slug": "radhe-krishna-radhe-krishna",
+            "title_hi": "राधे कृष्ण राधे कृष्ण",
+            "title_en": "Radhe Krishna Radhe Krishna (Krishna Bhajan)",
+            "title_gu": "રાધે કૃષ્ણ રાધે કૃષ્ણ",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "योगी वॉइस",
+            "youtube_id": "VdMhTcNTQyc",
+            "slots": [
+                "divas",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "bhajan,krishna,radha,kirtan,night,holi",
+            "blurb": "राधे-कृष्ण नाम का मधुर कीर्तन – दोपहर से रात तक बजाने योग्य।",
+            "sort_order": 550,
+            "lyrics": 0
+        },
+        {
+            "slug": "hare-rama-hare-krishna-dhun",
+            "title_hi": "हरे राम हरे कृष्ण धुन",
+            "title_en": "Hare Rama Hare Krishna Dhun (Kirtan)",
+            "title_gu": "હરે રામ હરે કૃષ્ણ ધુન",
+            "type": "bhajan",
+            "deity": "श्री कृष्ण",
+            "singer": "सनातन म्यूज़िक",
+            "youtube_id": "5eiPAzxCWn0",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya",
+                "ratri"
+            ],
+            "tags": "kirtan,mahamantra,krishna,iskcon,all-day,chanting",
+            "blurb": "महामंत्र हरे राम हरे कृष्ण का कीर्तन-धुन – दिन के हर समय।",
+            "sort_order": 560,
+            "lyrics": 0
+        },
+        {
+            "slug": "om-namah-shivaya-dhun",
+            "title_hi": "ॐ नमः शिवाय धुन",
+            "title_en": "Om Namah Shivaya Dhun (Shiv Dhuni)",
+            "title_gu": "ૐ નમઃ શિવાય ધુન",
+            "type": "bhajan",
+            "deity": "भगवान शिव",
+            "singer": "शिमरू भक्ति",
+            "youtube_id": "E1I_05xu-ro",
+            "slots": [
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "dhun,shiva,evening,night,meditation,shankaracharya",
+            "blurb": "ॐ नमः शिवाय महामंत्र की शांत धुन – संध्या व रात्रि कीर्तन के लिए।",
+            "sort_order": 570,
+            "lyrics": 0
+        },
+        {
+            "slug": "namo-namo-namoh-namoh",
+            "title_hi": "नमो नमो (शिव भजन)",
+            "title_en": "Namo Namo (Namoh Namoh Shiva Bhajan)",
+            "title_gu": "નમો નમો (શિવ ભજન)",
+            "type": "bhajan",
+            "deity": "भगवान शिव",
+            "singer": "डेलर मेहंदी",
+            "youtube_id": "dONWrZoR0Fc",
+            "slots": [
+                "pratah",
+                "divas",
+                "sandhya"
+            ],
+            "tags": "bhajan,shiva,mahashivratri,devotional,morning",
+            "blurb": "शंकर भगवान के नाम का ओजपूर्ण भजन – महाशिवरात्रि की शोभायात्रा के लिए।",
+            "sort_order": 580,
+            "lyrics": 0
+        },
+        {
+            "slug": "jai-jai-shiv-shankar",
+            "title_hi": "जय जय शिव शंकर",
+            "title_en": "Jai Jai Shiv Shankar (Mahadev Bhajan)",
+            "title_gu": "જય જય શિવ શંકર",
+            "type": "bhajan",
+            "deity": "भगवान शिव",
+            "singer": "मंत्र भजन भक्ति",
+            "youtube_id": "AfqPZSMEkvA",
+            "slots": [
+                "divas",
+                "sandhya",
+                "aarti",
+                "ratri"
+            ],
+            "tags": "bhajan,shiva,har-har-mahadev,evening,night,aarti",
+            "blurb": "शिव की जयकार से ओतप्रोत लोकप्रिय भजन – भंडारे व आरती में गाया जाने वाला पाठ।",
+            "sort_order": 590,
+            "lyrics": 0
+        }
+    ],
+    "shlokas": [
+        {
+            "key": "gayatri",
+            "sanskrit": "ॐ भूर्भुवः स्वः तत्सवितुर्वरेण्यं भर्गो देवस्य धीमहि धियो यो नः प्रचोदयात्॥",
+            "translit": "Om Bhur Bhuva Swaha, Tat Savitur Varenyam, Bhargo Devasya Dheemahi, Dhiyo Yo Nah Prachodayat",
+            "source": "ऋग्वेद ३.६२.१० – गायत्री मंत्र",
+            "meaning_hi": "हे परमात्मा! हम आपके तेज का ध्यान करते हैं। वह दिव्य प्रकाश हमारी बुद्धि को सन्मार्ग पर प्रेरित करे।"
+        },
+        {
+            "key": "mahamrityunjaya",
+            "sanskrit": "ॐ त्र्यम्बकं यजामहे सुगन्धिं पुष्टिवर्धनम्। उर्वारुकमिव बन्धनान्मृत्योर्मुक्षीय मामृतात्॥",
+            "translit": "Om Tryambakam Yajamahe Sugandhim Pushti-Vardhanam, Urvarukamiva Bandhanan Mrityor Mukshiya Maamritat",
+            "source": "ऋग्वेद ७.५९.१२ – महामृत्युंजय मंत्र",
+            "meaning_hi": "हम त्रिनेत्रधारी शिव की आराधना करते हैं; वे हमें मृत्यु के बंधन से मुक्त करें, अमृतस्वरूप से दूर न करें।"
+        },
+        {
+            "key": "pavamana",
+            "sanskrit": "ॐ असतो मा सद्गमय तमसो मा ज्योतिर्गमय मृत्योर्मा अमृतं गमय॥",
+            "translit": "Om Asato Ma Sadgamaya, Tamaso Ma Jyotirgamaya, Mrityor Ma Amritam Gamaya",
+            "source": "बृहदारण्यक उपनिषद् १.३.२८ – पवमान मंत्र",
+            "meaning_hi": "मुझे असत्य से सत्य की ओर, अंधकार से प्रकाश की ओर और मृत्यु से अमृत की ओर ले चलो।"
+        },
+        {
+            "key": "karma",
+            "sanskrit": "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन। मा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
+            "translit": "Karmanyevadhikaraste Ma Faleshu Kadachana, Ma Karmaphalahetur Bhur Ma Te Sango'stvakarmani",
+            "source": "भगवद्गीता २.४७",
+            "meaning_hi": "तुम्हारा अधिकार केवल कर्म में है, फल में कभी नहीं। फल की इच्छा कभी तुम्हारी प्रेरणा न बने।"
+        },
+        {
+            "key": "yada-yada",
+            "sanskrit": "यदा यदा हि धर्मस्य ग्लानिर्भवति भारत। अभ्युत्थानमधर्मस्य तदात्मानं सृजाम्यहम्॥",
+            "translit": "Yada Yada Hi Dharmasya Glanirbhavati Bharata, Abhyutthanamadharmasya Tadatmanam Srijamyaham",
+            "source": "भगवद्गीता ४.७",
+            "meaning_hi": "जब-जब धर्म की हानि होती है और अधर्म बढ़ता है, तब-तब मैं स्वयं को प्रकट करता हूँ।"
+        },
+        {
+            "key": "twam-eva",
+            "sanskrit": "त्वमेव माता च पिता त्वमेव, त्वमेव बन्धुः च सखा त्वमेव। त्वमेव विद्या द्रविणं त्वमेव, त्वमेव सर्वं मम देव देव॥",
+            "translit": "Twamewa Mata Cha Pita Twamewa, Twamewa Bandhu Cha Sakha Twamewa",
+            "source": "स्कन्द पुराण – त्वमेव माता",
+            "meaning_hi": "हे देवों के देव! आप ही माता-पिता, बंधु और मित्र हैं; आप ही विद्या और धन हैं, आप ही मेरे सर्वस्व हैं।"
+        },
+        {
+            "key": "vakra-tundya",
+            "sanskrit": "वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ। निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा॥",
+            "translit": "Vakratunda Mahakaya Suryakoti Samaprabha, Nirvighnam Kuru Me Deva Sarvakaryeshu Sarvada",
+            "source": "गणेश प्रार्थना",
+            "meaning_hi": "हे विघ्नहर्ता गणेश! आप विशालकाय और करोड़ों सूर्य के समान तेजस्वी हैं – सभी कार्यों में मेरा मंगल करें।"
+        },
+        {
+            "key": "shiva-tandava-first",
+            "sanskrit": "जटाटवीगलज्जलप्रवाहपावितस्थले गलेवलम्ब्य लम्बितां भुजङ्गतुङ्गमालिकाम्॥",
+            "translit": "Jatavigalajjala Pravahapavitasthale Galevalambya Lamitam Bhujangatungamalikam",
+            "source": "शिव तांडव स्तोत्रम् – प्रथम श्लोक",
+            "meaning_hi": "गंगा की जटाओं से बहते जल से पवित्र गले में लटके नाग की दीर्घ माला को धारण करने वाले शिव की स्तुति।"
+        },
+        {
+            "key": "sahana-vavatu",
+            "sanskrit": "ॐ सह नाववतु सह नौ भुनक्तु सह वीर्यं करवावहै। तेजस्वि नावधीतमस्तु मा विद्विषावहै॥",
+            "translit": "Om Saha Navavatu Saha Nau Bhunaktu, Saha Viryam Karavavahai",
+            "source": "तैत्तिरीय उपनिषद् – शांति पाठ",
+            "meaning_hi": "हम दोनों (गुरु और शिष्य) की रक्षा करें, हमें पोषण दें, साथ मिलकर सामर्थ्य प्राप्त करें – हममें द्वेष न हो।"
+        },
+        {
+            "key": "mangalam",
+            "sanskrit": "मंगलं भगवान् विष्णुः मंगलं गरुड़ध्वजः। मंगलं पुण्डरीकाक्षः मंगलाय तनो हरिः॥",
+            "translit": "Mangalam Bhagawan Vishnuh, Mangalam Garudadhvajah, Mangalam Pundarikakshah, Mangalaya Tano Harih",
+            "source": "विष्णु मंगल स्तोत्र",
+            "meaning_hi": "भगवान विष्णु, गरुड़ध्वज और कमलनेत्र भगवान हमारा कल्याण करें – सब शुभ हो।"
+        },
+        {
+            "key": "sarve-bhavantu",
+            "sanskrit": "ॐ सर्वे भवन्तु सुखिनः सर्वे सन्तु निरामयाः। सर्वे भद्राणि पश्यन्तु मा कश्चिद्दुःखभाग्भवेत्॥",
+            "translit": "Om Sarve Bhavantu Sukhinah Sarve Santu Niramayah, Sarve Bhadrani Pashyantu Ma Kashcidduhkhabhagbhavet",
+            "source": "बृहदारण्यक उपनिषद् – शांति मंत्र",
+            "meaning_hi": "सभी सुखी हों, सभी रोगमुक्त रहें, सभी मंगलमय दर्शन करें और किसी को भी दुःख का भागी न बनना पड़े।"
+        },
+        {
+            "key": "namami-shamishan",
+            "sanskrit": "ॐ नमः शिवाय… शिवाय शंकराय च मेघवर्णाय च शान्ताय च शिवाय च हरये च शंकराय च॥",
+            "translit": "Om Namah Shivaya – Shivaya Shankaraya Cha",
+            "source": "शिव पञ्चाक्षर महामंत्र",
+            "meaning_hi": "शिव, शंकर, मेघवर्ण, शांत और हरि को नमस्कार – पञ्चाक्षर मंत्र का जाप हर दिन शांति देता है।"
+        },
+        {
+            "key": "sarva-dharman",
+            "sanskrit": "सर्वधर्मान्परित्यज्यमामेकं शरणं व्रज। अहं त्वां सर्वपापेभ्यो मोक्षयिष्यामि मा शुचः॥",
+            "translit": "Sarva Dharman Parityajya Mam Ekam Sharanam Vraja, Aham Tvam Sarva Papebhyo Mokshayishyami Ma Shuchah",
+            "source": "भगवद्गीता १८.६६",
+            "meaning_hi": "सभी धर्मों को छोड़कर केवल मेरी शरण में आओ – मैं तुम्हें सभी पापों से मुक्त कर दूँगा, शोक न करो।"
+        },
+        {
+            "key": "matri-sparshas",
+            "sanskrit": "मात्रास्पर्शास्तु कौन्तेय शीतोष्णसुखदुःखदाः। आगमापायिनोऽनित्यास्तांस्तितिक्षस्व भारत॥",
+            "translit": "Matra Sparshas Tu Kaunteya Shitoshna Sukha Dukhadah, Agamapayino Nityas Tams Titikshasva Bharata",
+            "source": "भगवद्गीता २.१४",
+            "meaning_hi": "हे कौन्तेय! स्पर्श (छूने का अनुभव) शीत-उष्ण, सुख-दुःख देने वाले हैं – वे आते-जाते रहने वाले हैं, उन्हें सहन करो।"
+        },
+        {
+            "key": "na-jayate-mriyate",
+            "sanskrit": "न जायते म्रियते वाकदाचिन्नायं भूत्वा भविता वा न भूयः। अजो नित्यः शाश्वतोऽयं पुराणो न हन्यते हन्यमाने शरीरे॥",
+            "translit": "Na Jayate Mriyate Va Kadachin Na Ayam Bhutva Bhavita Va Na Bhuyah, Ajo Nityah Shashvato Ayam Purano Na Hanyate Hanyamane Sharire",
+            "source": "भगवद्गीता २.२०",
+            "meaning_hi": "आत्मा कभी जन्म नहीं लेता और न मरता है – यह अजन्मा, नित्य, शाश्वत और पुरातन है; शरीर नष्ट होने पर भी इसका नाश नहीं होता।"
+        },
+        {
+            "key": "om-purnamadah",
+            "sanskrit": "ॐ पूर्णमदः पूर्णमिदं पूर्णात्पूर्णमुदच्यते। पूर्णस्य पूर्णमादाय पूर्णमेवावशिष्यते॥",
+            "translit": "Om Purnamadah Purnamidam Purnat Purnamudachyate, Purnasya Purnamadaya Purnamevavashishyate",
+            "source": "ईश उपनिषद् – शांति पाठ",
+            "meaning_hi": "वह पूर्ण है, यह भी पूर्ण है; पूर्ण से ही पूर्ण की उत्पत्ति होती है – पूर्ण में से पूर्ण निकालने पर भी पूर्ण ही शेष रहता है।"
+        },
+        {
+            "key": "uddhared-atmanatmanam",
+            "sanskrit": "उद्धरेदात्मनात्मानं नात्मानमवसादयेत्। आत्मैव ह्यात्मनो बन्धुरात्मैव रिपुरात्मनः॥",
+            "translit": "Uddhared Atmanatmanam Na Atmanam Avasadayet, Atmaiva Hyatmano Bandhur Atmaiva Ripur Atmanah",
+            "source": "भगवद्गीता ६.५",
+            "meaning_hi": "मनुष्य को स्वयं को अपने द्वारा ऊँचा उठाना चाहिए, अपने को गिराना नहीं चाहिए – आत्मा ही आत्मा का मित्र है और आत्मा ही शत्रु।"
+        }
+    ],
+    "day_rules": [
+        {
+            "rule_type": "var",
+            "match_val": "sun",
+            "priority": 1,
+            "badge_hi": "रविवार – राम व सूर्य आराधना",
+            "note_hi": "रविवार को श्रीराम और सूर्य देव की आराधना विशेष फलदायी मानी जाती है।",
+            "track_slugs": "raghupati-raghav-raja-ram,gayatri-mantra-108,vaishnav-jan-to,ram-chandra-kripalu-bhajman,ram-aarti-raghuvir,surya-aarti-om-jai-surya,ram-raksha-stotram,aditya-hridayam-stotram,purusha-suktam"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "mon",
+            "priority": 1,
+            "badge_hi": "सोमवार – शिव आराधना",
+            "note_hi": "सोमवार भगवान शिव को समर्पित है – रुद्राभिषेक एवं शिव स्तुति विशेष फलदायी।",
+            "track_slugs": "om-jai-shiv-omkara,shiv-amritwani,mahamrityunjaya-mantra-108,mahadev-shankar-hain,shiva-panchakshari-stotram,om-namah-shivaya-dhun,namo-namo-namoh-namoh,jai-jai-shiv-shankar"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "tue",
+            "priority": 1,
+            "badge_hi": "मंगलवार – हनुमान जी",
+            "note_hi": "मंगलवार बजरंगबली की आराधना का दिन है – चालीसा, बजरंग बाण एवं अष्टक पाठ संकट हरता है।",
+            "track_slugs": "hanuman-chalisa,aarti-kije-hanuman-lala-ki,bajrang-baan,sankat-mochan-hanuman-ashtak"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "wed",
+            "priority": 1,
+            "badge_hi": "बुधवार – गणेश व विद्या आराधना",
+            "note_hi": "बुधवार श्री गणेश को समर्पित है – विघ्नहर्ता की आरती एवं विद्या-सरस्वती आरंभ शुभ।",
+            "track_slugs": "jai-ganesh-deva,gayatri-mantra-108,ganesh-amritwani,sukh-karta-dukh-harta,saraswati-vandana-ya-kundendu,vakratunda-mahakaya,sankat-nashan-ganesh-stotram,saraswati-aarti-om-jai-saraswati"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "thu",
+            "priority": 1,
+            "badge_hi": "गुरुवार – विष्णु/कृष्ण आराधना",
+            "note_hi": "गुरुवार भगवान विष्णु और श्रीकृष्ण की आराधना का विशेष दिन है।",
+            "track_slugs": "om-jai-jagdish-hare-lata,achyutam-keshavam,krishna-govind-hare-murari,vishnu-amritwani,govind-bolo-hari-gopal-bolo,kanakadhara-stotram,vishnu-sahasranamam,ashtalakshmi-stotram,radhe-krishna-radhe-krishna,hare-rama-hare-krishna-dhun"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "fri",
+            "priority": 1,
+            "badge_hi": "शुक्रवार – लक्ष्मी व दुर्गा आराधना",
+            "note_hi": "शुक्रवार माँ लक्ष्मी और दुर्गा देवी को समर्पित है – सौभाग्य व शक्ति का दिन।",
+            "track_slugs": "om-jai-lakshmi-mata,jai-ambe-gauri,mere-ghar-aao-lakshmi-maa,kanakadhara-stotram,ashtalakshmi-stotram,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "var",
+            "match_val": "sat",
+            "priority": 1,
+            "badge_hi": "शनिवार – शनि व हनुमान कृपा",
+            "note_hi": "शनिवार शनि देव और हनुमान जी की कृपा का दिन माना जाता है।",
+            "track_slugs": "hanuman-chalisa,aarti-kije-hanuman-lala-ki,mahamrityunjaya-mantra-108,shanaishwara-shani-bhajan,bajrang-baan,sankat-mochan-hanuman-ashtak,shani-aarti-jai-jai-shani-dev"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "ekadashi",
+            "priority": 2,
+            "badge_hi": "एकादशी – विष्णु व्रत",
+            "note_hi": "एकादशी पर भगवान विष्णु/कृष्ण का व्रत और कीर्तन विशेध फलदायी है।",
+            "track_slugs": "achyutam-keshavam,om-jai-jagdish-hare-anuradha,krishna-govind-hare-murari,govind-bolo-hari-gopal-bolo,ekadashi-special-bhajans,vishnu-amritwani,vishnu-sahasranamam,hare-rama-hare-krishna-dhun"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "dwadashi",
+            "priority": 2,
+            "badge_hi": "द्वादशी – विष्णु आराधना",
+            "note_hi": "द्वादशी पर विष्णु सहस्त्रनाम एवं आरती का विशेध महत्व है।",
+            "track_slugs": "om-jai-jagdish-hare-lata,vaishnav-jan-to,vishnu-amritwani"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "pradosh",
+            "priority": 2,
+            "badge_hi": "प्रदोष काल – शिव पूजा",
+            "note_hi": "प्रदोष व्रत पर संध्या में शिव पूजा और अभिषेक अत्यंत शुभ माना जाता है।",
+            "track_slugs": "om-jai-shiv-omkara,shiv-amritwani,mahamrityunjaya-mantra-108,mahadev-shankar-hain,shiv-stuti-ashutosh"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "shivaratri",
+            "priority": 2,
+            "badge_hi": "शिवरात्रि – रात्रि जागरण",
+            "note_hi": "चतुर्दशी की शिवरात्रि पर जागरण, रुद्राभिषेक और शिव स्तुति का विशेध विधान है।",
+            "track_slugs": "shiva-tandava-stotram,om-jai-shiv-omkara,shiv-amritwani,mahamrityunjaya-mantra-108,shiv-stuti-ashutosh,mahadev-shankar-hain,shiva-panchakshari-stotram,om-namah-shivaya-dhun,namo-namo-namoh-namoh"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "chaturthi",
+            "priority": 2,
+            "badge_hi": "चतुर्थी – गणेश व्रत",
+            "note_hi": "संकष्टि/विनायक चतुर्थी पर गणेश जी की आरती और व्रत विघ्न नाशक है।",
+            "track_slugs": "jai-ganesh-deva,sukh-karta-dukh-harta,ganesh-amritwani,vakratunda-mahakaya,sankat-nashan-ganesh-stotram"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "ashtami",
+            "priority": 2,
+            "badge_hi": "अष्टमी – देवी व कृष्ण आराधना",
+            "note_hi": "अष्टमी पर माता रानी और बालकृष्ण की आराधना विशेध शुभ है।",
+            "track_slugs": "jai-ambe-gauri,aarti-kunj-bihari-ki,om-jai-shri-krishna-bhajan,durga-chalisa,radhe-krishna-radhe-krishna,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "navami",
+            "priority": 2,
+            "badge_hi": "नवमी – देवी आराधना",
+            "note_hi": "नवमी तिथि माँ दुर्गा को समर्पित है – कन्या पूजन व देवी आरती शुभ।",
+            "track_slugs": "jai-ambe-gauri,durga-chalisa,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "purnima",
+            "priority": 2,
+            "badge_hi": "पूर्णिमा – विष्णु व चंद्र आराधना",
+            "note_hi": "पूर्णिमा को विष्णु पूजा, तुलसी आराधना और चंद्र दर्शन विशेध शुभ माने जाते हैं।",
+            "track_slugs": "om-jai-jagdish-hare-anuradha,krishna-govind-hare-murari,gayatri-mantra-108,vishnu-amritwani"
+        },
+        {
+            "rule_type": "tithi",
+            "match_val": "amavasya",
+            "priority": 2,
+            "badge_hi": "अमावस्या – शांति व पितृ स्मरण",
+            "note_hi": "अमावस्या पर दान-पुण्य, पितृ स्मरण और शांति मंत्रों का विशेध महत्व है।",
+            "track_slugs": "mahamrityunjaya-mantra-108,om-jai-shiv-omkara,shiva-tandava-stotram,om-namah-shivaya-dhun,shiva-panchakshari-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "diwali-lakshmi-puja",
+            "priority": 3,
+            "badge_hi": "दिवाली – लक्ष्मी पूजा",
+            "note_hi": "दीपावली पर माँ लक्ष्मी-गणेश पूजा, दीप जलाना और आरती का विशेध विधान है।",
+            "track_slugs": "om-jai-lakshmi-mata,jai-ganesh-deva,om-jai-jagdish-hare-lata,mere-ghar-aao-lakshmi-maa,sukh-karta-dukh-harta"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "hanuman-jayanti",
+            "priority": 3,
+            "badge_hi": "हनुमान जयंती",
+            "note_hi": "हनुमान जयंती पर चालीसा पाठ, बजरंग बाण, हनुमान आरती और अष्टक का विशेध पाठ शुभ है।",
+            "track_slugs": "hanuman-chalisa,aarti-kije-hanuman-lala-ki,bajrang-baan,sankat-mochan-hanuman-ashtak"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "janmashtami",
+            "priority": 3,
+            "badge_hi": "जन्माष्टमी – श्रीकृष्ण जन्मोत्सव",
+            "note_hi": "जन्माष्टमी पर रात्रि जागरण, कृष्ण जन्म एवं झांकी का विशेध विधान है।",
+            "track_slugs": "aarti-kunj-bihari-ki,achyutam-keshavam,krishna-govind-hare-murari,om-jai-shri-krishna-bhajan,govind-bolo-hari-gopal-bolo,radhe-krishna-radhe-krishna,hare-rama-hare-krishna-dhun"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "holi",
+            "priority": 3,
+            "badge_hi": "होली – रंगोत्सव",
+            "note_hi": "होली पर कृष्ण रासलीला और रंग गीतों का गान विशेध प्रिय है।",
+            "track_slugs": "achyutam-keshavam,krishna-govind-hare-murari,rang-dare-kanhaiya,radhe-krishna-radhe-krishna"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "maha-shivaratri",
+            "priority": 3,
+            "badge_hi": "महाशिवरात्रि",
+            "note_hi": "महाशिवरात्रि पर रात्रि जागरण, शिव तांडव और अभिषेक का विशेध विधान है।",
+            "track_slugs": "shiva-tandava-stotram,om-jai-shiv-omkara,shiv-amritwani,mahamrityunjaya-mantra-108,shiv-stuti-ashutosh,mahadev-shankar-hain,shiva-panchakshari-stotram,om-namah-shivaya-dhun,namo-namo-namoh-namoh"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "ganesh",
+            "priority": 3,
+            "badge_hi": "गणेश उत्सव",
+            "note_hi": "गणेश चतुर्थी/विसर्जन पर गणपति बाप्पा की आरती और मंगल मूर्ति की स्तुति शुभ है।",
+            "track_slugs": "jai-ganesh-deva,sukh-karta-dukh-harta,ganesh-amritwani,vakratunda-mahakaya,sankat-nashan-ganesh-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "navratri",
+            "priority": 3,
+            "badge_hi": "नवरात्रि – देवी आराधना",
+            "note_hi": "नवरात्रि के नौ दिन माँ दुर्गा की आराधना, कलश स्थापना और देवी आरती विशेध शुभ है।",
+            "track_slugs": "jai-ambe-gauri,durga-chalisa,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "vijaya-dashami",
+            "priority": 3,
+            "badge_hi": "विजयादशमी (दशहरा)",
+            "note_hi": "दशहरे पर श्रीराम की विजय का गान और धर्म की जीत का स्मरण शुभ है।",
+            "track_slugs": "raghupati-raghav-raja-ram,vaishnav-jan-to,ram-aarti-raghuvir,ram-raksha-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "rama-navami",
+            "priority": 3,
+            "badge_hi": "राम नवमी",
+            "note_hi": "राम नवमी पर श्रीराम जन्मोत्सव, रामधुन और राम आरती का गान विशेध फलदायी है।",
+            "track_slugs": "raghupati-raghav-raja-ram,vaishnav-jan-to,ram-aarti-raghuvir,ram-chandra-kripalu-bhajman,ram-raksha-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "raksha-bandhan",
+            "priority": 3,
+            "badge_hi": "रक्षाबंधन",
+            "note_hi": "रक्षाबंधन पर श्रीकृष्ण-भीम संबंधी कथा के साथ भक्ति गीत शुभ माने जाते हैं।",
+            "track_slugs": "achyutam-keshavam,krishna-govind-hare-murari,om-jai-shri-krishna-bhajan"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "guru-purnima",
+            "priority": 3,
+            "badge_hi": "गुरु पूर्णिमा",
+            "note_hi": "गुरु पूर्णिमा पर गुरु वंदना, गुरुर ब्रह्मा स्तोत्र और संत भक्ति पाठ विशेध शुभ है।",
+            "track_slugs": "devon-ke-guru-brihaspti,guru-purnima-special,gayatri-mantra-108"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "-chauth",
+            "priority": 3,
+            "badge_hi": "चतुर्थी व्रत – करवा चौथ / सकट चौथ",
+            "note_hi": "करवा चौथ में चंद्र दर्शन व सुहाग की कामना, सकट चौथ में गणेश व्रत शुभ है।",
+            "track_slugs": "karwa-chauth-maiya-jab-tak,aarti-kunj-bihari-ki,jai-ganesh-deva,krishna-govind-hare-murari"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "makar-sankranti",
+            "priority": 3,
+            "badge_hi": "मकर संक्रांति",
+            "note_hi": "संक्रांति पर सूर्य आराधना, तिल दान और गायत्री जाप विशेध शुभ माने जाते हैं।",
+            "track_slugs": "gayatri-mantra-108,surya-aarti-om-jai-surya"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "chhath",
+            "priority": 3,
+            "badge_hi": "छठ पूजा – सूर्य षष्ठी",
+            "note_hi": "छठ व्रत में सूर्य देव और छठी मैया को अर्घ्य दिया जाता है – छठ गीत व सूर्य आरती शुभ।",
+            "track_slugs": "gayatri-mantra-108,kaanch-hi-baans-ke-bahangiya,uga-hai-suraj-dev,surya-aarti-om-jai-surya"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "govardhan",
+            "priority": 3,
+            "badge_hi": "गोवर्धन पूजा",
+            "note_hi": "गोवर्धन पूजा पर श्रीकृष्ण की लीला का स्मरण और गोपाल भक्ति विशेध शुभ है।",
+            "track_slugs": "achyutam-keshavam,krishna-govind-hare-murari,om-jai-shri-krishna-bhajan"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "gita-jayanti",
+            "priority": 3,
+            "badge_hi": "गीता जयंती",
+            "note_hi": "गीता जयंती पर भगवद्गीता का पाठ और कृष्ण उपदेश का स्मरण शुभ है।",
+            "track_slugs": "vaishnav-jan-to,krishna-govind-hare-murari,bhagavad-gita-sampurna,hare-rama-hare-krishna-dhun"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "devutthana",
+            "priority": 3,
+            "badge_hi": "देवोत्थान (प्रबोधिनी) एकादशी",
+            "note_hi": "देवउठनी एकादशी से विष्णु का जागरण होता है – आरती, अमृतवाणी और कीर्तन विशेध शुभ।",
+            "track_slugs": "om-jai-jagdish-hare-lata,aarti-kunj-bihari-ki,vishnu-amritwani,govind-bolo-hari-gopal-bolo,kanakadhara-stotram,vishnu-sahasranamam,ashtalakshmi-stotram,radhe-krishna-radhe-krishna,hare-rama-hare-krishna-dhun"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "rathyatra",
+            "priority": 3,
+            "badge_hi": "जगन्नाथ रथयात्रा",
+            "note_hi": "रथयात्रा पर भगवान जगन्नाथ (विष्णु-कृष्ण) के भजन और कीर्तन विशेध शुभ हैं।",
+            "track_slugs": "raghupati-raghav-raja-ram,achyutam-keshavam"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "tulasi-vivah",
+            "priority": 3,
+            "badge_hi": "तुलसी विवाह",
+            "note_hi": "तुलसी विवाह से विवाह पंचमी का आरंभ होता है – विष्णु आरती व अमृतवाणी विशेध शुभ।",
+            "track_slugs": "krishna-govind-hare-murari,om-jai-jagdish-hare-anuradha,vishnu-amritwani"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "akshaya-tritiya",
+            "priority": 3,
+            "badge_hi": "अक्षय तृतीया",
+            "note_hi": "अक्षय तृतीया पर विष्णु-लक्ष्मी आराधना और दान का विशेध महत्व है।",
+            "track_slugs": "om-jai-lakshmi-mata,mere-ghar-aao-lakshmi-maa,om-jai-jagdish-hare-lata"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "kali-puja",
+            "priority": 3,
+            "badge_hi": "काली पूजा",
+            "note_hi": "काली पूजा में देवी शक्ति की आराधना और देवी आरती विशेध शुभ है।",
+            "track_slugs": "jai-ambe-gauri,durga-chalisa,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "dahi-handi",
+            "priority": 3,
+            "badge_hi": "दहीहंडी",
+            "note_hi": "दहीहंडी पर कृष्ण बाल्यलीला के भजन और उत्सव का गान शुभ है।",
+            "track_slugs": "achyutam-keshavam,aarti-kunj-bihari-ki,om-jai-shri-krishna-bhajan"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "vasant-panchami",
+            "priority": 3,
+            "badge_hi": "वसंत पंचमी – सरस्वती पूजा",
+            "note_hi": "वसंत पंचमी पर माँ सरस्वती की पूजा और विद्या-आरंभ विशेध शुभ माना जाता है।",
+            "track_slugs": "saraswati-vandana-ya-kundendu,gayatri-mantra-108,saraswati-aarti-om-jai-saraswati"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "navaratri",
+            "priority": 3,
+            "badge_hi": "शारदीय नवरात्रि – देवी आराधना",
+            "note_hi": "शारदीय नवरात्रि में घटस्थापना, नौ दिन देवी पाठ और दुर्गा चालीसा विशेध फलदायी है।",
+            "track_slugs": "jai-ambe-gauri,durga-chalisa,ambe-tu-hai-jagdambe-aarti"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "teej",
+            "priority": 3,
+            "badge_hi": "तीज (हरियाली/कजरी/हरतालिका) – शिव-पार्वती व्रत",
+            "note_hi": "तीज पर माँ पार्वती के लिए शिव-पार्वती व्रत और शिव आराधना विशेध शुभ है।",
+            "track_slugs": "om-jai-shiv-omkara,shiv-amritwani,mahadev-shankar-hain"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "shravana-somvara",
+            "priority": 3,
+            "badge_hi": "सावन सोमवार – शिव आराधना",
+            "note_hi": "सावन के सोमवार रुद्राभिषेक, बेलपत्र अर्पण और शिव भजन अत्यंत फलदायी हैं।",
+            "track_slugs": "mahadev-shankar-hain,shiv-amritwani,om-jai-shiv-omkara,shiva-tandava-stotram,om-namah-shivaya-dhun,shiva-panchakshari-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "shani-jayanti",
+            "priority": 3,
+            "badge_hi": "शनि जयंती",
+            "note_hi": "शनि जयंती पर शनि देव का अभिषेक, शनैश्वर भजन और हनुमान कृपा विशेध शुभ है।",
+            "track_slugs": "shanaishwara-shani-bhajan,bajrang-baan,hanuman-chalisa,shani-aarti-jai-jai-shani-dev"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "dhanteras",
+            "priority": 3,
+            "badge_hi": "धनतेरस",
+            "note_hi": "धनतेरस पर लक्ष्मी-गणेश पूजा और धन-समृद्धि की कामना से आरती विशेध शुभ है।",
+            "track_slugs": "om-jai-lakshmi-mata,mere-ghar-aao-lakshmi-maa,jai-ganesh-deva"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "bhai-dooj",
+            "priority": 3,
+            "badge_hi": "भाई दूज",
+            "note_hi": "भाई दूज पर भाई-बहन के संबंधों की रक्षा की कामना से विष्णु आरती व प्रार्थना शुभ है।",
+            "track_slugs": "om-jai-jagdish-hare-lata,vaishnav-jan-to"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "pitru",
+            "priority": 3,
+            "badge_hi": "पितृ पक्ष – श्राद्ध",
+            "note_hi": "पितृ पक्ष में पितृ स्मरण, तर्पण और शांति हेतु गायत्री व महामृत्युंजय जाप विशेध शुभ है।",
+            "track_slugs": "mahamrityunjaya-mantra-108,gayatri-mantra-108"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "ratha-saptami",
+            "priority": 3,
+            "badge_hi": "रथाष्टमी – सूर्य आराधना",
+            "note_hi": "रथाष्टमी को सूर्य देव का रथ दिशाएँ बदलता है – सूर्य आरती व गायत्री जाप शुभ।",
+            "track_slugs": "surya-aarti-om-jai-surya,gayatri-mantra-108,aditya-hridayam-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "varalakshmi",
+            "priority": 3,
+            "badge_hi": "वरलक्ष्मी व्रत",
+            "note_hi": "वरलक्ष्मी व्रत में माँ लक्ष्मी से सौभाग्य-वरदान की कामना से आरती विशेध शुभ है।",
+            "track_slugs": "om-jai-lakshmi-mata,mere-ghar-aao-lakshmi-maa,kanakadhara-stotram,ashtalakshmi-stotram"
+        },
+        {
+            "rule_type": "festival",
+            "match_val": "nag-panchami",
+            "priority": 3,
+            "badge_hi": "नाग पंचमी",
+            "note_hi": "नाग पंचमी पर नाग देवता की पूजा और शिव-कृष्ण (कालिय नाग) भक्ति विशेध शुभ है।",
+            "track_slugs": "om-jai-shiv-omkara,krishna-govind-hare-murari"
+        }
+    ],
+    "tithi_groups": {
+        "ekadashi": [
+            11,
+            26
+        ],
+        "dwadashi": [
+            12,
+            27
+        ],
+        "pradosh": [
+            13,
+            28
+        ],
+        "shivaratri": [
+            14,
+            29
+        ],
+        "chaturthi": [
+            4,
+            19
+        ],
+        "ashtami": [
+            8,
+            23
+        ],
+        "navami": [
+            9,
+            24
+        ],
+        "purnima": [
+            15
+        ],
+        "amavasya": [
+            30
+        ]
+    },
+    "jyotirlingas": [
+        {
+            "order": 1,
+            "slug": "somnath",
+            "name_hi": "सोमनाथ",
+            "name_en": "Somnath",
+            "place_hi": "प्रभास पाटन, गुजरात",
+            "place_en": "Prabhas Patan, Gujarat",
+            "youtube_id": "WY5LoCD2vPg",
+            "channel": "Somnath Temple - Official Channel",
+            "verified_on": "2026-10-21",
+            "available": true
+        },
+        {
+            "order": 2,
+            "slug": "mallikarjuna",
+            "name_hi": "श्री मल्लिकार्जुन",
+            "name_en": "Mallikarjuna (Srisailam)",
+            "place_hi": "श्रीशैलम, आंध्र प्रदेश",
+            "place_en": "Srisailam, Andhra Pradesh",
+            "youtube_id": null,
+            "channel": "Srisaila Tv",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 3,
+            "slug": "mahakaleshwar",
+            "name_hi": "महाकालेश्वर",
+            "name_en": "Mahakaleshwar",
+            "place_hi": "उज्जैन, मध्य प्रदेश",
+            "place_en": "Ujjain, Madhya Pradesh",
+            "youtube_id": "pZik61fEsJc",
+            "channel": "divyadarshan",
+            "verified_on": "2026-10-21",
+            "available": true
+        },
+        {
+            "order": 4,
+            "slug": "omkareshwar",
+            "name_hi": "ओंकारेश्वर",
+            "name_en": "Omkareshwar",
+            "place_hi": "खंडवा, मध्य प्रदेश",
+            "place_en": "Khandwa, Madhya Pradesh",
+            "youtube_id": "RJcQxzKBYQ8",
+            "channel": "Shri Omkareshwar Jyotirlinga Official",
+            "verified_on": "2026-10-26",
+            "available": true
+        },
+        {
+            "order": 5,
+            "slug": "vaijnath",
+            "name_hi": "श्री वैजनाथ (परली)",
+            "name_en": "Vaijnath (Parli)",
+            "place_hi": "परली, महाराष्ट्र",
+            "place_en": "Parli, Maharashtra",
+            "youtube_id": null,
+            "channel": "Shri Vaijnath Jyotirlinga",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 6,
+            "slug": "bhimashankar",
+            "name_hi": "भीमाशंकर",
+            "name_en": "Bhimashankar",
+            "place_hi": "पुणे, महाराष्ट्र",
+            "place_en": "Pune, Maharashtra",
+            "youtube_id": null,
+            "channel": "Bhimashankar jyotirlinga official",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 7,
+            "slug": "rameshwaram",
+            "name_hi": "रामेश्वरम्",
+            "name_en": "Rameshwaram",
+            "place_hi": "रामेश्वरम, तमिलनाडु",
+            "place_en": "Rameswaram, Tamil Nadu",
+            "youtube_id": null,
+            "channel": "Ramanathaswamy temple, Rameswaram",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 8,
+            "slug": "grishneshwar",
+            "name_hi": "घृष्णेश्वर",
+            "name_en": "Grishneshwar",
+            "place_hi": "एलोरा, महाराष्ट्र",
+            "place_en": "Ellora, Maharashtra",
+            "youtube_id": null,
+            "channel": "",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 9,
+            "slug": "nageshwar",
+            "name_hi": "नागेश्वर",
+            "name_en": "Nageshwar",
+            "place_hi": "द्वारका, गुजरात",
+            "place_en": "Dwarka, Gujarat",
+            "youtube_id": null,
+            "channel": "Shri Dwarkadhish Mandir",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 10,
+            "slug": "kashi-vishwanath",
+            "name_hi": "काशी विश्वनाथ",
+            "name_en": "Kashi Vishwanath",
+            "place_hi": "वाराणसी, उत्तर प्रदेश",
+            "place_en": "Varanasi, Uttar Pradesh",
+            "youtube_id": "WPZ0xL0-sKs",
+            "channel": "Shree Kashi Vishwanath Mandir Trust",
+            "verified_on": "2026-10-21",
+            "available": true
+        },
+        {
+            "order": 11,
+            "slug": "trimbakeshwar",
+            "name_hi": "त्र्यंबकेश्वर",
+            "name_en": "Trimbakeshwar",
+            "place_hi": "नासिक, महाराष्ट्र",
+            "place_en": "Nashik, Maharashtra",
+            "youtube_id": null,
+            "channel": "Trimbakeshwar Temple Puja",
+            "verified_on": "",
+            "available": false
+        },
+        {
+            "order": 12,
+            "slug": "baidyanath",
+            "name_hi": "बैद्यनाथ धाम",
+            "name_en": "Baidyanath (Deoghar)",
+            "place_hi": "देवघर, झारखंड",
+            "place_en": "Deoghar, Jharkhand",
+            "youtube_id": "gXFBJQWcleg",
+            "channel": "Official Baidyanath Dham",
+            "verified_on": "2026-10-26",
+            "available": true
+        }
+    ]
+}
