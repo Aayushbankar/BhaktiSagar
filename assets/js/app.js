@@ -1536,6 +1536,20 @@ function applyFullscreenUI(isFullscreen) {
   }
 
   function loadSuggest() {
+    if (window.__bsStaticSuggest__) {
+      window.__bsStaticSuggest__(state.city, pinnedDate)
+        .then(function (data) { applySuggest(data); })
+        .catch(function (err) {
+          el.trackGrid.innerHTML = '<div class="empty-state">' +
+            esc(str('load.error', { err: err.message })) +
+            '<br><br><button type="button" class="chip active" id="retryBtn">' +
+            esc(str('load.retry')) + '</button></div>';
+          var retry = $('retryBtn');
+          if (retry) { retry.addEventListener('click', function () { window.location.reload(); }); }
+          el.footerMeta.textContent = str('api.unavailable');
+        });
+      return;
+    }
     fetch(apiUrl(state.city), { headers: { 'Accept': 'application/json' } })
       .then(function (res) {
         if (!res.ok) { throw new Error('HTTP ' + res.status); }
